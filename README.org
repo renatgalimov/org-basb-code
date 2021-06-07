@@ -1,7 +1,61 @@
-# Created 2021-06-04 Пт 07:27
-#+TITLE: Org-roam full-text search
+# Created 2021-06-07 Пн 06:21
 #+AUTHOR: Renat Galimov
-* Full-text search                                                    :table:
+
+* Working notes
+
+Here we do the actual work.
+
+** Renat
+*** Brainstorm/Braindump
+- The final task is to have an article offering an opinionated
+  list of building blocks implementing CODE methodology.
+
+- I want to concentrate on
+  - Search
+  - Highlighting
+  - Summarization
+
+- We may want to make a set of videos/gifs demonstrating workflow
+  with our instrument.
+
+- Don't hesitate to use brute force
+
+*** Useful links
+A list of useful packages for implementing CODE with Emacs.
+
+- [[https://github.com/logseq/logseq][GitHub - logseq/logseq: A privacy-first, open-source(frontend now, backend later) platform for knowledge management and collaboration. Desktop app download link: https://github.com/logseq/logseq/releases, roadmap: https://trello.com/b/8txSM12G/roadmap]]
+
+- [[https://www.emacswiki.org/emacs/HighlightLibrary][EmacsWiki: Highlight Library]]
+  Highlight the text.
+
+- [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Enriched-Text.html][Emacs Enriched Text mode]]
+  Persistently store highlights and Emacs markup in text files.
+
+- [[https://pandoc.org/][Pandoc - About pandoc]]
+  Transform various documents to org-mode format.
+
+*** Keywords
+- CODE
+  - [[file:20210530130904-divergence_convergence.org::*Divergence and convergence][Divergence and convergence]]
+- Search
+  - [[file:~/Dropbox/org/index.org::*Read http://www.paulgraham.com/startupideas.html][Read http://www.paulgraham.com/startupideas.html]]
+  - [[file:20210505083712-code_methodology.org::+title: CODE methodology][CODE methodology]]
+  - [[file:20210328000412-zettlkasten.org::*Zettelkasten][Zettelkasten]]
+- Highlight
+  - [[file:~/Dropbox/org/index.org::*A reader, that doesn't allow you to read until you make notes.][A reader, that doesn't allow you to read until you make notes.]]
+
+* Emacs CODE implementation                                         :project:
+Here will go the actual content we produce.
+
+** Capture
+
+** Organize
+
+** Distill
+
+** Express
+
+** Org-roam Full-text search                                          :table:
 :DEADLINE: <2021-06-04 Пт>
 
 - Requested features:
@@ -18,45 +72,45 @@
 
 #+caption: Full text search engines features
 #+begin: columnview :hlines 1 :id local :maxlevel 2 :indent t
-| ITEM                  | FRONTEND | SPEED | SORT |
-|-----------------------+----------+-------+------|
-| Full-text search      |          |       |      |
-| \_  ripgrep (helm-rg) | helm ivy | fast  | nil  |
-| \_  helm-org-rifle    | helm     | slow  | t    |
-| \_  deft              | helm     | fast  | nil  |
-| \_  org-ql            | helm     | slow  |      |
-| \_  recoll            | helm ivy | fast  | nil  |
-| \_  org-agenda search |          |       |      |
-| \_  org-fts           | ivy      | fast  |      |
+| ITEM                      | FRONTEND | SPEED | SORT |
+|---------------------------+----------+-------+------|
+| Org-roam Full-text search |          |       |      |
+| \_  ripgrep (helm-rg)     | helm ivy | fast  | nil  |
+| \_  helm-org-rifle        | helm     | slow  | t    |
+| \_  deft                  | helm     | fast  | nil  |
+| \_  org-ql                | helm     | slow  |      |
+| \_  recoll                | helm ivy | fast  | nil  |
+| \_  org-fts               | ivy      | fast  |      |
+| \_  org-agenda search     |          |       |      |
 #+end:
 
-** ripgrep (helm-rg)
+*** ripgrep (helm-rg)
 [[https://github.com/cosmicexplorer/helm-rg][GitHub - cosmicexplorer/helm-rg: ripgrep is nice]]
 Now I use it as a default text search engine.
 
-** helm-org-rifle
+*** helm-org-rifle
 [[https://github.com/alphapapa/org-rifle][GitHub - alphapapa/org-rifle: Rifle through your Org-mode buffers and acquire your target]]
 
 This one is good. It gives you an idea about the context. But it's not ordering the data by the highlights.
 =(helm-org-rifle-directories org-roam-directory)=
 
 I find org-rifle too slow at the moment. But its output is exacly what I want.
-** deft
+*** deft
 [[https://github.com/dfeich/helm-deft][GitHub - dfeich/helm-deft: A helm based emacs module to help search in a predetermined list of directories. Inspired by the deft module.]]
 
 I use helm implementation. Speed is fast enough.
 
-** org-ql
+*** org-ql
 [[https://github.com/alphapapa/org-ql][GitHub - alphapapa/org-ql: An Org-mode query language, including search commands and saved views]]
 
 Doesn't look suitable for large filesets.
 
-** recoll
+*** recoll
 [[https://github.com/emacs-helm/helm-recoll][GitHub - emacs-helm/helm-recoll: helm interface for the recoll desktop search tool.]]
 I found recoll being to hard to set up.
 I wasn't able to get it working on MacOS.
 
-** org-fts
+*** org-fts
 [[https://github.com/zot/microfts/tree/main/elisp][microfts/elisp at main · zot/microfts · GitHub]]
 
 - It didn't work on MacOS from scratch.
@@ -64,6 +118,8 @@ I wasn't able to get it working on MacOS.
   either.
 - This one looks promising. Let's keep an eye on it.
 
-** org-agenda search
+*** org-agenda search
 - Not trying this for now because agenda wants to open all its
   files for search.
+
+* Awesome Emacs Code
