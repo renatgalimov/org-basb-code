@@ -7,18 +7,18 @@ Here we do the actual work.
 
 ** Renat
 *** Brainstorm/Braindump
-- The final task is to have an article offering an opinionated
-  list of building blocks implementing CODE methodology.
+    - The final task is to have an article offering an opinionated
+      list of building blocks implementing CODE methodology.
 
-- I want to concentrate on
-  - Search
-  - Highlighting
-  - Summarization
+    - I want to concentrate on
+      - Search
+      - Highlighting
+      - Summarization
 
-- We may want to make a set of videos/gifs demonstrating workflow
-  with our instrument.
+    - We may want to make a set of videos/gifs demonstrating workflow
+      with our instrument.
 
-- Don't hesitate to use brute force
+    - Don't hesitate to use brute force
 
 *** Useful links
 A list of useful packages for implementing CODE with Emacs.
@@ -36,6 +36,7 @@ A list of useful packages for implementing CODE with Emacs.
 
 *** Keywords
 - CODE
+
   - [[file:20210530130904-divergence_convergence.org::*Divergence and convergence][Divergence and convergence]]
 - Search
   - [[file:~/Dropbox/org/index.org::*Read http://www.paulgraham.com/startupideas.html][Read http://www.paulgraham.com/startupideas.html]]
@@ -44,12 +45,63 @@ A list of useful packages for implementing CODE with Emacs.
 - Highlight
   - [[file:~/Dropbox/org/index.org::*A reader, that doesn't allow you to read until you make notes.][A reader, that doesn't allow you to read until you make notes.]]
 
+*** Organize
+
+    Tagging your notes as PARA objects.
+
+    I have two approaches to manage projects, areas and resource tags:
+    by roam tags and by roam links.
+
+**** Tags
+
+     For every note you assign an appropriate tag with
+     =org-roam-tag-add=.
+
+     Then you can see all of your projects for example just by
+     searching by project tag.
+
+
+     On roam v2 it will look like.
+
+     #+DOWNLOADED: screenshot @ 2021-06-09 09:16:32
+     #+attr_org: :width 400px
+     [[file:Working_notes/2021-06-09_09-16-32_screenshot.png]]
+
+
+**** Roam linkns
+
+     You create roam fiels named =Project=, =Area=, =Resource= and
+     then put it into a roam entry as a link.
+
+     Then, you open the =Areas= note and in your org-roam buffer you
+     will see:
+
+     #+DOWNLOADED: screenshot @ 2021-06-09 09:20:55
+     #+attr_org: :width 400px
+     [[file:Working_notes/2021-06-09_09-20-55_screenshot.png]]
+
+
 * Emacs CODE implementation                                         :project:
-Here will go the actual content we produce.
+  Here will go the actual content we produce.
+  [[id:93AE58FD-887D-4CFC-BF4E-2238BFA35A8F][Divergence and convergence]]
+
+  Prerequisites:
+
+  - [[https://github.com/org-roam/org-roam][GitHub - org-roam/org-roam: Rudimentary Roam replica with Org-mode]]
+
+    This guide uses org-roam as the central tool to manage your notes.
+    And this is the only prerequisite.
+
+    Use a guide to set up either V1 or V2 version of org-roam.
+
 
 ** Capture
 
+
+
 ** Organize
+
+
 
 ** Distill
 
