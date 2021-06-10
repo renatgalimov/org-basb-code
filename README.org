@@ -45,6 +45,29 @@ A list of useful packages for implementing CODE with Emacs.
 - Highlight
   - [[file:~/Dropbox/org/index.org::*A reader, that doesn't allow you to read until you make notes.][A reader, that doesn't allow you to read until you make notes.]]
 
+*** Capture
+
+    Web-pages
+    - pandoc
+
+    Images
+    - test google cloud vision api
+    - rekognition api
+      I ended up using rekognition API
+
+      You need amazon account to use it.
+      #+caption: Rekognition script
+      #+begin_src bash
+        #!/bin/bash
+
+        set -euo pipefail
+
+        CREDENTIALS="$1"
+        TARGET_BASENAME="$(basename "$2")"
+
+        docker run --user "$(id -u):$(id -g)" -v /home/renat/.aws:/tmp/.aws -e HOME=/tmp -v "$(realpath "$2"):/mnt/$TARGET_BASENAME" -w /mnt --rm -i amazon/aws-cli --profile "$CREDENTIALS" rekognition detect-labels --image-bytes "fileb://$TARGET_BASENAME"
+      #+end_src
+
 *** Organize
 
     Tagging your notes as PARA objects.
