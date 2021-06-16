@@ -260,8 +260,10 @@ fi
 
 * Footnotes
 
-[fn:1] [[https://support.mozilla.org/en-US/kb/firefox-reader-view-clutter-free-web-pages][Reader view]]
+[fn:1]
+[[https://support.mozilla.org/en-US/kb/firefox-reader-view-clutter-free-web-pages][Reader view]]
 #+attr_html: :width 400px
 [[file:Footnotes/2021-06-16_04-30-55_screenshot.png]]
 
-[fn:2] https://support.mozilla.org/en-US/kb/how-save-web-page
+[fn:2]
+https://support.mozilla.org/en-US/kb/how-save-web-page
