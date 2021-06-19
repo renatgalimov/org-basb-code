@@ -14,8 +14,36 @@
 
     Use a guide to set up either V1 or V2 version of org-roam.
 
+
+** How to work with this guide?
+
+   - Open this file in emacs.
+   - Tangle a source block into your org directory.
+   - Add the file to your load path.
+
 ** Capture
+
+   - Emacs is a text editor.
+     You need to represent everything that you capture into a text.
+
+   - Web-pages
+   - E-books
+   - Documents
+   - Videos
+   - Audios
+   - Images
+
 ** Organize
+
+   - Org roam links
+   - Org-mode tags
+
 ** Distill
+
 ** Express
+
+   - Exporting
+   - Publishing
+
+
 * Awesome Emacs Code

@@ -31,6 +31,10 @@ A list of useful packages for implementing CODE with Emacs.
 - [[https://pandoc.org/][Pandoc - About pandoc]]
   Transform various documents to org-mode format.
 
+- A miro board of basb course
+  [[https://miro.com/app/board/o9J_lEwGSa8=/][Board]]
+
+
 *** Keywords
 - CODE
 
