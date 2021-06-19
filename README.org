@@ -38,16 +38,7 @@
 
    - Capture templates
      - Project
-       This template will create a project entry and will ask you to set a deadline.
-       #+caption: Capture project template
-       #+name: roam-capture-project
-       #+begin_src emacs-lisp
-         (add-to-list
-          'org-roam-capture-templates
-          ("p" "Project" plain "%?"
-           :if-new (file+head "roam/%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+roam_tags project\n\n* ${title}\n  :DEADLINE: %^{Project deadline}t\n\n")
-           :unnarrowed t))
-       #+end_src
+
 
 ** Organize
 

@@ -34,7 +34,6 @@ A list of useful packages for implementing CODE with Emacs.
 - A miro board of basb course
   [[https://miro.com/app/board/o9J_lEwGSa8=/][Board]]
 
-
 *** Keywords
 - CODE
 
@@ -68,7 +67,6 @@ A list of useful packages for implementing CODE with Emacs.
 
         docker run --user "$(id -u):$(id -g)" -v /home/renat/.aws:/tmp/.aws -e HOME=/tmp -v "$(realpath "$2"):/mnt/$TARGET_BASENAME" -w /mnt --rm -i amazon/aws-cli --profile "$CREDENTIALS" rekognition detect-labels --image-bytes "fileb://$TARGET_BASENAME"
       #+end_src
-
 
 **** Use pandoc to convert documents to org-mode format
 
@@ -227,11 +225,25 @@ A list of useful packages for implementing CODE with Emacs.
      :END:
 
      Them aim here is to extract projects/areas/resources I spent the most time in.
+**** Capture templates
+***** Project
+
+            This template will create a project entry and will ask you to set a deadline.
+       #+caption: Capture project template
+       #+name: roam-capture-project
+       #+begin_src emacs-lisp
+         (add-to-list
+          'org-roam-capture-templates
+          ("p" "Project" plain "%?"
+           :if-new (file+head "roam/%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+roam_tags project\n\n* ${title}\n  :DEADLINE: %^{Project deadline}t\n\n")
+           :unnarrowed t))
+       #+end_src
+
 
 *** Organize
 
     Tagging your notes as PARA objects.
-fi
+
     I have two approaches to manage projects, areas and resource tags:
     by roam tags and by roam links.
 
