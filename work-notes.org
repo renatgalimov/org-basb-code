@@ -34,6 +34,9 @@ A list of useful packages for implementing CODE with Emacs.
 - A miro board of basb course
   [[https://miro.com/app/board/o9J_lEwGSa8=/][Board]]
 
+- Org pandoc import
+  https://github.com/tecosaur/org-pandoc-import
+
 *** Keywords
 - CODE
 

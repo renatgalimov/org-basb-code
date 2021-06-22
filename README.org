@@ -21,11 +21,58 @@
    - Tangle a source block into your org directory.
    - Add the file to your load path.
 
+** Prerequisites
+*** Pandoc
+
+    #+caption: Install pandoc on Ubuntu
+    #+begin_src bash :exports code :eval never-export
+      sudo apt install pandoc
+    #+end_src
+
+    #+caption: Install pandoc on Mac OS with homebrew
+    #+begin_src bash :exports code :eval never-export
+      brew install pandoc
+    #+end_src
+
+    Ensure that pandoc is in your path.
+
+    #+caption: Pandoc version
+    #+begin_src bash :exports both :eval never-export :results verbatim
+      pandoc --version
+    #+end_src
+
+    #+RESULTS:
+    : pandoc 2.14.0.2
+    : Compiled with pandoc-types 1.22, texmath 0.12.3, skylighting 0.10.5.1,
+    : citeproc 0.4.0.1, ipynb 0.1.0.1
+    : User data directory: /Users/renat.galimov/.local/share/pandoc
+    : Copyright (C) 2006-2021 John MacFarlane. Web:  https://pandoc.org
+    : This is free software; see the source for copying conditions. There is no
+    : warranty, not even for merchantability or fitness for a particular purpose.
+*** straight.el
+
+    For this guide we will be using [[https://github.com/raxod502/straight.el][straight.el]] as your package manager.
+
+    #+caption: Install straight.el
+    #+begin_src emacs-lisp :exports code :eval never-export :results none
+      (defvar bootstrap-version)
+      (let ((bootstrap-file
+             (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+            (bootstrap-version 5))
+        (unless (file-exists-p bootstrap-file)
+          (with-current-buffer
+              (url-retrieve-synchronously
+               "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+               'silent 'inhibit-cookies)
+            (goto-char (point-max))
+            (eval-print-last-sexp)))
+        (load bootstrap-file nil 'nomessage))
+    #+end_src
+
 ** Capture
 
    - Emacs is a text editor.
      You need to represent everything that you capture into a text.
-
 
    - Capture targets:
      - Web-pages
@@ -35,6 +82,18 @@
      - Audios
      - Images
 
+
+   To capture we use pandoc and [[https://github.com/tecosaur/org-pandoc-import][org-pandoc-import]]
+
+   #+name: install-org-pandoc-import
+   #+begin_src emacs-lisp
+     (use-package org-pandoc-import
+       :straight (:host github
+                        :repo "tecosaur/org-pandoc-import"
+                        :files ("*.el" "filters" "preprocessors")))
+   #+end_src
+
+   I can convert almost any text format to org-mode representation.
 
    - Capture templates
      - Project
@@ -51,6 +110,16 @@
 
    - Exporting
    - Publishing
+
+
+* Emacs config
+
+  #+begin_src emacs-lisp :noweb yes :tangle ~/emacs/rc/CODE.el
+    <<install-pandoc-import>>
+
+  #+end_src
+
+  #+RESULTS:
 
 
 * Awesome Emacs Code
