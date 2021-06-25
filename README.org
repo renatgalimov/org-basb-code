@@ -118,7 +118,7 @@
      the output is the best among other methods.
 
    - Capture templates
-     - Project
+     <<Please, contribute your capture templates>>
 
 ** Organize
 
