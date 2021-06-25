@@ -2,34 +2,31 @@
 #+AUTHOR: Renat Galimov
 
 * Emacs CODE implementation                                         :project:
-  Here will go the actual content we produce.
-  [[id:93AE58FD-887D-4CFC-BF4E-2238BFA35A8F][Divergence and convergence]]
 
-  Prerequisites:
+** Prerequisites
 
-  - [[https://github.com/org-roam/org-roam][GitHub - org-roam/org-roam: Rudimentary Roam replica with Org-mode]]
+   - [[https://github.com/org-roam/org-roam][GitHub - org-roam/org-roam: Rudimentary Roam replica with Org-mode]]
 
-    This guide uses org-roam as the central tool to manage your notes.
-    And this is the only prerequisite.
+     This guide uses org-roam as the central tool to manage your notes.
+     And this is the only prerequisite.
 
-    Use a guide to set up either the V1 or V2 version of org-roam.
+     Use a guide to set up either the V1 or V2 version of org-roam.
 
 
 ** How to work with this guide?
-
-   - Open this file in emacs.
-   - Tangle a source block into your org directory.
-   - Add the file to your load path.
+   - Open this file in Emacs.
+   - [[https://orgmode.org/manual/Extracting-Source-Code.html][Extract]] the [[*Emacs config][config]] source block into your org directory.
+   - Add the resulting file to your load path.
 
 ** Prerequisites
 *** Pandoc
 
-    #+caption: Install pandoc on Ubuntu
+    #+caption: Install Pandoc on Ubuntu
     #+begin_src bash :exports code :eval never-export
       sudo apt install pandoc
     #+end_src
 
-    #+caption: Install pandoc on Mac OS with homebrew
+    #+caption: Install Pandoc on Mac OS with homebrew
     #+begin_src bash :exports code :eval never-export
       brew install pandoc
     #+end_src
@@ -82,7 +79,7 @@
      - Audios
      - Images
 
-   To capture we use pandoc and [[https://github.com/tecosaur/org-pandoc-import][org-pandoc-import]]
+   To capture we use Pandoc and [[https://github.com/tecosaur/org-pandoc-import][org-pandoc-import]]
 
    #+name: install-org-pandoc-import
    #+begin_src emacs-lisp
@@ -111,8 +108,8 @@
    - Open the web article in your browser and activate a web-clipper.
      I use Firefoxes built-in one.
    - Save entire HTML into a file.
-   - Convert the HTML with pandoc
-     #+caption: Convert HTML to Org with pandoc
+   - Convert the HTML with Pandoc
+     #+caption: Convert HTML to Org with Pandoc
      #+begin_src bash
        pandoc -f html -t org <source-file>.html -o <target-file>.org
      #+end_src
@@ -138,6 +135,7 @@
 
 * Emacs config
 
+  #+caption: Config source block
   #+begin_src emacs-lisp :noweb yes :tangle ~/emacs/rc/CODE.el
     <<install-pandoc-import>>
     <<install-org-web-tools>>
