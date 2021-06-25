@@ -93,7 +93,7 @@
    representation. One of the current drawbacks - it cannot import online web pages.
 
    Another package - [[https://github.com/alphapapa/org-web-tools][org-web-tools]] offers
-   =org-web-tools-read-url-as-org= function tha will download the URL
+   =org-web-tools-read-url-as-org= function, which can download an URL
    to an org buffer.
 
    #+name: install-org-web-tools
