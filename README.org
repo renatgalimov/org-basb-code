@@ -12,7 +12,7 @@
     This guide uses org-roam as the central tool to manage your notes.
     And this is the only prerequisite.
 
-    Use a guide to set up either V1 or V2 version of org-roam.
+    Use a guide to set up either the V1 or V2 version of org-roam.
 
 
 ** How to work with this guide?
@@ -34,7 +34,7 @@
       brew install pandoc
     #+end_src
 
-    Ensure that pandoc is in your path.
+    Ensure that Pandoc is in your path.
 
     #+caption: Pandoc version
     #+begin_src bash :exports both :eval never-export :results verbatim
@@ -51,7 +51,7 @@
     : warranty, not even for merchantability or fitness for a particular purpose.
 *** straight.el
 
-    For this guide we will be using [[https://github.com/raxod502/straight.el][straight.el]] as your package manager.
+    For this guide, we will be using [[https://github.com/raxod502/straight.el][straight.el]] as your package manager.
 
     #+caption: Install straight.el
     #+begin_src emacs-lisp :exports code :eval never-export :results none
@@ -72,7 +72,7 @@
 ** Capture
 
    - Emacs is a text editor.
-     You need to represent everything that you capture into a text.
+     You have to represent everything that you capture as a text.
 
    - Capture targets:
      - Web-pages
@@ -81,7 +81,6 @@
      - Videos
      - Audios
      - Images
-
 
    To capture we use pandoc and [[https://github.com/tecosaur/org-pandoc-import][org-pandoc-import]]
 
@@ -93,11 +92,36 @@
                         :files ("*.el" "filters" "preprocessors")))
    #+end_src
 
-   I can convert almost any text format to org-mode representation.
+   Pandoc can convert almost any text format to org-mode
+   representation. One of the current drawbacks - it cannot import online web pages.
+
+   Another package - [[https://github.com/alphapapa/org-web-tools][org-web-tools]] offers
+   =org-web-tools-read-url-as-org= function tha will download the URL
+   to an org buffer.
+
+   #+name: install-org-web-tools
+   #+begin_src emacs-lisp
+     (use-package org-web-tools :ensure t)
+   #+end_src
+
+   Often, downloaded files need manual cleanup.
+
+   The third approach is to use a web-clipper and Pandoc.
+
+   - Open the web article in your browser and activate a web-clipper.
+     I use Firefoxes built-in one.
+   - Save entire HTML into a file.
+   - Convert the HTML with pandoc
+     #+caption: Convert HTML to Org with pandoc
+     #+begin_src bash
+       pandoc -f html -t org <source-file>.html -o <target-file>.org
+     #+end_src
+
+     The resulting file might require some cleanup, but the quality of
+     the output is the best among other methods.
 
    - Capture templates
      - Project
-
 
 ** Organize
 
@@ -116,7 +140,7 @@
 
   #+begin_src emacs-lisp :noweb yes :tangle ~/emacs/rc/CODE.el
     <<install-pandoc-import>>
-
+    <<install-org-web-tools>>
   #+end_src
 
   #+RESULTS:
