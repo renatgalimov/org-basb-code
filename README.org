@@ -17,6 +17,7 @@
    - Open this file in Emacs.
    - [[https://orgmode.org/manual/Extracting-Source-Code.html][Extract]] the [[*Emacs config][config]] source block into your org directory.
    - Add the resulting file to your load path.
+   - I will be using =C-c n= prefix for keybindings in this package.
 
 ** Prerequisites
 *** Pandoc
@@ -51,6 +52,7 @@
     For this guide, we will be using [[https://github.com/raxod502/straight.el][straight.el]] as your package manager.
 
     #+caption: Install straight.el
+    #+name: install-straight-el
     #+begin_src emacs-lisp :exports code :eval never-export :results none
       (defvar bootstrap-version)
       (let ((bootstrap-file
@@ -68,77 +70,278 @@
 
 ** Capture
 
-   - Emacs is a text editor.
-     You have to represent everything that you capture as a text.
+   #+begin_quote
+   Emacs is a text editor. -- Me
+   #+end_quote
 
-   - Capture targets:
-     - Web-pages
-     - E-books
-     - Documents
-     - Videos
-     - Audios
-     - Images
+*** Capture documents
 
-   To capture we use Pandoc and [[https://github.com/tecosaur/org-pandoc-import][org-pandoc-import]]
+    - Capture targets:
+      - E-books
+      - Documents
+      - Videos
+      - Audios
+      - Images
 
-   #+name: install-org-pandoc-import
-   #+begin_src emacs-lisp
-     (use-package org-pandoc-import
-       :straight (:host github
-                        :repo "tecosaur/org-pandoc-import"
-                        :files ("*.el" "filters" "preprocessors")))
-   #+end_src
+    To capture we use Pandoc and [[https://github.com/tecosaur/org-pandoc-import][org-pandoc-import]]
 
-   Pandoc can convert almost any text format to org-mode
-   representation. One of the current drawbacks - it cannot import online web pages.
+    #+name: install-org-pandoc-import
+    #+begin_src emacs-lisp
+      (use-package org-pandoc-import
+        :straight (:host github
+                         :repo "tecosaur/org-pandoc-import"
+                         :files ("*.el" "filters" "preprocessors"))
 
-   Another package - [[https://github.com/alphapapa/org-web-tools][org-web-tools]] offers
-   =org-web-tools-read-url-as-org= function, which can download an URL
-   to an org buffer.
+        :bind (("C-c n o" . org-pandoc-import-as-org)))
+    #+end_src
 
-   #+name: install-org-web-tools
-   #+begin_src emacs-lisp
-     (use-package org-web-tools :ensure t)
-   #+end_src
+    Pandoc can convert almost any text format to org-mode
+    representation. One of the current drawbacks - it cannot import online web pages.
 
-   Often, downloaded files need manual cleanup.
+*** Capture web-pages
 
-   The third approach is to use a web-clipper and Pandoc.
+**** org-web-tools
+     [[https://github.com/alphapapa/org-web-tools][org-web-tools]] offers =org-web-tools-read-url-as-org= function,
+     which can download an URL to an org buffer.
 
-   - Open the web article in your browser and activate a web-clipper.
-     I use Firefoxes built-in one.
-   - Save entire HTML into a file.
-   - Convert the HTML with Pandoc
-     #+caption: Convert HTML to Org with Pandoc
-     #+begin_src bash
-       pandoc -f html -t org <source-file>.html -o <target-file>.org
+     #+name: install-org-web-tools
+     #+begin_src emacs-lisp
+       (use-package org-web-tools :ensure t
+         :bind (("C-c n u" . org-web-tools-read-url-as-org)))
      #+end_src
 
-     The resulting file might require some cleanup, but the quality of
-     the output is the best among other methods.
+     Often, downloaded files need manual cleanup.
 
-   - Capture templates
-     <<Please, contribute your capture templates>>
+**** Firefox web-clipper and Pandoc
+
+     An alternative approach is to use a web-clipper and Pandoc.
+
+     - Open the web article in your browser and activate a web-clipper.
+       I use Firefoxes built-in one.
+     - Save entire HTML into a file.
+     - Convert the HTML with Pandoc
+       #+caption: Convert HTML to Org with Pandoc
+       #+begin_src bash
+         pandoc -f html -t org <source-file>.html -o <target-file>.org
+       #+end_src
+
+       The resulting file might require some cleanup, but the quality of
+       the output is the best among other methods.
+
+*** Capture templates
+    <<Please, contribute your capture templates>>
+
+*** Finding your own records
+    Crawling over your own notes is a key part of the project
+    workflow.
+
+    Below I summarized information about all full-text search engines
+    I found for org-mode.
+
+    Depending on your own need you might select one or multiple of them.
+
+    Unfortunately, I didn't find any ideal solution for a full-text
+    search yet. Packages that make better sorting are slower than
+    packages that give results fast but in a random order.
+
+***** Org full-text search                                                              :table:
+          :PROPERTIES:
+          :ID:       47985238-3e66-4201-969c-16d1858b797e
+          :COLUMNS:  %25ITEM %FRONTEND %SPEED %SORT
+          :END:
+
+          - Requested features:
+            - helm or counsel integration.
+            - live search.
+            - result previewing support.
+            - a key-binding to capture results into currently clocked
+              org file.
+            - results ordering support
+              - Headlines
+              - Summary
+              - Hightlight
+            - large file-sets support
+
+          #+CAPTION: Full text search engines features
+          #+BEGIN: columnview :hlines 1 :id local :maxlevel 2 :indent t
+          | ITEM                      | FRONTEND | SPEED | SORT |
+          |---------------------------+----------+-------+------|
+          | Org-roam Full-text search |          |       |      |
+          | \_  ripgrep (helm-rg)     | helm ivy | fast  | nil  |
+          | \_  helm-org-rifle        | helm     | slow  | t    |
+          | \_  deft                  | helm     | fast  | nil  |
+          | \_  org-ql                | helm     | slow  |      |
+          | \_  recoll                | helm ivy | fast  | nil  |
+          | \_  org-fts               | ivy      | fast  |      |
+          | \_  org-agenda search     |          |       |      |
+          #+END:
+
+******* ripgrep (helm-rg)
+        :PROPERTIES:
+        :frontend: helm ivy
+        :full_text_search: t
+        :speed:    fast
+        :sort:     nil
+        :END:
+
+        [[https://github.com/cosmicexplorer/helm-rg][GitHub - cosmicexplorer/helm-rg: ripgrep is nice]]
+        Now I use it as a default text search engine.
+
+        #+caption: Install ripgrep in MacOS
+        #+begin_src bash
+          brew install ripgrep
+        #+end_src
+
+        #+caption: Install helm-rg
+        #+name: install-helm-rg
+        #+begin_src emacs-lisp
+          (use-package helm-rg :ensure t
+            :init
+            (defun helm-rg-roam-directory (&optional query)
+              "Search with rg in your roam directory, QUERY."
+              (interactive)
+              (let ((helm-rg-default-directory org-roam-directory))
+                (helm-rg query nil)))
+            :bind (("C-c n R" . helm-rg-roam-directory)))
+        #+end_src
+
+******* helm-org-rifle
+        :PROPERTIES:
+        :frontend: helm
+        :speed:    slow
+        :sort:     t
+        :END:
+
+        [[https://github.com/alphapapa/org-rifle][GitHub - alphapapa/org-rifle: Rifle through your Org-mode buffers and acquire your target]]
+
+        This one is good. It gives you an idea about the context. But
+        it's not ordering the data by the highlights.
+
+        I find org-rifle too slow at the moment. But its output is exacly what I want.
+
+        #+caption: Install org-rifle
+        #+name: install-org-rifle
+        #+begin_src emacs-lisp :comments both
+          (use-package helm-org-rifle :ensure t
+            :init
+            (defun org-rifle-roam-directory ()
+              (interactive)
+              (helm-org-rifle-directories org-roam-directory))
+            :bind (("C-c n s" . org-rifle-roam-directory)))
+        #+end_src
+
+******* deft
+        :PROPERTIES:
+        :frontend: helm
+        :speed:    fast
+        :sort:     nil
+        :END:
+        [[https://github.com/dfeich/helm-deft][GitHub - dfeich/helm-deft: A helm based emacs module to help search in a predetermined list of directories. Inspired by the deft module.]]
+
+        Helm implementation didn't work for me. So I set a default
+        version here.
+
+        One of the drawbacks here is that you can't see the text you
+        matched. From my point of view - helm-rg gives more precise
+        information about the context.
+
+        #+name: install-deft
+        #+begin_src emacs-lisp
+          (use-package deft :ensure t
+            :init (setq deft-directory org-roam-directory
+                        deft-recursive t)
+            :bind (("C-c n d" . deft))
+            )
+          ;; (use-package helm-deft
+          ;;   :ensure t
+          ;;   :straight (:host github
+          ;;                    :repo "dfeich/helm-deft"
+          ;;                    :files ("*.el"))
+          ;;   :init
+          ;;   (setq helm-deft-dir-list `(,org-roam-directory)
+          ;;         helm-deft-extension '("org"))
+          ;;   :bind (("C-c n d" . helm-deft)))
+
+        #+end_src
+
+******* org-ql
+        :PROPERTIES:
+        :frontend: helm
+        :speed:    slow
+        :END:
+        [[https://github.com/alphapapa/org-ql][GitHub - alphapapa/org-ql: An Org-mode query language, including search commands and saved views]]
+
+        Doesn't look suitable for large filesets, but helm
+        implementation is perfect for medium-sized collections.
+
+        #+name: install-org-ql
+        #+begin_src emacs-lisp
+          (use-package org-ql :ensure t
+            :init
+            (setq org-ql-search-directories-files-recursive t))
+          (use-package helm-org-ql :ensure t
+            :init
+            (setq helm-org-ql-recursive-paths t)
+            :bind (("C-c n q" . helm-org-ql-org-directory)))
+        #+end_src
+
+******* recoll
+        :PROPERTIES:
+        :frontend: helm ivy
+        :speed:    fast
+        :sort:     nil
+        :END:
+        [[https://github.com/emacs-helm/helm-recoll][GitHub - emacs-helm/helm-recoll: helm interface for the recoll desktop search tool.]]
+        I found recoll being to hard to set up.
+        I wasn't able to get it working on MacOS.
+
+******* org-fts
+        :PROPERTIES:
+        :speed:    fast
+        :frontend: ivy
+        :END:
+        [[https://github.com/zot/microfts/tree/main/elisp][microfts/elisp at main · zot/microfts · GitHub]]
+
+        - It didn't work on MacOS from scratch.
+        - I tried to compile its binary manually but that didn't work
+          either.
+        - This one looks promising. Let's keep an eye on it.
+
+******* org-agenda search
+        - Not trying this for now because agenda wants to open all its
+          files for search.
 
 ** Organize
-
-   - Org roam links
    - Org-mode tags
 
+     This is a default method. You just tag your projects with a
+     =project= tag, areas with an =area= tag and so on.
+
+   - Org-roam links
+
+     An alternative to use Org-roam references as tags.
+     You create grouping notes: =projects=, =areas=, =resources= and insert
+     a link to the target record according to where it belongs.
+
+
 ** Distill
+*** Progressive summarization
 
 ** Express
 
    - Exporting
    - Publishing
-
-
 * Emacs config
 
   #+caption: Config source block
-  #+begin_src emacs-lisp :noweb yes :tangle ~/emacs/rc/CODE.el
-    <<install-pandoc-import>>
+  #+begin_src emacs-lisp :noweb yes :tangle ~/emacs/rc/CODE.el :comments noweb
+    <<install-straight-el>>
+    <<install-org-pandoc-import>>
     <<install-org-web-tools>>
+    <<install-helm-rg>>
+    <<install-org-rifle>>
+    <<install-deft>>
+    <<install-org-ql>>
   #+end_src
 
   #+RESULTS:
