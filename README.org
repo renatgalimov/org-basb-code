@@ -410,7 +410,7 @@
       on.
 
       #+caption: Highlighting on capture demo
-      [[attachment:Highlighting with org-capturre.gif]]
+      [[file:data/1F/D14535-77E8-4296-9BC9-A72DB1CB7E0F/Highlighting with org-capturre.gif]]
 
 ** Express
 
