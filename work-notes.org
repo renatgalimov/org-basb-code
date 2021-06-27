@@ -90,138 +90,84 @@ A list of useful packages for implementing CODE with Emacs.
      with [[https://orgmode.org/manual/Handling-Links.html][org-store-link]] and put it into appropriate resource, area or
      project file.
 
-**** Highlighting text with enriched mode
-     :LOGBOOK:
-     CLOCK: [2021-06-13 Вс 07:16]--[2021-06-13 Sun 07:31] =>  0:15
-     CLOCK: [2021-06-13 Вс 06:49]--[2021-06-13 Вс 07:15] =>  0:26
-     :END:
 
-     When working with plain text buffers, like org-mode or markdown,
-     you can use the =highlight= library to highligh the text.
 
-     I'm using org-capture with highlight to work on text.
+**** highlighting
 
-     #+caption: A capture template
-     #+begin_src elisp :tangle ~/emacs/rc/CODE.el
-       ;; Use =org-capture f= to put a link to the text you selected.into an
-       ;; org entry with the current timer enabled.
+      To keep track of important stuff inside the file I highlight the
+      text I selected with =highlight.el=.
 
-       (add-to-list
-        'org-capture-templates
-        '("f" "Curently watched" item (clock)
-          "%(with-current-buffer (org-capture-get :original-buffer) (replace-regexp-in-string \"\n\" \" \" (buffer-substring (region-beginning) (region-end)))) [[%F::%(with-current-buffer (org-capture-get :original-buffer) (replace-regexp-in-string \"\n\" \" \" (buffer-substring (region-beginning) (region-end))))][↗]]%?" :unnarrowed t))
-     #+end_src
+      Use different colors for different highlights.
+      When I'm reading, I try to keep track of statements and questions
+      I'm interested in. The code below defines appropriate faces.
 
-     This is my basic building block. Whenever I'm reading an article
-     in emacs (transformed to an org-mode or markdown file), I can
-     click =C-c f= to insert a list entry to the notebook I'm
-     currently on.
+      #+caption: Custom highlights
+      #+begin_src elisp :tangle ~/emacs/rc/CODE.el
+        (defface highlight-question
+          '((((class color) (min-colors 88) (background light))
+             :background "darkseagreen2")
+            (((class color) (min-colors 88) (background dark))
+             :background "darkolivegreen")
+            (((class color) (min-colors 16) (background light))
+             :background "darkseagreen2")
+            (((class color) (min-colors 16) (background dark))
+             :background "darkolivegreen")
+            (((class color) (min-colors 8))
+             :background "green" :foreground "black")
+            (t :inverse-video t))
+          "Face for highlighting questions."
+          :group 'basic-faces)
 
-     To keep track of important stuff inside the file I highlight the
-     text I selected with =highlight.el=.
+        (defface highlight-statement
+          '((((class color) (min-colors 88) (background light))
+             :background "#3c4c7a")
+            (((class color) (min-colors 88) (background dark))
+             :background "#3c4c7a")
+            (((class color) (min-colors 16) (background light))
+             :background "#3c4c7a")
+            (((class color) (min-colors 16) (background dark))
+             :background "#3c4c7a")
+            (((class color) (min-colors 8))
+             :background "blue" :foreground "black")
+            (t :inverse-video t))
+          "Face for highlighting statements."
+          :group 'basic-faces)
 
-     #+caption: Install highlight.el
-     #+begin_src elisp :tangle ~/emacs/rc/CODE.el
-       ;; If you get errors saying somethign about facemenu, try
-       ;; uncommenting this.
-       ;; (setq facemenu-menu nil)
+        (defface highlight-general
+          '((((class color) (min-colors 88) (background light))
+             :background "#614b61")
+            (((class color) (min-colors 88) (background dark))
+             :background "#614b61")
+            (((class color) (min-colors 16) (background light))
+             :background "#614b61")
+            (((class color) (min-colors 16) (background dark))
+             :background "#614b61")
+            (((class color) (min-colors 8))
+             :background "red" :foreground "black")
+            (t :inverse-video t))
+          "Face for highlighting."
+          :group 'basic-faces)
+      #+end_src
 
-       ;; Intalls the package
-       (use-package highlight :ensure t)
-     #+end_src
+      Helper functions and their keybindings so we can mark text
+      quickly. I use =ESC ESC h= prefix. Feel free to use your own.
 
-     Use different colors for different highlights.
-     When I'm reading, I try to keep track of statements and questions
-     I'm interested in. The code below defines appropriate faces.
+      #+begin_src elisp :tangle ~/emacs/rc/CODE.el
+        (defun hlt-question()
+          (interactive)
+          (hlt-highlight-region (region-beginning) (region-end) 'highlight-question))
 
-     #+caption: Custom highlights
-     #+begin_src elisp :tangle ~/emacs/rc/CODE.el
-       (defface highlight-question
-         '((((class color) (min-colors 88) (background light))
-            :background "darkseagreen2")
-           (((class color) (min-colors 88) (background dark))
-            :background "darkolivegreen")
-           (((class color) (min-colors 16) (background light))
-            :background "darkseagreen2")
-           (((class color) (min-colors 16) (background dark))
-            :background "darkolivegreen")
-           (((class color) (min-colors 8))
-            :background "green" :foreground "black")
-           (t :inverse-video t))
-         "Face for highlighting questions."
-         :group 'basic-faces)
+        (defun hlt-statement()
+          (interactive)
+          (hlt-highlight-region (region-beginning) (region-end) 'highlight-statement))
 
-       (defface highlight-statement
-         '((((class color) (min-colors 88) (background light))
-            :background "#3c4c7a")
-           (((class color) (min-colors 88) (background dark))
-            :background "#3c4c7a")
-           (((class color) (min-colors 16) (background light))
-            :background "#3c4c7a")
-           (((class color) (min-colors 16) (background dark))
-            :background "#3c4c7a")
-           (((class color) (min-colors 8))
-            :background "blue" :foreground "black")
-           (t :inverse-video t))
-         "Face for highlighting statements."
-         :group 'basic-faces)
 
-       (defface highlight-general
-         '((((class color) (min-colors 88) (background light))
-            :background "#614b61")
-           (((class color) (min-colors 88) (background dark))
-            :background "#614b61")
-           (((class color) (min-colors 16) (background light))
-            :background "#614b61")
-           (((class color) (min-colors 16) (background dark))
-            :background "#614b61")
-           (((class color) (min-colors 8))
-            :background "red" :foreground "black")
-           (t :inverse-video t))
-         "Face for highlighting."
-         :group 'basic-faces)
-     #+end_src
+        (global-set-key (kbd "ESC M-h q") #'hlt-question)
+        (global-set-key (kbd "ESC M-h s") #'hlt-statement)
+        (global-set-key (kbd "ESC M-h h") #'hlt-general)
+        (global-set-key (kbd "ESC M-h u") #'hlt-unhighlight-region)
+      #+end_src
 
-     Helper functions and their keybindings so we can mark text
-     quickly. I use =ESC ESC h= prefix. Feel free to use your own.
-
-     #+begin_src elisp :tangle ~/emacs/rc/CODE.el
-       (defun hlt-question()
-         (interactive)
-         (hlt-highlight-region (region-beginning) (region-end) 'highlight-question))
-
-       (defun hlt-statement()
-         (interactive)
-         (hlt-highlight-region (region-beginning) (region-end) 'highlight-statement))
-
-       (defun hlt-general()
-         (interactive)
-         (message "Im in hlt-general"
-         (hlt-highlight-region (region-beginning) (region-end) 'highlight-general)))
-
-       (global-set-key (kbd "ESC M-h q") #'hlt-question)
-       (global-set-key (kbd "ESC M-h s") #'hlt-statement)
-       (global-set-key (kbd "ESC M-h h") #'hlt-general)
-       (global-set-key (kbd "ESC M-h u") #'hlt-unhighlight-region)
-     #+end_src
-
-     Now, let's enable automatic highlighting on our function.
-
-     #+caption: Auto-highlight
-     #+begin_src elisp :tangle ~/emacs/rc/CODE.el
-       (defun r/do-highlight-on-capture ()
-         "Highlight selected region of the buffer you were in at capture."
-         (save-excursion
-           (with-current-buffer (plist-get org-capture-plist :original-buffer)
-             (hlt-general))))
-
-       (defun r/highlight-on-capture ()
-         (message "Running highlight on capture hook")
-         (when (equal (plist-get org-capture-plist :key) "f")
-           (r/do-highlight-on-capture)))
-
-       (add-hook 'org-capture-after-finalize-hook #'r/highlight-on-capture)
-     #+end_src
 **** Twelve favourite problems
      :LOGBOOK:
      CLOCK: [2021-06-16 Wed 04:25]--[2021-06-16 Wed 04:27] =>  0:02

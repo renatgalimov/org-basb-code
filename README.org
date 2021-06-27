@@ -12,7 +12,6 @@
 
      Use a guide to set up either the V1 or V2 version of org-roam.
 
-
 ** How to work with this guide?
    - Open this file in Emacs.
    - [[https://orgmode.org/manual/Extracting-Source-Code.html][Extract]] the [[*Emacs config][config]] source block into your org directory.
@@ -71,7 +70,7 @@
 ** Capture
 
    #+begin_quote
-   Emacs is a text editor. -- Me
+   Emacs is a text editor.
    #+end_quote
 
 *** Capture documents
@@ -236,7 +235,7 @@
         :speed:    fast
         :sort:     nil
         :END:
-        [[https://github.com/dfeich/helm-deft][GitHub - dfeich/helm-deft: A helm based emacs module to help search in a predetermined list of directories. Inspired by the deft module.]]
+        [[https://github.com/dfeich/helm-deft][GitHub - dfeich/helm-deft: A helm based Emacs module to help search in a predetermined list of directories. Inspired by the deft module.]]
 
         Helm implementation didn't work for me. So I set a default
         version here.
@@ -272,7 +271,7 @@
         [[https://github.com/alphapapa/org-ql][GitHub - alphapapa/org-ql: An Org-mode query language, including search commands and saved views]]
 
         Doesn't look suitable for large filesets, but helm
-        implementation is perfect for medium-sized collections.
+        implementation is good for medium-sized collections.
 
         #+name: install-org-ql
         #+begin_src emacs-lisp
@@ -312,20 +311,106 @@
           files for search.
 
 ** Organize
-   - Org-mode tags
+*** Org-mode tags
 
      This is a default method. You just tag your projects with a
      =project= tag, areas with an =area= tag and so on.
 
-   - Org-roam links
+*** Org-roam links
 
      An alternative to use Org-roam references as tags.
      You create grouping notes: =projects=, =areas=, =resources= and insert
      a link to the target record according to where it belongs.
 
-
 ** Distill
 *** Progressive summarization
+**** Make org-emphasize multi-linear
+
+     To bypass the limit of two lines for org-emphasize marks enable
+     the code below.
+
+     #+name: increase-org-emphasis-limit
+     #+begin_src emacs-lisp
+       ;; Make org-emphasis to work on up to 10 lines selection.
+       (setcar (nthcdr 4 org-emphasis-regexp-components) 10)
+       (org-set-emph-re 'org-emphasis-regexp-components org-emphasis-regexp-components)
+     #+end_src
+
+**** Highlighting
+     :LOGBOOK:
+     CLOCK: [2021-06-13 Вс 07:16]--[2021-06-13 Sun 07:31] =>  0:15
+     CLOCK: [2021-06-13 Вс 06:49]--[2021-06-13 Вс 07:15] =>  0:26
+     :END:
+
+     Highlighting is a key part of progressive summarization.
+     Here I will be highlighting with =highlight.el= and enriched mode.
+     If you don't want to put your text file into the [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Enriched-Mode.html][enriched text mode]], you can
+     use =org-emphasize= instead of functions provided here.
+
+***** highlight.el
+
+      When working with plain text buffers, like org-mode or markdown,
+      you can use [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Enriched-Mode.html][enriched text mode]] with the =highlight= library to
+      mark the text.
+
+      #+caption: Set up highlight.el
+      #+name: setup-highlight-el
+      #+begin_src emacs-lisp
+        ;; If you get errors saying somethign about facemenu, try
+        ;; uncommenting this.
+        ;; (setq facemenu-menu nil)
+
+        (use-package highlight :ensure t
+          :init
+          (defun hlt-general()
+            (interactive)
+            (unless (bound-and-true-p enriched-mode)
+              (enriched-mode t))
+            (hlt-highlight-region (region-beginning) (region-end) 'highlight))
+
+          :bind (("C-c n h" . hlt-general)
+                 ("C-c n H" . hlt-unhighlight-region)))
+      #+end_src
+
+***** org-capture a region                                                             :ATTACH:
+      :PROPERTIES:
+      :ID:       1FD14535-77E8-4296-9BC9-A72DB1CB7E0F
+      :END:
+
+      To keep track of highlighted notes we will use =org-capture=.
+
+      #+caption: A capture template
+      #+name: highlight-capture
+      #+begin_src elisp
+        ;; Use =org-capture f= to put a link to the text you selected.into an
+        ;; org entry with the current timer enabled.
+
+        (add-to-list
+         'org-capture-templates
+         '("f" "Curently watched" item (clock)
+           "%(with-current-buffer (org-capture-get :original-buffer) (replace-regexp-in-string \"\n\" \" \" (buffer-substring (region-beginning) (region-end)))) [[%F::%(with-current-buffer (org-capture-get :original-buffer) (replace-regexp-in-string \"\n\" \" \" (buffer-substring (region-beginning) (region-end))))][↗]]%?" :unnarrowed t))
+
+        ;; The code below automatically highlights the region we captured
+        (defun do-highlight-on-capture ()
+          "Highlight selected region of the buffer you were in at capture."
+          (save-excursion
+            (with-current-buffer (plist-get org-capture-plist :original-buffer)
+              (hlt-general))))
+
+        (defun highlight-on-capture ()
+          (when (equal (plist-get org-capture-plist :key) "f")
+            (do-highlight-on-capture)))
+
+        (add-hook 'org-capture-after-finalize-hook #'highlight-on-capture)
+      #+end_src
+
+      This is my basic marking mechanism. Whenever I'm reading an
+      article in Emacs (transformed to an org-mode or markdown file),
+      I click =C-c f= to insert an entry to the notebook I'm currently
+      on.
+
+      #+caption: Highlighting on capture demo
+      [[attachment:Highlighting with org-capturre.gif]]
 
 ** Express
 
@@ -335,16 +420,17 @@
 
   #+caption: Config source block
   #+begin_src emacs-lisp :noweb yes :tangle ~/emacs/rc/CODE.el :comments noweb
-    <<install-straight-el>>
-    <<install-org-pandoc-import>>
-    <<install-org-web-tools>>
-    <<install-helm-rg>>
-    <<install-org-rifle>>
-    <<install-deft>>
-    <<install-org-ql>>
+        <<install-straight-el>>
+        <<install-org-pandoc-import>>
+        <<install-org-web-tools>>
+        <<install-helm-rg>>
+        <<install-org-rifle>>
+        <<install-deft>>
+        <<install-org-ql>>
+        <<increase-org-emphasis-limit>>
+        <<highlight-capture>>
+        <<setup-highlight-el>>
   #+end_src
 
   #+RESULTS:
-
-
 * Awesome Emacs Code
