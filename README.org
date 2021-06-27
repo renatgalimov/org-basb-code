@@ -375,6 +375,7 @@
 ***** org-capture a region                                                             :ATTACH:
       :PROPERTIES:
       :ID:       1FD14535-77E8-4296-9BC9-A72DB1CB7E0F
+      :DIR:      ~/projects/org-basb-code/attachments
       :END:
 
       To keep track of highlighted notes we will use =org-capture=.
@@ -410,7 +411,8 @@
       on.
 
       #+caption: Highlighting on capture demo
-      [[file:data/1F/D14535-77E8-4296-9BC9-A72DB1CB7E0F/Highlighting with org-capturre.gif]]
+      #+attr_org: :width 400px
+      [[file:attachments/highlighting-with-org-capture.gif]]
 
 ** Express
 
