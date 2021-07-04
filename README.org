@@ -1,6 +1,3 @@
-# Created 2021-06-07 Пн 06:21
-#+AUTHOR: Renat Galimov
-
 * Emacs CODE implementation                                         :project:
 
 ** Prerequisites
@@ -316,11 +313,30 @@
      This is a default method. You just tag your projects with a
      =project= tag, areas with an =area= tag and so on.
 
+     You can search projects with helm or with org-ql:
+
+     #+caption: Finding projects with helm
+     [[file:Emacs_CODE_implementation/2021-07-04_07-52-17_screenshot.png]]
+
+     #+caption: Finding projects with org-ql
+     [[file:Emacs_CODE_implementation/2021-07-04_07-57-55_screenshot.png]]
+
 *** Org-roam links
 
      An alternative to use Org-roam references as tags.
-     You create grouping notes: =projects=, =areas=, =resources= and insert
+     You create notebooks called: =projects=, =areas=, =resources= and insert
      a link to the target record according to where it belongs.
+
+     #+caption: Links to an area within notes
+     [[file:Emacs_CODE_implementation/2021-07-04_08-05-12_screenshot.png]]
+
+
+     If you go to the =areas= note and call =org-roam-buffer-toggle=, you will see
+     a backlink to you note in the side buffer.
+
+     #+caption: Backlinks to all areas in the side buffer
+     [[file:Emacs_CODE_implementation/2021-07-04_08-07-11_screenshot.png]]
+
 
 ** Distill
 *** Progressive summarization
@@ -416,8 +432,11 @@
 
 ** Express
 
-   - Exporting
-   - Publishing
+   This area is too large to cover it in this guide.
+   If you're new to org-mode consult
+
+   [[https://orgmode.org/manual/Exporting.html][Exporting]] and [[https://orgmode.org/manual/Publishing.html][publishing]] sections of the org manual.
+
 * Emacs config
 
   #+caption: Config source block
@@ -435,4 +454,3 @@
   #+end_src
 
   #+RESULTS:
-* Awesome Emacs Code
