@@ -1,0 +1,1093 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2021-07-29 Thu 06:47 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Renat Galimov" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="src/readtheorg_theme/css/htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="src/readtheorg_theme/css/readtheorg.css"/>
+<script type="text/javascript" src="src/lib/js/jquery.min.js"></script>
+<script type="text/javascript" src="src/lib/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="src/lib/js/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript" src="src/readtheorg_theme/js/readtheorg.js"></script>
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="content">
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org8a73b99">1. Emacs CODE implementation&#xa0;&#xa0;&#xa0;<span class="tag"><span class="project">project</span></span></a>
+<ul>
+<li><a href="#orga883e4b">1.1. Prerequisites</a></li>
+<li><a href="#org37ba708">1.2. How to work with this guide?</a></li>
+<li><a href="#orgb4d026b">1.3. Prerequisites</a>
+<ul>
+<li><a href="#org4813543">1.3.1. Pandoc</a></li>
+<li><a href="#orgb8c09f0">1.3.2. straight.el</a></li>
+<li><a href="#org26aaa8b">1.3.3. Org-roam</a></li>
+</ul>
+</li>
+<li><a href="#org9cb925a">1.4. Capture</a>
+<ul>
+<li><a href="#orgbdf4e43">1.4.1. Capture documents</a></li>
+<li><a href="#org719355c">1.4.2. Capture web-pages</a></li>
+<li><a href="#org57b1aea">1.4.3. Capture templates</a></li>
+<li><a href="#org9f87a02">1.4.4. Finding your own records</a></li>
+</ul>
+</li>
+<li><a href="#org01f431f">1.5. Organize</a>
+<ul>
+<li><a href="#org4ff8e7b">1.5.1. Org-mode tags</a></li>
+<li><a href="#org007a59c">1.5.2. Org-roam links</a></li>
+</ul>
+</li>
+<li><a href="#org9470c27">1.6. Distill</a>
+<ul>
+<li><a href="#org0951fc8">1.6.1. Progressive summarization</a></li>
+</ul>
+</li>
+<li><a href="#org8621517">1.7. Express</a></li>
+</ul>
+</li>
+<li><a href="#org2c7df25">2. Emacs config</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org8a73b99" class="outline-2">
+<h2 id="org8a73b99"><span class="section-number-2">1</span> Emacs CODE implementation&#xa0;&#xa0;&#xa0;<span class="tag"><span class="project">project</span></span></h2>
+<div class="outline-text-2" id="text-1">
+</div>
+<div id="outline-container-orga883e4b" class="outline-3">
+<h3 id="orga883e4b"><span class="section-number-3">1.1</span> Prerequisites</h3>
+<div class="outline-text-3" id="text-1-1">
+<ul class="org-ul">
+<li><p>
+<a href="https://github.com/org-roam/org-roam">GitHub - org-roam/org-roam: Rudimentary Roam replica with Org-mode</a>
+</p>
+
+<p>
+This guide uses org-roam as the central tool to manage your notes.
+And this is the only prerequisite.
+</p>
+
+<p>
+Use a guide to set up either the V1 or V2 version of org-roam.
+</p></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org37ba708" class="outline-3">
+<h3 id="org37ba708"><span class="section-number-3">1.2</span> How to work with this guide?</h3>
+<div class="outline-text-3" id="text-1-2">
+<ul class="org-ul">
+<li>Open this file in Emacs.</li>
+<li><a href="https://orgmode.org/manual/Extracting-Source-Code.html">Extract</a> the <a href="#org2c7df25">config</a> source block into your org directory.</li>
+<li>Add the resulting file to your load path.</li>
+<li>I will be using <code>C-c n</code> prefix for keybindings in this package.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgb4d026b" class="outline-3">
+<h3 id="orgb4d026b"><span class="section-number-3">1.3</span> Prerequisites</h3>
+<div class="outline-text-3" id="text-1-3">
+</div>
+<div id="outline-container-org4813543" class="outline-4">
+<h4 id="org4813543"><span class="section-number-4">1.3.1</span> Pandoc</h4>
+<div class="outline-text-4" id="text-1-3-1">
+<div class="org-src-container">
+<label class="org-src-name"><span class="listing-number">Listing 1: </span>Install Pandoc on Ubuntu</label><pre class="src src-bash">sudo apt install pandoc
+</pre>
+</div>
+
+<div class="org-src-container">
+<label class="org-src-name"><span class="listing-number">Listing 2: </span>Install Pandoc on Mac OS with homebrew</label><pre class="src src-bash">brew install pandoc
+</pre>
+</div>
+
+<p>
+Ensure that Pandoc is in your path.
+</p>
+
+<div class="org-src-container">
+<label class="org-src-name"><span class="listing-number">Listing 3: </span>Pandoc version</label><pre class="src src-bash">pandoc --version
+</pre>
+</div>
+
+<pre class="example">
+pandoc 2.14.0.2
+Compiled with pandoc-types 1.22, texmath 0.12.3, skylighting 0.10.5.1,
+citeproc 0.4.0.1, ipynb 0.1.0.1
+User data directory: /Users/renat.galimov/.local/share/pandoc
+Copyright (C) 2006-2021 John MacFarlane. Web:  https://pandoc.org
+This is free software; see the source for copying conditions. There is no
+warranty, not even for merchantability or fitness for a particular purpose.
+</pre>
+</div>
+</div>
+<div id="outline-container-orgb8c09f0" class="outline-4">
+<h4 id="orgb8c09f0"><span class="section-number-4">1.3.2</span> straight.el</h4>
+<div class="outline-text-4" id="text-1-3-2">
+<p>
+For this guide, we will be using <a href="https://github.com/raxod502/straight.el">straight.el</a> as your package manager.
+</p>
+
+<div class="org-src-container">
+<label class="org-src-name"><span class="listing-number">Listing 4: </span>Install straight.el</label><pre class="src src-emacs-lisp" id="org2f7fc7e">(<span style="color: #51afef;">defvar</span> <span style="color: #dcaeea;">bootstrap-version</span>)
+(<span style="color: #51afef;">let</span> ((bootstrap-file
+       (expand-file-name <span style="color: #98be65;">"straight/repos/straight.el/bootstrap.el"</span> user-emacs-directory))
+      (bootstrap-version 5))
+  (<span style="color: #51afef;">unless</span> (file-exists-p bootstrap-file)
+    (<span style="color: #51afef;">with-current-buffer</span>
+        (url-retrieve-synchronously
+         <span style="color: #98be65;">"https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"</span>
+         'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org26aaa8b" class="outline-4">
+<h4 id="org26aaa8b"><span class="section-number-4">1.3.3</span> Org-roam</h4>
+<div class="outline-text-4" id="text-1-3-3">
+<p>
+Obviously, we need <a href="https://github.com/org-roam/org-roam">org-roam</a> itself
+</p>
+<div class="org-src-container">
+<label class="org-src-name"><span class="listing-number">Listing 5: </span>Install org-roam</label><pre class="src src-emacs-lisp" id="org589ed7c">(<span style="color: #51afef;">use-package</span> <span style="color: #a9a1e1;">org-roam</span> <span style="color: #c678dd;">:ensure</span> t <span style="color: #c678dd;">:pin</span> <span style="color: #98be65;">"melpa-stable"</span>)
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org9cb925a" class="outline-3">
+<h3 id="org9cb925a"><span class="section-number-3">1.4</span> Capture</h3>
+<div class="outline-text-3" id="text-1-4">
+<blockquote>
+<p>
+Emacs is a text editor.
+</p>
+</blockquote>
+</div>
+
+<div id="outline-container-orgbdf4e43" class="outline-4">
+<h4 id="orgbdf4e43"><span class="section-number-4">1.4.1</span> Capture documents</h4>
+<div class="outline-text-4" id="text-1-4-1">
+<ul class="org-ul">
+<li>Capture targets:
+<ul class="org-ul">
+<li>E-books</li>
+<li>Documents</li>
+<li>Videos</li>
+<li>Audios</li>
+<li>Images</li>
+</ul></li>
+</ul>
+
+<p>
+To capture we use Pandoc and <a href="https://github.com/tecosaur/org-pandoc-import">org-pandoc-import</a>
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp" id="org76dabfc">(<span style="color: #51afef;">use-package</span> <span style="color: #a9a1e1;">org-pandoc-import</span>
+  <span style="color: #c678dd;">:straight</span> (<span style="color: #c678dd;">:host</span> github
+                   <span style="color: #c678dd;">:repo</span> <span style="color: #98be65;">"tecosaur/org-pandoc-import"</span>
+                   <span style="color: #c678dd;">:files</span> (<span style="color: #98be65;">"*.el"</span> <span style="color: #98be65;">"filters"</span> <span style="color: #98be65;">"preprocessors"</span>))
+
+  <span style="color: #c678dd;">:bind</span> ((<span style="color: #98be65;">"C-c n o"</span> . org-pandoc-import-as-org)))
+</pre>
+</div>
+
+<p>
+Pandoc can convert almost any text format to org-mode
+representation. One of the current drawbacks - it cannot import online web pages.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org719355c" class="outline-4">
+<h4 id="org719355c"><span class="section-number-4">1.4.2</span> Capture web-pages</h4>
+<div class="outline-text-4" id="text-1-4-2">
+</div>
+<ol class="org-ol">
+<li><a id="orga997592"></a>org-web-tools<br />
+<div class="outline-text-5" id="text-1-4-2-1">
+<p>
+<a href="https://github.com/alphapapa/org-web-tools">org-web-tools</a> offers <code>org-web-tools-read-url-as-org</code> function,
+which can download an URL to an org buffer.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp" id="org1c8281b">(<span style="color: #51afef;">use-package</span> <span style="color: #a9a1e1;">org-web-tools</span> <span style="color: #c678dd;">:ensure</span> t
+  <span style="color: #c678dd;">:bind</span> ((<span style="color: #98be65;">"C-c n u"</span> . org-web-tools-read-url-as-org)))
+</pre>
+</div>
+
+<p>
+Often, downloaded files need manual cleanup.
+</p>
+</div>
+</li>
+
+<li><a id="org45286bb"></a>Firefox web-clipper and Pandoc<br />
+<div class="outline-text-5" id="text-1-4-2-2">
+<p>
+An alternative approach is to use a web-clipper and Pandoc.
+</p>
+
+<ul class="org-ul">
+<li>Open the web article in your browser and activate a web-clipper.
+I use Firefoxes built-in one.</li>
+<li>Save entire HTML into a file.</li>
+<li><p>
+Convert the HTML with Pandoc
+</p>
+<div class="org-src-container">
+<label class="org-src-name"><span class="listing-number">Listing 6: </span>Convert HTML to Org with Pandoc</label><pre class="src src-bash">pandoc -f html -t org &lt;source-file&gt;.html -o &lt;target-file&gt;.org
+</pre>
+</div>
+
+<p>
+The resulting file might require some cleanup, but the quality of
+the output is the best among other methods.
+</p></li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+
+<div id="outline-container-org57b1aea" class="outline-4">
+<h4 id="org57b1aea"><span class="section-number-4">1.4.3</span> Capture templates</h4>
+<div class="outline-text-4" id="text-1-4-3">
+<p>
+<a id="orgb12c714"></a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-org9f87a02" class="outline-4">
+<h4 id="org9f87a02"><span class="section-number-4">1.4.4</span> Finding your own records</h4>
+<div class="outline-text-4" id="text-1-4-4">
+<p>
+Crawling over your own notes is a key part of the project
+workflow.
+</p>
+
+<p>
+Below I summarized information about all full-text search engines
+I found for org-mode.
+</p>
+
+<p>
+Depending on your own need you might select one or multiple of them.
+</p>
+
+<p>
+Unfortunately, I didn't find any ideal solution for a full-text
+search yet. Packages that make better sorting are slower than
+packages that give results fast but in a random order.
+</p>
+</div>
+
+<ol class="org-ol">
+<li><a id="org80d0fec"></a>Org full-text search&#xa0;&#xa0;&#xa0;<span class="tag"><span class="table">table</span></span><br />
+<div class="outline-text-6" id="text-1-4-4-0-1">
+<ul class="org-ul">
+<li>Requested features:
+<ul class="org-ul">
+<li>helm or counsel integration.</li>
+<li>live search.</li>
+<li>result previewing support.</li>
+<li>a key-binding to capture results into currently clocked
+org file.</li>
+<li>results ordering support
+<ul class="org-ul">
+<li>Headlines</li>
+<li>Summary</li>
+<li>Hightlight</li>
+</ul></li>
+<li>large file-sets support</li>
+</ul></li>
+</ul>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">ITEM</th>
+<th scope="col" class="org-left">FRONTEND</th>
+<th scope="col" class="org-left">SPEED</th>
+<th scope="col" class="org-left">SORT</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">Org-roam Full-text search</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&ensp;&ensp;ripgrep (helm-rg)</td>
+<td class="org-left">helm ivy</td>
+<td class="org-left">fast</td>
+<td class="org-left">nil</td>
+</tr>
+
+<tr>
+<td class="org-left">&ensp;&ensp;helm-org-rifle</td>
+<td class="org-left">helm</td>
+<td class="org-left">slow</td>
+<td class="org-left">t</td>
+</tr>
+
+<tr>
+<td class="org-left">&ensp;&ensp;deft</td>
+<td class="org-left">helm</td>
+<td class="org-left">fast</td>
+<td class="org-left">nil</td>
+</tr>
+
+<tr>
+<td class="org-left">&ensp;&ensp;org-ql</td>
+<td class="org-left">helm</td>
+<td class="org-left">slow</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&ensp;&ensp;recoll</td>
+<td class="org-left">helm ivy</td>
+<td class="org-left">fast</td>
+<td class="org-left">nil</td>
+</tr>
+
+<tr>
+<td class="org-left">&ensp;&ensp;org-fts</td>
+<td class="org-left">ivy</td>
+<td class="org-left">fast</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&ensp;&ensp;org-agenda search</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<ol class="org-ol">
+<li><a id="org149951f"></a>ripgrep (helm-rg)<br />
+<div class="outline-text-8" id="text-1-4-4-0-1-0-1">
+<p>
+<a href="https://github.com/cosmicexplorer/helm-rg">GitHub - cosmicexplorer/helm-rg: ripgrep is nice</a>
+Now I use it as a default text search engine.
+</p>
+
+<div class="org-src-container">
+<label class="org-src-name"><span class="listing-number">Listing 7: </span>Install ripgrep in MacOS</label><pre class="src src-bash">brew install ripgrep
+</pre>
+</div>
+
+<div class="org-src-container">
+<label class="org-src-name"><span class="listing-number">Listing 8: </span>Install helm-rg</label><pre class="src src-emacs-lisp" id="org33cb69f">(<span style="color: #51afef;">use-package</span> <span style="color: #a9a1e1;">helm-rg</span> <span style="color: #c678dd;">:ensure</span> t
+  <span style="color: #c678dd;">:init</span>
+  (<span style="color: #51afef;">defun</span> <span style="color: #c678dd;">helm-rg-roam-directory</span> (<span style="color: #ECBE7B;">&amp;optional</span> query)
+    <span style="color: #83898d;">"Search with rg in your roam directory, QUERY."</span>
+    (<span style="color: #51afef;">interactive</span>)
+    (<span style="color: #51afef;">let</span> ((helm-rg-default-directory org-roam-directory))
+      (helm-rg query nil)))
+  <span style="color: #c678dd;">:bind</span> ((<span style="color: #98be65;">"C-c n R"</span> . helm-rg-roam-directory)))
+</pre>
+</div>
+</div>
+</li>
+
+<li><a id="org737b8f1"></a>helm-org-rifle<br />
+<div class="outline-text-8" id="text-1-4-4-0-1-0-2">
+<p>
+<a href="https://github.com/alphapapa/org-rifle">GitHub - alphapapa/org-rifle: Rifle through your Org-mode buffers and acquire your target</a>
+</p>
+
+<p>
+This one is good. It gives you an idea about the context. But
+it's not ordering the data by the highlights.
+</p>
+
+<p>
+I find org-rifle too slow at the moment. But its output is exacly what I want.
+</p>
+
+<div class="org-src-container">
+<label class="org-src-name"><span class="listing-number">Listing 9: </span>Install org-rifle</label><pre class="src src-emacs-lisp" id="orgd388ae5">(<span style="color: #51afef;">use-package</span> <span style="color: #a9a1e1;">helm-org-rifle</span> <span style="color: #c678dd;">:ensure</span> t
+  <span style="color: #c678dd;">:init</span>
+  (<span style="color: #51afef;">defun</span> <span style="color: #c678dd;">org-rifle-roam-directory</span> ()
+    (<span style="color: #51afef;">interactive</span>)
+    (helm-org-rifle-directories org-roam-directory))
+  <span style="color: #c678dd;">:bind</span> ((<span style="color: #98be65;">"C-c n s"</span> . org-rifle-roam-directory)))
+</pre>
+</div>
+</div>
+</li>
+
+<li><a id="org1974b18"></a>deft<br />
+<div class="outline-text-8" id="text-1-4-4-0-1-0-3">
+<p>
+<a href="https://github.com/dfeich/helm-deft">GitHub - dfeich/helm-deft: A helm based Emacs module to help search in a predetermined list of directories. Inspired by the deft module.</a>
+</p>
+
+<p>
+Helm implementation didn't work for me. So I set a default
+version here.
+</p>
+
+<p>
+One of the drawbacks here is that you can't see the text you
+matched. From my point of view - helm-rg gives more precise
+information about the context.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp" id="org4857f1f">(<span style="color: #51afef;">use-package</span> <span style="color: #a9a1e1;">deft</span> <span style="color: #c678dd;">:ensure</span> t
+  <span style="color: #c678dd;">:init</span> (<span style="color: #51afef;">setq</span> deft-directory org-roam-directory
+              deft-recursive t)
+  <span style="color: #c678dd;">:bind</span> ((<span style="color: #98be65;">"C-c n d"</span> . deft))
+  )
+<span style="color: #5B6268;">;; </span><span style="color: #5B6268;">(use-package helm-deft</span>
+<span style="color: #5B6268;">;;   </span><span style="color: #5B6268;">:ensure t</span>
+<span style="color: #5B6268;">;;   </span><span style="color: #5B6268;">:straight (:host github</span>
+<span style="color: #5B6268;">;;                    </span><span style="color: #5B6268;">:repo "dfeich/helm-deft"</span>
+<span style="color: #5B6268;">;;                    </span><span style="color: #5B6268;">:files ("*.el"))</span>
+<span style="color: #5B6268;">;;   </span><span style="color: #5B6268;">:init</span>
+<span style="color: #5B6268;">;;   </span><span style="color: #5B6268;">(setq helm-deft-dir-list `(,org-roam-directory)</span>
+<span style="color: #5B6268;">;;         </span><span style="color: #5B6268;">helm-deft-extension '("org"))</span>
+<span style="color: #5B6268;">;;   </span><span style="color: #5B6268;">:bind (("C-c n d" . helm-deft)))</span>
+
+</pre>
+</div>
+</div>
+</li>
+
+<li><a id="org8ef17d0"></a>org-ql<br />
+<div class="outline-text-8" id="text-1-4-4-0-1-0-4">
+<p>
+<a href="https://github.com/alphapapa/org-ql">GitHub - alphapapa/org-ql: An Org-mode query language, including search commands and saved views</a>
+</p>
+
+<p>
+Doesn't look suitable for large filesets, but helm
+implementation is good for medium-sized collections.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp" id="orged9d3b3">(<span style="color: #51afef;">use-package</span> <span style="color: #a9a1e1;">org-ql</span> <span style="color: #c678dd;">:ensure</span> t
+  <span style="color: #c678dd;">:init</span>
+  (<span style="color: #51afef;">setq</span> org-ql-search-directories-files-recursive t))
+(<span style="color: #51afef;">use-package</span> <span style="color: #a9a1e1;">helm-org-ql</span> <span style="color: #c678dd;">:ensure</span> t
+  <span style="color: #c678dd;">:init</span>
+  (<span style="color: #51afef;">setq</span> helm-org-ql-recursive-paths t)
+  <span style="color: #c678dd;">:bind</span> ((<span style="color: #98be65;">"C-c n q"</span> . helm-org-ql-org-directory)))
+</pre>
+</div>
+</div>
+</li>
+
+<li><a id="org44c9de1"></a>recoll<br />
+<div class="outline-text-8" id="text-1-4-4-0-1-0-5">
+<p>
+<a href="https://github.com/emacs-helm/helm-recoll">GitHub - emacs-helm/helm-recoll: helm interface for the recoll desktop search tool.</a>
+I found recoll being to hard to set up.
+I wasn't able to get it working on MacOS.
+</p>
+</div>
+</li>
+
+<li><a id="orgb2c0ebc"></a>org-fts<br />
+<div class="outline-text-8" id="text-1-4-4-0-1-0-6">
+<p>
+<a href="https://github.com/zot/microfts/tree/main/elisp">microfts/elisp at main · zot/microfts · GitHub</a>
+</p>
+
+<ul class="org-ul">
+<li>It didn't work on MacOS from scratch.</li>
+<li>I tried to compile its binary manually but that didn't work
+either.</li>
+<li>This one looks promising. Let's keep an eye on it.</li>
+</ul>
+</div>
+</li>
+
+<li><a id="org253fa5e"></a>org-agenda search<br />
+<div class="outline-text-8" id="text-1-4-4-0-1-0-7">
+<ul class="org-ul">
+<li>Not trying this for now because agenda wants to open all its
+files for search.</li>
+</ul>
+</div>
+</li>
+</ol>
+</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org01f431f" class="outline-3">
+<h3 id="org01f431f"><span class="section-number-3">1.5</span> Organize</h3>
+<div class="outline-text-3" id="text-1-5">
+</div>
+<div id="outline-container-org4ff8e7b" class="outline-4">
+<h4 id="org4ff8e7b"><span class="section-number-4">1.5.1</span> Org-mode tags</h4>
+<div class="outline-text-4" id="text-1-5-1">
+<p>
+This is a default method. You just tag your projects with a
+<code>project</code> tag, areas with an <code>area</code> tag and so on.
+</p>
+
+<p>
+You can search projects with helm or with org-ql:
+</p>
+
+
+<div id="org1aa6aa7" class="figure">
+<p><img src="Emacs_CODE_implementation/2021-07-04_07-52-17_screenshot.png" alt="2021-07-04_07-52-17_screenshot.png" />
+</p>
+<p><span class="figure-number">Figure 1: </span>Finding projects with helm</p>
+</div>
+
+
+<div id="orgc5e793c" class="figure">
+<p><img src="Emacs_CODE_implementation/2021-07-04_07-57-55_screenshot.png" alt="2021-07-04_07-57-55_screenshot.png" />
+</p>
+<p><span class="figure-number">Figure 2: </span>Finding projects with org-ql</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org007a59c" class="outline-4">
+<h4 id="org007a59c"><span class="section-number-4">1.5.2</span> Org-roam links</h4>
+<div class="outline-text-4" id="text-1-5-2">
+<p>
+An alternative to use Org-roam references as tags.
+You create notebooks called: <code>projects</code>, <code>areas</code>, <code>resources</code> and insert
+a link to the target record according to where it belongs.
+</p>
+
+
+<div id="org81278db" class="figure">
+<p><img src="Emacs_CODE_implementation/2021-07-04_08-05-12_screenshot.png" alt="2021-07-04_08-05-12_screenshot.png" />
+</p>
+<p><span class="figure-number">Figure 3: </span>Links to an area within notes</p>
+</div>
+
+
+<p>
+If you go to the <code>areas</code> note and call <code>org-roam-buffer-toggle</code>, you will see
+a backlink to you note in the side buffer.
+</p>
+
+
+<div id="org8350b99" class="figure">
+<p><img src="Emacs_CODE_implementation/2021-07-04_08-07-11_screenshot.png" alt="2021-07-04_08-07-11_screenshot.png" />
+</p>
+<p><span class="figure-number">Figure 4: </span>Backlinks to all areas in the side buffer</p>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org9470c27" class="outline-3">
+<h3 id="org9470c27"><span class="section-number-3">1.6</span> Distill</h3>
+<div class="outline-text-3" id="text-1-6">
+</div>
+<div id="outline-container-org0951fc8" class="outline-4">
+<h4 id="org0951fc8"><span class="section-number-4">1.6.1</span> Progressive summarization</h4>
+<div class="outline-text-4" id="text-1-6-1">
+</div>
+<ol class="org-ol">
+<li><a id="orgb0cb774"></a>Make org-emphasize multi-linear<br />
+<div class="outline-text-5" id="text-1-6-1-1">
+<p>
+To bypass the limit of two lines for org-emphasize marks enable
+the code below.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp" id="org0fb386c"><span style="color: #5B6268;">;; </span><span style="color: #5B6268;">Make org-emphasis to work on up to 10 lines selection.</span>
+(setcar (nthcdr 4 org-emphasis-regexp-components) 10)
+(org-set-emph-re 'org-emphasis-regexp-components org-emphasis-regexp-components)
+</pre>
+</div>
+</div>
+</li>
+
+<li><a id="org1c2c347"></a>Highlighting<br />
+<div class="outline-text-5" id="text-1-6-1-2">
+<p>
+Highlighting is a key part of progressive summarization.
+Here I will be highlighting with <code>highlight.el</code> and enriched mode.
+If you don't want to put your text file into the <a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Enriched-Mode.html">enriched text mode</a>, you can
+use <code>org-emphasize</code> instead of functions provided here.
+</p>
+</div>
+
+<ol class="org-ol">
+<li><a id="orgf76c43a"></a>highlight.el<br />
+<div class="outline-text-6" id="text-1-6-1-2-1">
+<p>
+When working with plain text buffers, like org-mode or markdown,
+you can use <a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Enriched-Mode.html">enriched text mode</a> with the <code>highlight</code> library to
+mark the text.
+</p>
+
+<div class="org-src-container">
+<label class="org-src-name"><span class="listing-number">Listing 10: </span>Set up highlight.el</label><pre class="src src-emacs-lisp" id="orgc474da4"><span style="color: #5B6268;">;; </span><span style="color: #5B6268;">If you get errors saying somethign about facemenu, try</span>
+<span style="color: #5B6268;">;; </span><span style="color: #5B6268;">uncommenting this.</span>
+<span style="color: #5B6268;">;; </span><span style="color: #5B6268;">(setq facemenu-menu nil)</span>
+
+(<span style="color: #51afef;">use-package</span> <span style="color: #a9a1e1;">highlight</span> <span style="color: #c678dd;">:ensure</span> t
+  <span style="color: #c678dd;">:init</span>
+  (<span style="color: #51afef;">defun</span> <span style="color: #c678dd;">hlt-general</span>()
+    (<span style="color: #51afef;">interactive</span>)
+    (<span style="color: #51afef;">unless</span> (<span style="color: #51afef;">bound-and-true-p</span> enriched-mode)
+      (enriched-mode t))
+    (hlt-highlight-region (region-beginning) (region-end) 'highlight))
+
+  <span style="color: #c678dd;">:bind</span> ((<span style="color: #98be65;">"C-c n h"</span> . hlt-general)
+         (<span style="color: #98be65;">"C-c n H"</span> . hlt-unhighlight-region)))
+</pre>
+</div>
+</div>
+</li>
+
+<li><a id="org8d821fb"></a>org-capture a region&#xa0;&#xa0;&#xa0;<span class="tag"><span class="ATTACH">ATTACH</span></span><br />
+<div class="outline-text-6" id="text-1-6-1-2-2">
+<p>
+To keep track of highlighted notes we will use <code>org-capture</code>.
+</p>
+
+<div class="org-src-container">
+<label class="org-src-name"><span class="listing-number">Listing 11: </span>A capture template</label><pre class="src src-elisp" id="orgad8ed68"><span style="color: #5B6268;">;; </span><span style="color: #5B6268;">Use =org-capture f= to put a link to the text you selected.into an</span>
+<span style="color: #5B6268;">;; </span><span style="color: #5B6268;">org entry with the current timer enabled.</span>
+
+(add-to-list
+ 'org-capture-templates
+ '(<span style="color: #98be65;">"f"</span> <span style="color: #98be65;">"Curently watched"</span> item (clock)
+   <span style="color: #98be65;">"%(with-current-buffer (org-capture-get :original-buffer) (replace-regexp-in-string \"\n\" \" \" (buffer-substring (region-beginning) (region-end)))) [[%F::%(with-current-buffer (org-capture-get :original-buffer) (replace-regexp-in-string \"\n\" \" \" (buffer-substring (region-beginning) (region-end))))][&#8599;]]%?"</span> <span style="color: #c678dd;">:unnarrowed</span> t))
+
+<span style="color: #5B6268;">;; </span><span style="color: #5B6268;">The code below automatically highlights the region we captured</span>
+(<span style="color: #51afef;">defun</span> <span style="color: #c678dd;">do-highlight-on-capture</span> ()
+  <span style="color: #83898d;">"Highlight selected region of the buffer you were in at capture."</span>
+  (<span style="color: #51afef;">save-excursion</span>
+    (<span style="color: #51afef;">with-current-buffer</span> (plist-get org-capture-plist <span style="color: #c678dd;">:original-buffer</span>)
+      (hlt-general))))
+
+(<span style="color: #51afef;">defun</span> <span style="color: #c678dd;">highlight-on-capture</span> ()
+  (<span style="color: #51afef;">when</span> (equal (plist-get org-capture-plist <span style="color: #c678dd;">:key</span>) <span style="color: #98be65;">"f"</span>)
+    (do-highlight-on-capture)))
+
+(add-hook 'org-capture-after-finalize-hook #'highlight-on-capture)
+</pre>
+</div>
+
+<p>
+This is my basic marking mechanism. Whenever I'm reading an
+article in Emacs (transformed to an org-mode or markdown file),
+I click <code>C-c f</code> to insert an entry to the notebook I'm currently
+on.
+</p>
+
+
+<div id="org3c1fcd5" class="figure">
+<p><img src="attachments/highlighting-with-org-capture.gif" alt="highlighting-with-org-capture.gif" />
+</p>
+<p><span class="figure-number">Figure 5: </span>Highlighting on capture demo</p>
+</div>
+</div>
+</li>
+</ol>
+</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org8621517" class="outline-3">
+<h3 id="org8621517"><span class="section-number-3">1.7</span> Express</h3>
+<div class="outline-text-3" id="text-1-7">
+<p>
+This area is too large to cover it in this guide.
+If you're new to org-mode consult
+</p>
+
+<p>
+<a href="https://orgmode.org/manual/Exporting.html">Exporting</a> and <a href="https://orgmode.org/manual/Publishing.html">publishing</a> sections of the org manual.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org2c7df25" class="outline-2">
+<h2 id="org2c7df25"><span class="section-number-2">2</span> Emacs config</h2>
+<div class="outline-text-2" id="text-2">
+<div class="org-src-container">
+<label class="org-src-name"><span class="listing-number">Listing 12: </span>Config source block</label><pre class="src src-emacs-lisp"><span style="color: #5B6268;">;; </span><span style="color: #5B6268;">[[[[file:~/projects/org-basb-code/README.org::install-straight-el][install-straight-el]]][install-straight-el]]</span>
+(<span style="color: #51afef;">defvar</span> <span style="color: #dcaeea;">bootstrap-version</span>)
+(<span style="color: #51afef;">let</span> ((bootstrap-file
+       (expand-file-name <span style="color: #98be65;">"straight/repos/straight.el/bootstrap.el"</span> user-emacs-directory))
+      (bootstrap-version 5))
+  (<span style="color: #51afef;">unless</span> (file-exists-p bootstrap-file)
+    (<span style="color: #51afef;">with-current-buffer</span>
+        (url-retrieve-synchronously
+         <span style="color: #98be65;">"https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"</span>
+         'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
+<span style="color: #5B6268;">;; </span><span style="color: #5B6268;">install-straight-el ends here</span>
+<span style="color: #5B6268;">;; </span><span style="color: #5B6268;">[[[[file:~/projects/org-basb-code/README.org::install-org-roam][install-org-roam]]][install-org-roam]]</span>
+(<span style="color: #51afef;">use-package</span> <span style="color: #a9a1e1;">org-roam</span> <span style="color: #c678dd;">:ensure</span> t <span style="color: #c678dd;">:pin</span> <span style="color: #98be65;">"melpa-stable"</span>)
+<span style="color: #5B6268;">;; </span><span style="color: #5B6268;">install-org-roam ends here</span>
+<span style="color: #5B6268;">;; </span><span style="color: #5B6268;">[[[[file:~/projects/org-basb-code/README.org::install-org-pandoc-import][install-org-pandoc-import]]][install-org-pandoc-import]]</span>
+(<span style="color: #51afef;">use-package</span> <span style="color: #a9a1e1;">org-pandoc-import</span>
+  <span style="color: #c678dd;">:straight</span> (<span style="color: #c678dd;">:host</span> github
+                   <span style="color: #c678dd;">:repo</span> <span style="color: #98be65;">"tecosaur/org-pandoc-import"</span>
+                   <span style="color: #c678dd;">:files</span> (<span style="color: #98be65;">"*.el"</span> <span style="color: #98be65;">"filters"</span> <span style="color: #98be65;">"preprocessors"</span>))
+
+  <span style="color: #c678dd;">:bind</span> ((<span style="color: #98be65;">"C-c n o"</span> . org-pandoc-import-as-org)))
+<span style="color: #5B6268;">;; </span><span style="color: #5B6268;">install-org-pandoc-import ends here</span>
+<span style="color: #5B6268;">;; </span><span style="color: #5B6268;">[[[[file:~/projects/org-basb-code/README.org::install-org-web-tools][install-org-web-tools]]][install-org-web-tools]]</span>
+(<span style="color: #51afef;">use-package</span> <span style="color: #a9a1e1;">org-web-tools</span> <span style="color: #c678dd;">:ensure</span> t
+  <span style="color: #c678dd;">:bind</span> ((<span style="color: #98be65;">"C-c n u"</span> . org-web-tools-read-url-as-org)))
+<span style="color: #5B6268;">;; </span><span style="color: #5B6268;">install-org-web-tools ends here</span>
+<span style="color: #5B6268;">;; </span><span style="color: #5B6268;">[[[[file:~/projects/org-basb-code/README.org::install-helm-rg][install-helm-rg]]][install-helm-rg]]</span>
+(<span style="color: #51afef;">use-package</span> <span style="color: #a9a1e1;">helm-rg</span> <span style="color: #c678dd;">:ensure</span> t
+  <span style="color: #c678dd;">:init</span>
+  (<span style="color: #51afef;">defun</span> <span style="color: #c678dd;">helm-rg-roam-directory</span> (<span style="color: #ECBE7B;">&amp;optional</span> query)
+    <span style="color: #83898d;">"Search with rg in your roam directory, QUERY."</span>
+    (<span style="color: #51afef;">interactive</span>)
+    (<span style="color: #51afef;">let</span> ((helm-rg-default-directory org-roam-directory))
+      (helm-rg query nil)))
+  <span style="color: #c678dd;">:bind</span> ((<span style="color: #98be65;">"C-c n R"</span> . helm-rg-roam-directory)))
+<span style="color: #5B6268;">;; </span><span style="color: #5B6268;">install-helm-rg ends here</span>
+<span style="color: #5B6268;">;; </span><span style="color: #5B6268;">[[[[file:~/projects/org-basb-code/README.org::install-org-rifle][install-org-rifle]]][install-org-rifle]]</span>
+(<span style="color: #51afef;">use-package</span> <span style="color: #a9a1e1;">helm-org-rifle</span> <span style="color: #c678dd;">:ensure</span> t
+  <span style="color: #c678dd;">:init</span>
+  (<span style="color: #51afef;">defun</span> <span style="color: #c678dd;">org-rifle-roam-directory</span> ()
+    (<span style="color: #51afef;">interactive</span>)
+    (helm-org-rifle-directories org-roam-directory))
+  <span style="color: #c678dd;">:bind</span> ((<span style="color: #98be65;">"C-c n s"</span> . org-rifle-roam-directory)))
+<span style="color: #5B6268;">;; </span><span style="color: #5B6268;">install-org-rifle ends here</span>
+<span style="color: #5B6268;">;; </span><span style="color: #5B6268;">[[[[file:~/projects/org-basb-code/README.org::install-deft][install-deft]]][install-deft]]</span>
+(<span style="color: #51afef;">use-package</span> <span style="color: #a9a1e1;">deft</span> <span style="color: #c678dd;">:ensure</span> t
+  <span style="color: #c678dd;">:init</span> (<span style="color: #51afef;">setq</span> deft-directory org-roam-directory
+              deft-recursive t)
+  <span style="color: #c678dd;">:bind</span> ((<span style="color: #98be65;">"C-c n d"</span> . deft))
+  )
+<span style="color: #5B6268;">;; </span><span style="color: #5B6268;">(use-package helm-deft</span>
+<span style="color: #5B6268;">;;   </span><span style="color: #5B6268;">:ensure t</span>
+<span style="color: #5B6268;">;;   </span><span style="color: #5B6268;">:straight (:host github</span>
+<span style="color: #5B6268;">;;                    </span><span style="color: #5B6268;">:repo "dfeich/helm-deft"</span>
+<span style="color: #5B6268;">;;                    </span><span style="color: #5B6268;">:files ("*.el"))</span>
+<span style="color: #5B6268;">;;   </span><span style="color: #5B6268;">:init</span>
+<span style="color: #5B6268;">;;   </span><span style="color: #5B6268;">(setq helm-deft-dir-list `(,org-roam-directory)</span>
+<span style="color: #5B6268;">;;         </span><span style="color: #5B6268;">helm-deft-extension '("org"))</span>
+<span style="color: #5B6268;">;;   </span><span style="color: #5B6268;">:bind (("C-c n d" . helm-deft)))</span>
+
+<span style="color: #5B6268;">;; </span><span style="color: #5B6268;">install-deft ends here</span>
+<span style="color: #5B6268;">;; </span><span style="color: #5B6268;">[[[[file:~/projects/org-basb-code/README.org::install-org-ql][install-org-ql]]][install-org-ql]]</span>
+(<span style="color: #51afef;">use-package</span> <span style="color: #a9a1e1;">org-ql</span> <span style="color: #c678dd;">:ensure</span> t
+  <span style="color: #c678dd;">:init</span>
+  (<span style="color: #51afef;">setq</span> org-ql-search-directories-files-recursive t))
+(<span style="color: #51afef;">use-package</span> <span style="color: #a9a1e1;">helm-org-ql</span> <span style="color: #c678dd;">:ensure</span> t
+  <span style="color: #c678dd;">:init</span>
+  (<span style="color: #51afef;">setq</span> helm-org-ql-recursive-paths t)
+  <span style="color: #c678dd;">:bind</span> ((<span style="color: #98be65;">"C-c n q"</span> . helm-org-ql-org-directory)))
+<span style="color: #5B6268;">;; </span><span style="color: #5B6268;">install-org-ql ends here</span>
+<span style="color: #5B6268;">;; </span><span style="color: #5B6268;">[[[[file:~/projects/org-basb-code/README.org::increase-org-emphasis-limit][increase-org-emphasis-limit]]][increase-org-emphasis-limit]]</span>
+<span style="color: #5B6268;">;; </span><span style="color: #5B6268;">Make org-emphasis to work on up to 10 lines selection.</span>
+(setcar (nthcdr 4 org-emphasis-regexp-components) 10)
+(org-set-emph-re 'org-emphasis-regexp-components org-emphasis-regexp-components)
+<span style="color: #5B6268;">;; </span><span style="color: #5B6268;">increase-org-emphasis-limit ends here</span>
+<span style="color: #5B6268;">;; </span><span style="color: #5B6268;">[[[[id:1FD14535-77E8-4296-9BC9-A72DB1CB7E0F][org-capture a region]]][highlight-capture]]</span>
+<span style="color: #5B6268;">;; </span><span style="color: #5B6268;">Use =org-capture f= to put a link to the text you selected.into an</span>
+<span style="color: #5B6268;">;; </span><span style="color: #5B6268;">org entry with the current timer enabled.</span>
+
+(add-to-list
+ 'org-capture-templates
+ '(<span style="color: #98be65;">"f"</span> <span style="color: #98be65;">"Curently watched"</span> item (clock)
+   <span style="color: #98be65;">"%(with-current-buffer (org-capture-get :original-buffer) (replace-regexp-in-string \"\n\" \" \" (buffer-substring (region-beginning) (region-end)))) [[%F::%(with-current-buffer (org-capture-get :original-buffer) (replace-regexp-in-string \"\n\" \" \" (buffer-substring (region-beginning) (region-end))))][&#8599;]]%?"</span> <span style="color: #c678dd;">:unnarrowed</span> t))
+
+<span style="color: #5B6268;">;; </span><span style="color: #5B6268;">The code below automatically highlights the region we captured</span>
+(<span style="color: #51afef;">defun</span> <span style="color: #c678dd;">do-highlight-on-capture</span> ()
+  <span style="color: #83898d;">"Highlight selected region of the buffer you were in at capture."</span>
+  (<span style="color: #51afef;">save-excursion</span>
+    (<span style="color: #51afef;">with-current-buffer</span> (plist-get org-capture-plist <span style="color: #c678dd;">:original-buffer</span>)
+      (hlt-general))))
+
+(<span style="color: #51afef;">defun</span> <span style="color: #c678dd;">highlight-on-capture</span> ()
+  (<span style="color: #51afef;">when</span> (equal (plist-get org-capture-plist <span style="color: #c678dd;">:key</span>) <span style="color: #98be65;">"f"</span>)
+    (do-highlight-on-capture)))
+
+(add-hook 'org-capture-after-finalize-hook #'highlight-on-capture)
+<span style="color: #5B6268;">;; </span><span style="color: #5B6268;">highlight-capture ends here</span>
+<span style="color: #5B6268;">;; </span><span style="color: #5B6268;">[[[[file:~/projects/org-basb-code/README.org::setup-highlight-el][setup-highlight-el]]][setup-highlight-el]]</span>
+<span style="color: #5B6268;">;; </span><span style="color: #5B6268;">If you get errors saying somethign about facemenu, try</span>
+<span style="color: #5B6268;">;; </span><span style="color: #5B6268;">uncommenting this.</span>
+<span style="color: #5B6268;">;; </span><span style="color: #5B6268;">(setq facemenu-menu nil)</span>
+
+(<span style="color: #51afef;">use-package</span> <span style="color: #a9a1e1;">highlight</span> <span style="color: #c678dd;">:ensure</span> t
+  <span style="color: #c678dd;">:init</span>
+  (<span style="color: #51afef;">defun</span> <span style="color: #c678dd;">hlt-general</span>()
+    (<span style="color: #51afef;">interactive</span>)
+    (<span style="color: #51afef;">unless</span> (<span style="color: #51afef;">bound-and-true-p</span> enriched-mode)
+      (enriched-mode t))
+    (hlt-highlight-region (region-beginning) (region-end) 'highlight))
+
+  <span style="color: #c678dd;">:bind</span> ((<span style="color: #98be65;">"C-c n h"</span> . hlt-general)
+         (<span style="color: #98be65;">"C-c n H"</span> . hlt-unhighlight-region)))
+<span style="color: #5B6268;">;; </span><span style="color: #5B6268;">setup-highlight-el ends here</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Renat Galimov</p>
+<p class="date">Created: 2021-07-29 Thu 06:47</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

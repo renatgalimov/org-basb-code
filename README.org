@@ -17,7 +17,6 @@
 
 ** Prerequisites
 *** Pandoc
-
     #+caption: Install Pandoc on Ubuntu
     #+begin_src bash :exports code :eval never-export
       sudo apt install pandoc
@@ -63,6 +62,15 @@
             (eval-print-last-sexp)))
         (load bootstrap-file nil 'nomessage))
     #+end_src
+
+*** Org-roam
+    Obviously, we need [[https://github.com/org-roam/org-roam][org-roam]] itself
+    #+caption: Install org-roam
+    #+name: install-org-roam
+    #+begin_src emacs-lisp :exports code :eval never-export :results none
+      (use-package org-roam :ensure t :pin "melpa-stable")
+    #+end_src
+
 
 ** Capture
 
@@ -438,19 +446,19 @@
    [[https://orgmode.org/manual/Exporting.html][Exporting]] and [[https://orgmode.org/manual/Publishing.html][publishing]] sections of the org manual.
 
 * Emacs config
-
   #+caption: Config source block
   #+begin_src emacs-lisp :noweb yes :tangle ~/emacs/rc/CODE.el :comments noweb
-        <<install-straight-el>>
-        <<install-org-pandoc-import>>
-        <<install-org-web-tools>>
-        <<install-helm-rg>>
-        <<install-org-rifle>>
-        <<install-deft>>
-        <<install-org-ql>>
-        <<increase-org-emphasis-limit>>
-        <<highlight-capture>>
-        <<setup-highlight-el>>
+    <<install-straight-el>>
+    <<install-org-roam>>
+    <<install-org-pandoc-import>>
+    <<install-org-web-tools>>
+    <<install-helm-rg>>
+    <<install-org-rifle>>
+    <<install-deft>>
+    <<install-org-ql>>
+    <<increase-org-emphasis-limit>>
+    <<highlight-capture>>
+    <<setup-highlight-el>>
   #+end_src
 
   #+RESULTS:
