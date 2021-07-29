@@ -1,5 +1,6 @@
-* Emacs CODE implementation                                         :project:
+#+TITLE: Emacs CODE implementation
 
+* CODE implementation
 ** Prerequisites
 
    - [[https://github.com/org-roam/org-roam][GitHub - org-roam/org-roam: Rudimentary Roam replica with Org-mode]]
