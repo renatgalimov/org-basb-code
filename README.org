@@ -463,4 +463,5 @@
     <<setup-highlight-el>>
   #+end_src
 
-  #+RESULTS:
+* Useful links
+  [[https://gist.github.com/mwfogleman/267b6bc7e512826a2c36cb57f0e3d854][GTD/BASB Templates for Emacs and Org-Mode · GitHub]]
