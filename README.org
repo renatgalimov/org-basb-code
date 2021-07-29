@@ -1,4 +1,5 @@
 #+TITLE: Emacs CODE implementation
+#+EXPORT_FILE_NAME: index
 
 * CODE implementation
 ** Prerequisites
