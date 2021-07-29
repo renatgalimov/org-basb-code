@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-07-29 Thu 06:41 -->
+<!-- 2021-07-29 Thu 07:03 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>&lrm;</title>
@@ -353,14 +353,14 @@ I ended up using rekognition API
 You need amazon account to use it.
 </p>
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 1: </span>Rekognition script</label><pre class="src src-bash">#!/bin/bash
+<label class="org-src-name"><span class="listing-number">Listing 1: </span>Rekognition script</label><pre class="src src-bash"><span style="color: #5B6268;">#</span><span style="color: #5B6268;">!/bin/</span><span style="color: #51afef;">bash</span>
 
-set -euo pipefail
+<span style="color: #c678dd;">set</span> -euo pipefail
 
-CREDENTIALS="$1"
-TARGET_BASENAME="$(basename "$2")"
+<span style="color: #dcaeea;">CREDENTIALS</span>=<span style="color: #98be65;">"$1"</span>
+<span style="color: #dcaeea;">TARGET_BASENAME</span>=<span style="color: #98be65;">"$(</span><span style="color: #51afef; font-weight: bold;">basename</span><span style="color: #98be65;"> "$2")"</span>
 
-docker run --user "$(id -u):$(id -g)" -v /home/renat/.aws:/tmp/.aws -e HOME=/tmp -v "$(realpath "$2"):/mnt/$TARGET_BASENAME" -w /mnt --rm -i amazon/aws-cli --profile "$CREDENTIALS" rekognition detect-labels --image-bytes "fileb://$TARGET_BASENAME"
+docker run --user <span style="color: #98be65;">"$(</span><span style="color: #51afef; font-weight: bold;">id</span><span style="color: #98be65;"> -u):$(</span><span style="color: #51afef; font-weight: bold;">id</span><span style="color: #98be65;"> -g)"</span> -v /home/renat/.aws:/tmp/.aws -e <span style="color: #dcaeea;">HOME</span>=/tmp -v <span style="color: #98be65;">"$(</span><span style="color: #51afef; font-weight: bold;">realpath</span><span style="color: #98be65;"> "$2"):/mnt/$TARGET_BASENAME"</span> -w /mnt --rm -i amazon/aws-cli --profile <span style="color: #98be65;">"$CREDENTIALS"</span> rekognition detect-labels --image-bytes <span style="color: #98be65;">"fileb://$TARGET_BASENAME"</span>
 </pre>
 </div></li>
 </ul>
@@ -384,7 +384,7 @@ Then I use <a href="https://pandoc.org/">pandoc</a> to convert the page I saved 
 </p>
 
 <div class="org-src-container">
-<pre class="src src-bash">cd ~/Dropbox/org/html
+<pre class="src src-bash"><span style="color: #c678dd;">cd</span> ~/Dropbox/org/html
 pandoc -f html -t org &lt;file name&gt;.html -o &lt;file name&gt;.org
 </pre>
 </div>
@@ -413,50 +413,50 @@ I'm interested in. The code below defines appropriate faces.
 </p>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 2: </span>Custom highlights</label><pre class="src src-elisp">(defface highlight-question
+<label class="org-src-name"><span class="listing-number">Listing 2: </span>Custom highlights</label><pre class="src src-elisp">(<span style="color: #51afef;">defface</span> <span style="color: #dcaeea;">highlight-question</span>
   '((((class color) (min-colors 88) (background light))
-     :background "darkseagreen2")
+     <span style="color: #c678dd;">:background</span> <span style="color: #98be65;">"darkseagreen2"</span>)
     (((class color) (min-colors 88) (background dark))
-     :background "darkolivegreen")
+     <span style="color: #c678dd;">:background</span> <span style="color: #98be65;">"darkolivegreen"</span>)
     (((class color) (min-colors 16) (background light))
-     :background "darkseagreen2")
+     <span style="color: #c678dd;">:background</span> <span style="color: #98be65;">"darkseagreen2"</span>)
     (((class color) (min-colors 16) (background dark))
-     :background "darkolivegreen")
+     <span style="color: #c678dd;">:background</span> <span style="color: #98be65;">"darkolivegreen"</span>)
     (((class color) (min-colors 8))
-     :background "green" :foreground "black")
-    (t :inverse-video t))
-  "Face for highlighting questions."
-  :group 'basic-faces)
+     <span style="color: #c678dd;">:background</span> <span style="color: #98be65;">"green"</span> <span style="color: #c678dd;">:foreground</span> <span style="color: #98be65;">"black"</span>)
+    (t <span style="color: #c678dd;">:inverse-video</span> t))
+  <span style="color: #83898d;">"Face for highlighting questions."</span>
+  <span style="color: #c678dd;">:group</span> 'basic-faces)
 
-(defface highlight-statement
+(<span style="color: #51afef;">defface</span> <span style="color: #dcaeea;">highlight-statement</span>
   '((((class color) (min-colors 88) (background light))
-     :background "#3c4c7a")
+     <span style="color: #c678dd;">:background</span> <span style="color: #98be65;">"#3c4c7a"</span>)
     (((class color) (min-colors 88) (background dark))
-     :background "#3c4c7a")
+     <span style="color: #c678dd;">:background</span> <span style="color: #98be65;">"#3c4c7a"</span>)
     (((class color) (min-colors 16) (background light))
-     :background "#3c4c7a")
+     <span style="color: #c678dd;">:background</span> <span style="color: #98be65;">"#3c4c7a"</span>)
     (((class color) (min-colors 16) (background dark))
-     :background "#3c4c7a")
+     <span style="color: #c678dd;">:background</span> <span style="color: #98be65;">"#3c4c7a"</span>)
     (((class color) (min-colors 8))
-     :background "blue" :foreground "black")
-    (t :inverse-video t))
-  "Face for highlighting statements."
-  :group 'basic-faces)
+     <span style="color: #c678dd;">:background</span> <span style="color: #98be65;">"blue"</span> <span style="color: #c678dd;">:foreground</span> <span style="color: #98be65;">"black"</span>)
+    (t <span style="color: #c678dd;">:inverse-video</span> t))
+  <span style="color: #83898d;">"Face for highlighting statements."</span>
+  <span style="color: #c678dd;">:group</span> 'basic-faces)
 
-(defface highlight-general
+(<span style="color: #51afef;">defface</span> <span style="color: #dcaeea;">highlight-general</span>
   '((((class color) (min-colors 88) (background light))
-     :background "#614b61")
+     <span style="color: #c678dd;">:background</span> <span style="color: #98be65;">"#614b61"</span>)
     (((class color) (min-colors 88) (background dark))
-     :background "#614b61")
+     <span style="color: #c678dd;">:background</span> <span style="color: #98be65;">"#614b61"</span>)
     (((class color) (min-colors 16) (background light))
-     :background "#614b61")
+     <span style="color: #c678dd;">:background</span> <span style="color: #98be65;">"#614b61"</span>)
     (((class color) (min-colors 16) (background dark))
-     :background "#614b61")
+     <span style="color: #c678dd;">:background</span> <span style="color: #98be65;">"#614b61"</span>)
     (((class color) (min-colors 8))
-     :background "red" :foreground "black")
-    (t :inverse-video t))
-  "Face for highlighting."
-  :group 'basic-faces)
+     <span style="color: #c678dd;">:background</span> <span style="color: #98be65;">"red"</span> <span style="color: #c678dd;">:foreground</span> <span style="color: #98be65;">"black"</span>)
+    (t <span style="color: #c678dd;">:inverse-video</span> t))
+  <span style="color: #83898d;">"Face for highlighting."</span>
+  <span style="color: #c678dd;">:group</span> 'basic-faces)
 </pre>
 </div>
 
@@ -466,19 +466,19 @@ quickly. I use <code>ESC ESC h</code> prefix. Feel free to use your own.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-elisp">(defun hlt-question()
-  (interactive)
+<pre class="src src-elisp">(<span style="color: #51afef;">defun</span> <span style="color: #c678dd;">hlt-question</span>()
+  (<span style="color: #51afef;">interactive</span>)
   (hlt-highlight-region (region-beginning) (region-end) 'highlight-question))
 
-(defun hlt-statement()
-  (interactive)
+(<span style="color: #51afef;">defun</span> <span style="color: #c678dd;">hlt-statement</span>()
+  (<span style="color: #51afef;">interactive</span>)
   (hlt-highlight-region (region-beginning) (region-end) 'highlight-statement))
 
 
-(global-set-key (kbd "ESC M-h q") #'hlt-question)
-(global-set-key (kbd "ESC M-h s") #'hlt-statement)
-(global-set-key (kbd "ESC M-h h") #'hlt-general)
-(global-set-key (kbd "ESC M-h u") #'hlt-unhighlight-region)
+(global-set-key (kbd <span style="color: #98be65;">"ESC M-h q"</span>) #'hlt-question)
+(global-set-key (kbd <span style="color: #98be65;">"ESC M-h s"</span>) #'hlt-statement)
+(global-set-key (kbd <span style="color: #98be65;">"ESC M-h h"</span>) #'hlt-general)
+(global-set-key (kbd <span style="color: #98be65;">"ESC M-h u"</span>) #'hlt-unhighlight-region)
 </pre>
 </div>
 </div>
@@ -501,9 +501,9 @@ This template will create a project entry and will ask you to set a deadline.
 <div class="org-src-container">
 <label class="org-src-name"><span class="listing-number">Listing 3: </span>Capture project template</label><pre class="src src-emacs-lisp" id="org7d97ba0">(add-to-list
  'org-roam-capture-templates
- ("p" "Project" plain "%?"
-  :if-new (file+head "roam/%&lt;%Y%m%d%H%M%S&gt;-${slug}.org" "#+title: ${title}\n#+roam_tags project\n\n* ${title}\n  :DEADLINE: %^{Project deadline}t\n\n")
-  :unnarrowed t))
+ (<span style="color: #98be65;">"p"</span> <span style="color: #98be65;">"Project"</span> plain <span style="color: #98be65;">"%?"</span>
+  <span style="color: #c678dd;">:if-new</span> (file+head <span style="color: #98be65;">"roam/%&lt;%Y%m%d%H%M%S&gt;-${slug}.org"</span> <span style="color: #98be65;">"#+title: ${title}\n#+roam_tags project\n\n* ${title}\n  :DEADLINE: %^{Project deadline}t\n\n"</span>)
+  <span style="color: #c678dd;">:unnarrowed</span> t))
 </pre>
 </div>
 </div>
@@ -545,7 +545,7 @@ On roam v2 it will look like.
 </p>
 
 
-<div id="orga81b616" class="figure">
+<div id="org075f64d" class="figure">
 <p><img src="Working_notes/2021-06-09_09-16-32_screenshot.png" alt="2021-06-09_09-16-32_screenshot.png" />
 </p>
 </div>
@@ -565,7 +565,7 @@ will see:
 </p>
 
 
-<div id="org31c5220" class="figure">
+<div id="org21d2b62" class="figure">
 <p><img src="Working_notes/2021-06-09_09-20-55_screenshot.png" alt="2021-06-09_09-20-55_screenshot.png" />
 </p>
 </div>
@@ -583,7 +583,7 @@ will see:
 <a href="https://support.mozilla.org/en-US/kb/firefox-reader-view-clutter-free-web-pages">Reader view</a>
 </p>
 
-<div id="org6a04e5e" class="figure">
+<div id="org809804b" class="figure">
 <p><img src="Footnotes/2021-06-16_04-30-55_screenshot.png" alt="2021-06-16_04-30-55_screenshot.png" width="400px" />
 </p>
 </div></div></div>
@@ -597,7 +597,7 @@ will see:
 </div></div>
 <div id="postamble" class="status">
 <p class="author">Author: Renat Galimov</p>
-<p class="date">Created: 2021-07-29 Thu 06:41</p>
+<p class="date">Created: 2021-07-29 Thu 07:03</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
