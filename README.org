@@ -2,22 +2,30 @@
 #+EXPORT_FILE_NAME: index
 
 * CODE implementation
+
 ** Prerequisites
-
-   - [[https://github.com/org-roam/org-roam][GitHub - org-roam/org-roam: Rudimentary Roam replica with Org-mode]]
-
-     This guide uses org-roam as the central tool to manage your notes.
-     And this is the only prerequisite.
-
-     Use a guide to set up either the V1 or V2 version of org-roam.
 
 ** How to work with this guide?
    - Open this file in Emacs.
-   - [[https://orgmode.org/manual/Extracting-Source-Code.html][Extract]] the [[*Emacs config][config]] source block into your org directory.
+   - [[https://orgmode.org/manual/Extracting-Source-Code.html][Extract]] the [[*Emacs config][config]] source block into your emacs directory.
    - Add the resulting file to your load path.
    - I will be using =C-c n= prefix for keybindings in this package.
 
 ** Prerequisites
+
+*** [[https://github.com/org-roam/org-roam][GitHub - org-roam/org-roam: Rudimentary Roam replica with
+     Org-mode]]
+
+     This guide uses org-roam as the central tool to manage your
+     notes.
+
+    #+caption: Install org-roam
+    #+name: install-org-roam
+    #+begin_src emacs-lisp :exports code :eval never-export :results none
+      (use-package org-roam :ensure t :pin "melpa-stable"
+        :init (setq org-roam-v2-ack t)
+    #+end_src
+
 *** Pandoc
     #+caption: Install Pandoc on Ubuntu
     #+begin_src bash :exports code :eval never-export
@@ -66,12 +74,6 @@
     #+end_src
 
 *** Org-roam
-    Obviously, we need [[https://github.com/org-roam/org-roam][org-roam]] itself
-    #+caption: Install org-roam
-    #+name: install-org-roam
-    #+begin_src emacs-lisp :exports code :eval never-export :results none
-      (use-package org-roam :ensure t :pin "melpa-stable")
-    #+end_src
 
 
 ** Capture
@@ -465,3 +467,4 @@
 
 * Useful links
   [[https://gist.github.com/mwfogleman/267b6bc7e512826a2c36cb57f0e3d854][GTD/BASB Templates for Emacs and Org-Mode · GitHub]]
+  [[yt:AyhPmypHDEw]]
