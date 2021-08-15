@@ -1,4 +1,5 @@
 #+TITLE: Emacs CODE implementation
+#+AUTHOR: Renat Galimov
 #+EXPORT_FILE_NAME: index
 
 * CODE implementation
