@@ -16,7 +16,9 @@
 
 ** Prerequisites
 
-*** [[https://github.com/org-roam/org-roam][GitHub - org-roam/org-roam: Rudimentary Roam replica with Org-mode]]
+*** org-roam
+
+    [[https://github.com/org-roam/org-roam][GitHub - org-roam/org-roam: Rudimentary Roam replica with Org-mode]]
 
      This guide uses org-roam as the central tool to manage your
      notes.
@@ -464,31 +466,31 @@
       #+caption: Highlighting on capture demo
       #+attr_org: :width 400px
       [[file:attachments/highlighting-with-org-capture.gif]]
-**** Working with PDF files                                                            :ATTACH:
-     :PROPERTIES:
-     :ID:       B5A87A1B-E0FE-40D6-AC63-AD52DB283C31
-     :END:
-    #+name: install-pdf-tools
-    #+begin_src emacs-lisp
-      (use-package pdf-tools
-        :ensure t
-        :straight (:host github
-                         :repo "matthew-piziak/pdf-tools"
-                         :files ("lisp/*.el" "server"))
-        :init
-        (add-to-list 'auto-mode-alist '("\\.pdf\\'" . pdf-view-mode))
-        (setq pdf-info-epdfinfo-program (locate-file "straight/repos/pdf-tools/server/epdfinfo" `(,straight-base-dir))))
-      (use-package org-pdftools :ensure t
-        :init
-        (org-pdftools-setup-link))
-        #+end_src
+*** Working with PDF files                                                             :ATTACH:
+    :PROPERTIES:
+    :ID:       B5A87A1B-E0FE-40D6-AC63-AD52DB283C31
+    :END:
+   #+name: install-pdf-tools
+   #+begin_src emacs-lisp
+     (use-package pdf-tools
+       :ensure t
+       :straight (:host github
+                        :repo "matthew-piziak/pdf-tools"
+                        :files ("lisp/*.el" "server"))
+       :init
+       (add-to-list 'auto-mode-alist '("\\.pdf\\'" . pdf-view-mode))
+       (setq pdf-info-epdfinfo-program (locate-file "straight/repos/pdf-tools/server/epdfinfo" `(,straight-base-dir))))
+     (use-package org-pdftools :ensure t
+       :init
+       (org-pdftools-setup-link))
+       #+end_src
 
-        Now, capturing with =C-c c f= will create a highlight in the
-        PDF file and add a link to an org-mode node you're currently
-        working on.
+       Now, capturing with =C-c c f= will create a highlight in the
+       PDF file and add a link to an org-mode node you're currently
+       working on.
 
-        #+CAPTION: Highlighting text in a PDF document
-        [[file:attachments/Highlighting PDF files with org capture.mp4][Highlighting text in a PDF document]]
+       #+CAPTION: Highlighting text in a PDF document
+       [[file:attachments/Highlighting PDF files with org capture.mp4][Highlighting text in a PDF document]]
 ** Express
    This area is too large to cover it in this guide.
    If you're new to org-mode consult
@@ -513,6 +515,6 @@
   #+end_src
 
 * Useful links
-  [[https://gist.github.com/mwfogleman/267b6bc7e512826a2c36cb57f0e3d854][GTD/BASB Templates for Emacs and Org-Mode · GitHub]]
-  [[yt:AyhPmypHDEw]]
-  [[https://github.com/weirdNox/org-noter][GitHub - weirdNox/org-noter: Emacs document annotator, using Org-mode]]
+  - [[https://gist.github.com/mwfogleman/267b6bc7e512826a2c36cb57f0e3d854][GTD/BASB Templates for Emacs and Org-Mode · GitHub]]
+  - [[yt:AyhPmypHDEw]]
+  - [[https://github.com/weirdNox/org-noter][GitHub - weirdNox/org-noter: Emacs document annotator, using Org-mode]]
