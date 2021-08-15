@@ -2,6 +2,9 @@
 #+EXPORT_FILE_NAME: index
 
 * CODE implementation
+  :PROPERTIES:
+  :DIR:      ~/projects/org-basb-code/attachments/
+  :END:
 
   https://renatgalimov.github.io/org-basb-code/
 
