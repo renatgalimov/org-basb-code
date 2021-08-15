@@ -2,8 +2,11 @@
 #+EXPORT_FILE_NAME: index
 
 * CODE implementation
+  :PROPERTIES:
+  :DIR:      ~/projects/org-basb-code/attachments/
+  :END:
 
-** Prerequisites
+  https://renatgalimov.github.io/org-basb-code/
 
 ** How to work with this guide?
    - Open this file in Emacs.
@@ -13,8 +16,7 @@
 
 ** Prerequisites
 
-*** [[https://github.com/org-roam/org-roam][GitHub - org-roam/org-roam: Rudimentary Roam replica with
-     Org-mode]]
+*** [[https://github.com/org-roam/org-roam][GitHub - org-roam/org-roam: Rudimentary Roam replica with Org-mode]]
 
      This guide uses org-roam as the central tool to manage your
      notes.
@@ -74,7 +76,19 @@
     #+end_src
 
 *** Org-roam
-
+    Obviously, we need [[https://github.com/org-roam/org-roam][org-roam]] itself
+    #+caption: Install org-roam
+    #+name: install-org-roam
+    #+begin_src emacs-lisp :exports code :eval never-export :results none
+      (setq org-roam-v2-ack t)
+      (use-package org-roam
+        :ensure t
+        :pin "melpa-stable"
+        :bind (("C-c n l" . #'org-roam-buffer-toggle)
+               ("C-c n f" . #'org-roam-node-find)
+               ("C-c n v" . #'org-roam-node-visit)
+               ("C-c n i" . #'org-roam-node-insert)))
+    #+end_src
 
 ** Capture
 
@@ -292,7 +306,6 @@
             (setq helm-org-ql-recursive-paths t)
             :bind (("C-c n q" . helm-org-ql-org-directory)))
         #+end_src
-
 ******* recoll
         :PROPERTIES:
         :frontend: helm ivy
@@ -348,7 +361,6 @@
 
      #+caption: Backlinks to all areas in the side buffer
      [[file:Emacs_CODE_implementation/2021-07-04_08-07-11_screenshot.png]]
-
 
 ** Distill
 *** Progressive summarization
@@ -414,18 +426,29 @@
         ;; Use =org-capture f= to put a link to the text you selected.into an
         ;; org entry with the current timer enabled.
 
+        (defun r/org-capture-get-selected-text ()
+          (with-current-buffer (org-capture-get :original-buffer)
+            (string-trim
+             (replace-regexp-in-string
+              "\n" " "
+              (cond ((eq major-mode 'pdf-view-mode)
+                     (pdf-info-gettext (pdf-view-current-page) (car (pdf-view-active-region))))
+                    (t (buffer-substring-no-properties (region-beginning) (region-end))))))))
+        (defun r/org-capture-get-link (path)
+          (with-current-buffer (org-capture-get :original-buffer)
+            (cond ((eq major-mode 'pdf-view-mode) (switch-to-buffer (org-capture-get :original-buffer)) (org-pdftools-get-link))
+                  (t (concat path "::" (r/org-capture-get-selected-text))))))
         (add-to-list
          'org-capture-templates
          '("f" "Curently watched" item (clock)
-           "%(with-current-buffer (org-capture-get :original-buffer) (replace-regexp-in-string \"\n\" \" \" (buffer-substring (region-beginning) (region-end)))) [[%F::%(with-current-buffer (org-capture-get :original-buffer) (replace-regexp-in-string \"\n\" \" \" (buffer-substring (region-beginning) (region-end))))][↗]]%?" :unnarrowed t))
-
+           "%(r/org-capture-get-selected-text) [[%(r/org-capture-get-link \"%F\")][↗]]%?" :unnarrowed t))
         ;; The code below automatically highlights the region we captured
         (defun do-highlight-on-capture ()
           "Highlight selected region of the buffer you were in at capture."
           (save-excursion
             (with-current-buffer (plist-get org-capture-plist :original-buffer)
-              (hlt-general))))
-
+              (cond ((eq major-mode 'pdf-view-mode) (switch-to-buffer (org-capture-get :original-buffer)) (pdf-annot-add-highlight-markup-annotation (car (pdf-view-active-region))))
+                    (t (hlt-general))))))
         (defun highlight-on-capture ()
           (when (equal (plist-get org-capture-plist :key) "f")
             (do-highlight-on-capture)))
@@ -441,9 +464,32 @@
       #+caption: Highlighting on capture demo
       #+attr_org: :width 400px
       [[file:attachments/highlighting-with-org-capture.gif]]
+**** Working with PDF files                                                            :ATTACH:
+     :PROPERTIES:
+     :ID:       B5A87A1B-E0FE-40D6-AC63-AD52DB283C31
+     :END:
+    #+name: install-pdf-tools
+    #+begin_src emacs-lisp
+      (use-package pdf-tools
+        :ensure t
+        :straight (:host github
+                         :repo "matthew-piziak/pdf-tools"
+                         :files ("lisp/*.el" "server"))
+        :init
+        (add-to-list 'auto-mode-alist '("\\.pdf\\'" . pdf-view-mode))
+        (setq pdf-info-epdfinfo-program (locate-file "straight/repos/pdf-tools/server/epdfinfo" `(,straight-base-dir))))
+      (use-package org-pdftools :ensure t
+        :init
+        (org-pdftools-setup-link))
+        #+end_src
 
+        Now, capturing with =C-c c f= will create a highlight in the
+        PDF file and add a link to an org-mode node you're currently
+        working on.
+
+        #+CAPTION: Highlighting text in a
+        [[attachment:Highlighting PDF files with org capture.mp4][Highlighting text in a PDF document]]
 ** Express
-
    This area is too large to cover it in this guide.
    If you're new to org-mode consult
 
@@ -463,8 +509,10 @@
     <<increase-org-emphasis-limit>>
     <<highlight-capture>>
     <<setup-highlight-el>>
+    <<install-pdf-tools>>
   #+end_src
 
 * Useful links
   [[https://gist.github.com/mwfogleman/267b6bc7e512826a2c36cb57f0e3d854][GTD/BASB Templates for Emacs and Org-Mode · GitHub]]
   [[yt:AyhPmypHDEw]]
+  [[https://github.com/weirdNox/org-noter][GitHub - weirdNox/org-noter: Emacs document annotator, using Org-mode]]
