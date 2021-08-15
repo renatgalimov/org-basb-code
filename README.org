@@ -483,8 +483,8 @@
         PDF file and add a link to an org-mode node you're currently
         working on.
 
-        #+CAPTION: Highlighting text in a
-        [[attachment:Highlighting PDF files with org capture.mp4][Highlighting text in a PDF document]]
+        #+CAPTION: Highlighting text in a PDF document
+        [[file:attachments/Highlighting PDF files with org capture.mp4][Highlighting text in a PDF document]]
 ** Express
    This area is too large to cover it in this guide.
    If you're new to org-mode consult
