@@ -2,6 +2,9 @@
 #+EXPORT_FILE_NAME: index
 
 * CODE implementation
+
+  https://renatgalimov.github.io/org-basb-code/
+
 ** Prerequisites
 
    - [[https://github.com/org-roam/org-roam][GitHub - org-roam/org-roam: Rudimentary Roam replica with Org-mode]]
@@ -70,9 +73,14 @@
     #+caption: Install org-roam
     #+name: install-org-roam
     #+begin_src emacs-lisp :exports code :eval never-export :results none
-      (use-package org-roam :ensure t :pin "melpa-stable")
+      (use-package org-roam
+        :ensure t
+        :pin "melpa-stable"
+        :bind (("C-c n l" . #'org-roam-buffer-toggle)
+               ("C-c n f" . #'org-roam-node-find)
+               ("C-c n v" . #'org-roam-node-visit)
+               ("C-c n i" . #'org-roam-node-insert)))
     #+end_src
-
 
 ** Capture
 
@@ -346,7 +354,6 @@
 
      #+caption: Backlinks to all areas in the side buffer
      [[file:Emacs_CODE_implementation/2021-07-04_08-07-11_screenshot.png]]
-
 
 ** Distill
 *** Progressive summarization
