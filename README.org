@@ -17,20 +17,6 @@
 
 ** Prerequisites
 
-*** org-roam
-
-    [[https://github.com/org-roam/org-roam][GitHub - org-roam/org-roam: Rudimentary Roam replica with Org-mode]]
-
-     This guide uses org-roam as the central tool to manage your
-     notes.
-
-    #+caption: Install org-roam
-    #+name: install-org-roam
-    #+begin_src emacs-lisp :exports code :eval never-export :results none
-      (setq org-roam-v2-ack t)
-      (use-package org-roam :ensure t :pin "melpa-stable")
-    #+end_src
-
 *** Pandoc
     #+caption: Install Pandoc on Ubuntu
     #+begin_src bash :exports code :eval never-export
