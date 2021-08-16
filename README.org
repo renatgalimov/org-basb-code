@@ -492,7 +492,9 @@
        working on.
 
        #+CAPTION: Highlighting text in a PDF document
-       [[file:attachments/Highlighting PDF files with org capture.mp4][Highlighting text in a PDF document]]
+       #+attr_org: :width 400px
+       [[file:attachments/Highlighting PDF files with org capture.gif]]
+
 ** Express
    This area is too large to cover it in this guide.
    If you're new to org-mode consult
