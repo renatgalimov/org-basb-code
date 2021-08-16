@@ -470,6 +470,7 @@
 *** Working with PDF files                                                             :ATTACH:
     :PROPERTIES:
     :ID:       B5A87A1B-E0FE-40D6-AC63-AD52DB283C31
+    :CUSTOM_ID: working-with-pdf-files
     :END:
    #+name: install-pdf-tools
    #+begin_src emacs-lisp

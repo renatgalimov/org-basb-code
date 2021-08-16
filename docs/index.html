@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-08-15 Sun 13:56 -->
+<!-- 2021-08-16 Mon 06:30 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Emacs CODE implementation</title>
@@ -257,7 +257,7 @@
 <li><a href="#orga696ed9">1.5. Distill</a>
 <ul>
 <li><a href="#org18b2e25">1.5.1. Progressive summarization</a></li>
-<li><a href="#org8125073">1.5.2. Working with PDF files&#xa0;&#xa0;&#xa0;<span class="tag"><span class="ATTACH">ATTACH</span></span></a></li>
+<li><a href="#working-with-pdf-files">1.5.2. Working with PDF files&#xa0;&#xa0;&#xa0;<span class="tag"><span class="ATTACH">ATTACH</span></span></a></li>
 </ul>
 </li>
 <li><a href="#org6020e8c">1.6. Express</a></li>
@@ -306,8 +306,8 @@ notes.
 </p>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 1: </span>Install org-roam</label><pre class="src src-emacs-lisp" id="org2fd9898">(<span style="color: #51afef;">use-package</span> <span style="color: #a9a1e1;">org-roam</span> <span style="color: #c678dd;">:ensure</span> t <span style="color: #c678dd;">:pin</span> <span style="color: #98be65;">"melpa-stable"</span>
-  <span style="color: #c678dd;">:init</span> (<span style="color: #51afef;">setq</span> org-roam-v2-ack t)
+<label class="org-src-name"><span class="listing-number">Listing 1: </span>Install org-roam</label><pre class="src src-emacs-lisp" id="orgb7f5e6b">(<span style="color: #51afef;">setq</span> org-roam-v2-ack t)
+(<span style="color: #51afef;">use-package</span> <span style="color: #a9a1e1;">org-roam</span> <span style="color: #c678dd;">:ensure</span> t <span style="color: #c678dd;">:pin</span> <span style="color: #98be65;">"melpa-stable"</span>)
 </pre>
 </div>
 </div>
@@ -378,7 +378,7 @@ For this guide, we will be using <a href="https://github.com/raxod502/straight.e
 Obviously, we need <a href="https://github.com/org-roam/org-roam">org-roam</a> itself
 </p>
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 6: </span>Install org-roam</label><pre class="src src-emacs-lisp" id="org6f1585e">(<span style="color: #51afef;">setq</span> org-roam-v2-ack t)
+<label class="org-src-name"><span class="listing-number">Listing 6: </span>Install org-roam</label><pre class="src src-emacs-lisp" id="org66d3f19">(<span style="color: #51afef;">setq</span> org-roam-v2-ack t)
 (<span style="color: #51afef;">use-package</span> <span style="color: #a9a1e1;">org-roam</span>
   <span style="color: #c678dd;">:ensure</span> t
   <span style="color: #c678dd;">:pin</span> <span style="color: #98be65;">"melpa-stable"</span>
@@ -794,14 +794,14 @@ You can search projects with helm or with org-ql:
 </p>
 
 
-<div id="orgc5c615f" class="figure">
+<div id="org36e366c" class="figure">
 <p><img src="Emacs_CODE_implementation/2021-07-04_07-52-17_screenshot.png" alt="2021-07-04_07-52-17_screenshot.png" />
 </p>
 <p><span class="figure-number">Figure 1: </span>Finding projects with helm</p>
 </div>
 
 
-<div id="org54c355e" class="figure">
+<div id="org6132ad4" class="figure">
 <p><img src="Emacs_CODE_implementation/2021-07-04_07-57-55_screenshot.png" alt="2021-07-04_07-57-55_screenshot.png" />
 </p>
 <p><span class="figure-number">Figure 2: </span>Finding projects with org-ql</p>
@@ -819,7 +819,7 @@ a link to the target record according to where it belongs.
 </p>
 
 
-<div id="orgd2b8fee" class="figure">
+<div id="org6bfac12" class="figure">
 <p><img src="Emacs_CODE_implementation/2021-07-04_08-05-12_screenshot.png" alt="2021-07-04_08-05-12_screenshot.png" />
 </p>
 <p><span class="figure-number">Figure 3: </span>Links to an area within notes</p>
@@ -832,7 +832,7 @@ a backlink to you note in the side buffer.
 </p>
 
 
-<div id="orgcdec858" class="figure">
+<div id="orgb7b2bd4" class="figure">
 <p><img src="Emacs_CODE_implementation/2021-07-04_08-07-11_screenshot.png" alt="2021-07-04_08-07-11_screenshot.png" />
 </p>
 <p><span class="figure-number">Figure 4: </span>Backlinks to all areas in the side buffer</p>
@@ -954,7 +954,7 @@ on.
 </p>
 
 
-<div id="org19e662e" class="figure">
+<div id="org8e5b5a8" class="figure">
 <p><img src="attachments/highlighting-with-org-capture.gif" alt="highlighting-with-org-capture.gif" />
 </p>
 <p><span class="figure-number">Figure 5: </span>Highlighting on capture demo</p>
@@ -965,9 +965,9 @@ on.
 </li>
 </ol>
 </div>
-<div id="outline-container-org8125073" class="outline-4">
-<h4 id="org8125073"><span class="section-number-4">1.5.2</span> Working with PDF files&#xa0;&#xa0;&#xa0;<span class="tag"><span class="ATTACH">ATTACH</span></span></h4>
-<div class="outline-text-4" id="text-1-5-2">
+<div id="outline-container-working-with-pdf-files" class="outline-4">
+<h4 id="working-with-pdf-files"><span class="section-number-4">1.5.2</span> Working with PDF files&#xa0;&#xa0;&#xa0;<span class="tag"><span class="ATTACH">ATTACH</span></span></h4>
+<div class="outline-text-4" id="text-working-with-pdf-files">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp" id="orga913fcf">(<span style="color: #51afef;">use-package</span> <span style="color: #a9a1e1;">pdf-tools</span>
   <span style="color: #c678dd;">:ensure</span> t
@@ -1029,8 +1029,8 @@ If you're new to org-mode consult
   (load bootstrap-file nil 'nomessage))
 <span style="color: #5B6268;">;; </span><span style="color: #5B6268;">install-straight-el ends here</span>
 <span style="color: #5B6268;">;; </span><span style="color: #5B6268;">[[[[file:~/projects/org-basb-code/README.org::install-org-roam][install-org-roam]]][install-org-roam]]</span>
-(<span style="color: #51afef;">use-package</span> <span style="color: #a9a1e1;">org-roam</span> <span style="color: #c678dd;">:ensure</span> t <span style="color: #c678dd;">:pin</span> <span style="color: #98be65;">"melpa-stable"</span>
-  <span style="color: #c678dd;">:init</span> (<span style="color: #51afef;">setq</span> org-roam-v2-ack t)
+(<span style="color: #51afef;">setq</span> org-roam-v2-ack t)
+(<span style="color: #51afef;">use-package</span> <span style="color: #a9a1e1;">org-roam</span> <span style="color: #c678dd;">:ensure</span> t <span style="color: #c678dd;">:pin</span> <span style="color: #98be65;">"melpa-stable"</span>)
 <span style="color: #5B6268;">;; </span><span style="color: #5B6268;">install-org-roam ends here</span>
 <span style="color: #5B6268;">;; </span><span style="color: #5B6268;">[[[[file:~/projects/org-basb-code/README.org::install-org-pandoc-import][install-org-pandoc-import]]][install-org-pandoc-import]]</span>
 (<span style="color: #51afef;">use-package</span> <span style="color: #a9a1e1;">org-pandoc-import</span>
@@ -1173,7 +1173,7 @@ If you're new to org-mode consult
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Renat Galimov</p>
-<p class="date">Created: 2021-08-15 Sun 13:56</p>
+<p class="date">Created: 2021-08-16 Mon 06:30</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
