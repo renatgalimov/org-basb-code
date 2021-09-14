@@ -300,7 +300,10 @@
         #+begin_src emacs-lisp
           (use-package org-ql :ensure t
             :init
-            (setq org-ql-search-directories-files-recursive t))
+
+            (setq org-ql-search-directories-files-recursive t
+                  org-ql-search-directories-files-regexp ".org\\(_archive\\)?$"
+                  ))
           (use-package helm-org-ql :ensure t
             :init
             (setq helm-org-ql-recursive-paths t)
