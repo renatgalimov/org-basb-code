@@ -470,7 +470,12 @@
                         :files ("lisp/*.el" "server"))
        :init
        (add-to-list 'auto-mode-alist '("\\.pdf\\'" . pdf-view-mode))
+
+       (if (not (locate-file "straight/repos/pdf-tools/server/epdfinfo" `(,straight-base-dir)))
+           (pdf-tools-build-server
+            (concat straight-base-dir "straight/repos/pdf-tools/server") nil nil nil (concat straight-base-dir "straight/build/pdf-tools/server")))
        (setq pdf-info-epdfinfo-program (locate-file "straight/repos/pdf-tools/server/epdfinfo" `(,straight-base-dir))))
+
      (use-package org-pdftools :ensure t
        :init
        (org-pdftools-setup-link))

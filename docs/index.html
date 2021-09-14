@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-08-16 Mon 07:01 -->
+<!-- 2021-09-14 Tue 03:39 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Emacs CODE implementation</title>
@@ -229,71 +229,71 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org14eceef">1. CODE implementation</a>
+<li><a href="#org221ef20">1. CODE implementation</a>
 <ul>
-<li><a href="#org735a213">1.1. How to work with this guide?</a></li>
-<li><a href="#orgcece2b0">1.2. Prerequisites</a>
+<li><a href="#org37ba708">1.1. How to work with this guide?</a></li>
+<li><a href="#org7d6db56">1.2. Prerequisites</a>
 <ul>
-<li><a href="#org56c15d9">1.2.1. Pandoc</a></li>
-<li><a href="#orgcf55dbc">1.2.2. straight.el</a></li>
-<li><a href="#org80b245d">1.2.3. Org-roam</a></li>
+<li><a href="#org4813543">1.2.1. Pandoc</a></li>
+<li><a href="#orgb8c09f0">1.2.2. straight.el</a></li>
+<li><a href="#org26aaa8b">1.2.3. Org-roam</a></li>
 </ul>
 </li>
-<li><a href="#org0631135">1.3. Capture</a>
+<li><a href="#org9cb925a">1.3. Capture</a>
 <ul>
-<li><a href="#orgeafa059">1.3.1. Capture documents</a></li>
-<li><a href="#orgb743f46">1.3.2. Capture web-pages</a></li>
-<li><a href="#org595d7fe">1.3.3. Capture templates</a></li>
-<li><a href="#org8842cbb">1.3.4. Finding your own records</a></li>
+<li><a href="#orgbdf4e43">1.3.1. Capture documents</a></li>
+<li><a href="#org719355c">1.3.2. Capture web-pages</a></li>
+<li><a href="#org57b1aea">1.3.3. Capture templates</a></li>
+<li><a href="#org9f87a02">1.3.4. Finding your own records</a></li>
 </ul>
 </li>
-<li><a href="#orgb405116">1.4. Organize</a>
+<li><a href="#org01f431f">1.4. Organize</a>
 <ul>
-<li><a href="#org4b119dc">1.4.1. Org-mode tags</a></li>
-<li><a href="#orgaca061b">1.4.2. Org-roam links</a></li>
+<li><a href="#org4ff8e7b">1.4.1. Org-mode tags</a></li>
+<li><a href="#org007a59c">1.4.2. Org-roam links</a></li>
 </ul>
 </li>
-<li><a href="#orga696ed9">1.5. Distill</a>
+<li><a href="#org9470c27">1.5. Distill</a>
 <ul>
-<li><a href="#org18b2e25">1.5.1. Progressive summarization</a></li>
+<li><a href="#org0951fc8">1.5.1. Progressive summarization</a></li>
 <li><a href="#working-with-pdf-files">1.5.2. Working with PDF files&#xa0;&#xa0;&#xa0;<span class="tag"><span class="ATTACH">ATTACH</span></span></a></li>
 </ul>
 </li>
-<li><a href="#org6020e8c">1.6. Express</a></li>
+<li><a href="#org8621517">1.6. Express</a></li>
 </ul>
 </li>
-<li><a href="#org56bff78">2. Emacs config</a></li>
-<li><a href="#org88bf203">3. Useful links</a></li>
+<li><a href="#org2c7df25">2. Emacs config</a></li>
+<li><a href="#org2bb5bd0">3. Useful links</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org14eceef" class="outline-2">
-<h2 id="org14eceef"><span class="section-number-2">1</span> CODE implementation</h2>
+<div id="outline-container-org221ef20" class="outline-2">
+<h2 id="org221ef20"><span class="section-number-2">1</span> CODE implementation</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 <a href="https://renatgalimov.github.io/org-basb-code/">https://renatgalimov.github.io/org-basb-code/</a>
 </p>
 </div>
 
-<div id="outline-container-org735a213" class="outline-3">
-<h3 id="org735a213"><span class="section-number-3">1.1</span> How to work with this guide?</h3>
+<div id="outline-container-org37ba708" class="outline-3">
+<h3 id="org37ba708"><span class="section-number-3">1.1</span> How to work with this guide?</h3>
 <div class="outline-text-3" id="text-1-1">
 <ul class="org-ul">
 <li>Open this file in Emacs.</li>
-<li><a href="https://orgmode.org/manual/Extracting-Source-Code.html">Extract</a> the <a href="#org56bff78">config</a> source block into your emacs directory.</li>
+<li><a href="https://orgmode.org/manual/Extracting-Source-Code.html">Extract</a> the <a href="#org2c7df25">config</a> source block into your emacs directory.</li>
 <li>Add the resulting file to your load path.</li>
 <li>I will be using <code>C-c n</code> prefix for keybindings in this package.</li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgcece2b0" class="outline-3">
-<h3 id="orgcece2b0"><span class="section-number-3">1.2</span> Prerequisites</h3>
+<div id="outline-container-org7d6db56" class="outline-3">
+<h3 id="org7d6db56"><span class="section-number-3">1.2</span> Prerequisites</h3>
 <div class="outline-text-3" id="text-1-2">
 </div>
-<div id="outline-container-org56c15d9" class="outline-4">
-<h4 id="org56c15d9"><span class="section-number-4">1.2.1</span> Pandoc</h4>
+<div id="outline-container-org4813543" class="outline-4">
+<h4 id="org4813543"><span class="section-number-4">1.2.1</span> Pandoc</h4>
 <div class="outline-text-4" id="text-1-2-1">
 <div class="org-src-container">
 <label class="org-src-name"><span class="listing-number">Listing 1: </span>Install Pandoc on Ubuntu</label><pre class="src src-bash">sudo apt install pandoc
@@ -325,15 +325,15 @@ warranty, not even for merchantability or fitness for a particular purpose.
 </pre>
 </div>
 </div>
-<div id="outline-container-orgcf55dbc" class="outline-4">
-<h4 id="orgcf55dbc"><span class="section-number-4">1.2.2</span> straight.el</h4>
+<div id="outline-container-orgb8c09f0" class="outline-4">
+<h4 id="orgb8c09f0"><span class="section-number-4">1.2.2</span> straight.el</h4>
 <div class="outline-text-4" id="text-1-2-2">
 <p>
 For this guide, we will be using <a href="https://github.com/raxod502/straight.el">straight.el</a> as your package manager.
 </p>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 4: </span>Install straight.el</label><pre class="src src-emacs-lisp" id="orgfd53805">(<span style="color: #51afef;">defvar</span> <span style="color: #dcaeea;">bootstrap-version</span>)
+<label class="org-src-name"><span class="listing-number">Listing 4: </span>Install straight.el</label><pre class="src src-emacs-lisp" id="org2f7fc7e">(<span style="color: #51afef;">defvar</span> <span style="color: #dcaeea;">bootstrap-version</span>)
 (<span style="color: #51afef;">let</span> ((bootstrap-file
        (expand-file-name <span style="color: #98be65;">"straight/repos/straight.el/bootstrap.el"</span> user-emacs-directory))
       (bootstrap-version 5))
@@ -350,14 +350,14 @@ For this guide, we will be using <a href="https://github.com/raxod502/straight.e
 </div>
 </div>
 
-<div id="outline-container-org80b245d" class="outline-4">
-<h4 id="org80b245d"><span class="section-number-4">1.2.3</span> Org-roam</h4>
+<div id="outline-container-org26aaa8b" class="outline-4">
+<h4 id="org26aaa8b"><span class="section-number-4">1.2.3</span> Org-roam</h4>
 <div class="outline-text-4" id="text-1-2-3">
 <p>
 Obviously, we need <a href="https://github.com/org-roam/org-roam">org-roam</a> itself
 </p>
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 5: </span>Install org-roam</label><pre class="src src-emacs-lisp" id="orgda7d77d">(<span style="color: #51afef;">setq</span> org-roam-v2-ack t)
+<label class="org-src-name"><span class="listing-number">Listing 5: </span>Install org-roam</label><pre class="src src-emacs-lisp" id="org371657c">(<span style="color: #51afef;">setq</span> org-roam-v2-ack t)
 (<span style="color: #51afef;">use-package</span> <span style="color: #a9a1e1;">org-roam</span>
   <span style="color: #c678dd;">:ensure</span> t
   <span style="color: #c678dd;">:pin</span> <span style="color: #98be65;">"melpa-stable"</span>
@@ -371,8 +371,8 @@ Obviously, we need <a href="https://github.com/org-roam/org-roam">org-roam</a> i
 </div>
 </div>
 
-<div id="outline-container-org0631135" class="outline-3">
-<h3 id="org0631135"><span class="section-number-3">1.3</span> Capture</h3>
+<div id="outline-container-org9cb925a" class="outline-3">
+<h3 id="org9cb925a"><span class="section-number-3">1.3</span> Capture</h3>
 <div class="outline-text-3" id="text-1-3">
 <blockquote>
 <p>
@@ -381,8 +381,8 @@ Emacs is a text editor.
 </blockquote>
 </div>
 
-<div id="outline-container-orgeafa059" class="outline-4">
-<h4 id="orgeafa059"><span class="section-number-4">1.3.1</span> Capture documents</h4>
+<div id="outline-container-orgbdf4e43" class="outline-4">
+<h4 id="orgbdf4e43"><span class="section-number-4">1.3.1</span> Capture documents</h4>
 <div class="outline-text-4" id="text-1-3-1">
 <ul class="org-ul">
 <li>Capture targets:
@@ -400,7 +400,7 @@ To capture we use Pandoc and <a href="https://github.com/tecosaur/org-pandoc-imp
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp" id="org31ec744">(<span style="color: #51afef;">use-package</span> <span style="color: #a9a1e1;">org-pandoc-import</span>
+<pre class="src src-emacs-lisp" id="org76dabfc">(<span style="color: #51afef;">use-package</span> <span style="color: #a9a1e1;">org-pandoc-import</span>
   <span style="color: #c678dd;">:straight</span> (<span style="color: #c678dd;">:host</span> github
                    <span style="color: #c678dd;">:repo</span> <span style="color: #98be65;">"tecosaur/org-pandoc-import"</span>
                    <span style="color: #c678dd;">:files</span> (<span style="color: #98be65;">"*.el"</span> <span style="color: #98be65;">"filters"</span> <span style="color: #98be65;">"preprocessors"</span>))
@@ -416,12 +416,12 @@ representation. One of the current drawbacks - it cannot import online web pages
 </div>
 </div>
 
-<div id="outline-container-orgb743f46" class="outline-4">
-<h4 id="orgb743f46"><span class="section-number-4">1.3.2</span> Capture web-pages</h4>
+<div id="outline-container-org719355c" class="outline-4">
+<h4 id="org719355c"><span class="section-number-4">1.3.2</span> Capture web-pages</h4>
 <div class="outline-text-4" id="text-1-3-2">
 </div>
 <ol class="org-ol">
-<li><a id="orgc6007b4"></a>org-web-tools<br />
+<li><a id="orga997592"></a>org-web-tools<br />
 <div class="outline-text-5" id="text-1-3-2-1">
 <p>
 <a href="https://github.com/alphapapa/org-web-tools">org-web-tools</a> offers <code>org-web-tools-read-url-as-org</code> function,
@@ -429,7 +429,7 @@ which can download an URL to an org buffer.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp" id="orgcda146f">(<span style="color: #51afef;">use-package</span> <span style="color: #a9a1e1;">org-web-tools</span> <span style="color: #c678dd;">:ensure</span> t
+<pre class="src src-emacs-lisp" id="org1c8281b">(<span style="color: #51afef;">use-package</span> <span style="color: #a9a1e1;">org-web-tools</span> <span style="color: #c678dd;">:ensure</span> t
   <span style="color: #c678dd;">:bind</span> ((<span style="color: #98be65;">"C-c n u"</span> . org-web-tools-read-url-as-org)))
 </pre>
 </div>
@@ -440,7 +440,7 @@ Often, downloaded files need manual cleanup.
 </div>
 </li>
 
-<li><a id="orgb703f1f"></a>Firefox web-clipper and Pandoc<br />
+<li><a id="org45286bb"></a>Firefox web-clipper and Pandoc<br />
 <div class="outline-text-5" id="text-1-3-2-2">
 <p>
 An alternative approach is to use a web-clipper and Pandoc.
@@ -468,17 +468,17 @@ the output is the best among other methods.
 </ol>
 </div>
 
-<div id="outline-container-org595d7fe" class="outline-4">
-<h4 id="org595d7fe"><span class="section-number-4">1.3.3</span> Capture templates</h4>
+<div id="outline-container-org57b1aea" class="outline-4">
+<h4 id="org57b1aea"><span class="section-number-4">1.3.3</span> Capture templates</h4>
 <div class="outline-text-4" id="text-1-3-3">
 <p>
-<a id="org193fc02"></a>
+<a id="orgb12c714"></a>
 </p>
 </div>
 </div>
 
-<div id="outline-container-org8842cbb" class="outline-4">
-<h4 id="org8842cbb"><span class="section-number-4">1.3.4</span> Finding your own records</h4>
+<div id="outline-container-org9f87a02" class="outline-4">
+<h4 id="org9f87a02"><span class="section-number-4">1.3.4</span> Finding your own records</h4>
 <div class="outline-text-4" id="text-1-3-4">
 <p>
 Crawling over your own notes is a key part of the project
@@ -502,7 +502,7 @@ packages that give results fast but in a random order.
 </div>
 
 <ol class="org-ol">
-<li><a id="orgfe8583c"></a>Org full-text search&#xa0;&#xa0;&#xa0;<span class="tag"><span class="table">table</span></span><br />
+<li><a id="org80d0fec"></a>Org full-text search&#xa0;&#xa0;&#xa0;<span class="tag"><span class="table">table</span></span><br />
 <div class="outline-text-6" id="text-1-3-4-0-1">
 <ul class="org-ul">
 <li>Requested features:
@@ -603,7 +603,7 @@ org file.</li>
 </div>
 
 <ol class="org-ol">
-<li><a id="org8710a78"></a>ripgrep (helm-rg)<br />
+<li><a id="org149951f"></a>ripgrep (helm-rg)<br />
 <div class="outline-text-8" id="text-1-3-4-0-1-0-1">
 <p>
 <a href="https://github.com/cosmicexplorer/helm-rg">GitHub - cosmicexplorer/helm-rg: ripgrep is nice</a>
@@ -616,7 +616,7 @@ Now I use it as a default text search engine.
 </div>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 8: </span>Install helm-rg</label><pre class="src src-emacs-lisp" id="org30473b6">(<span style="color: #51afef;">use-package</span> <span style="color: #a9a1e1;">helm-rg</span> <span style="color: #c678dd;">:ensure</span> t
+<label class="org-src-name"><span class="listing-number">Listing 8: </span>Install helm-rg</label><pre class="src src-emacs-lisp" id="org33cb69f">(<span style="color: #51afef;">use-package</span> <span style="color: #a9a1e1;">helm-rg</span> <span style="color: #c678dd;">:ensure</span> t
   <span style="color: #c678dd;">:init</span>
   (<span style="color: #51afef;">defun</span> <span style="color: #c678dd;">helm-rg-roam-directory</span> (<span style="color: #ECBE7B;">&amp;optional</span> query)
     <span style="color: #83898d;">"Search with rg in your roam directory, QUERY."</span>
@@ -629,7 +629,7 @@ Now I use it as a default text search engine.
 </div>
 </li>
 
-<li><a id="org727a588"></a>helm-org-rifle<br />
+<li><a id="org737b8f1"></a>helm-org-rifle<br />
 <div class="outline-text-8" id="text-1-3-4-0-1-0-2">
 <p>
 <a href="https://github.com/alphapapa/org-rifle">GitHub - alphapapa/org-rifle: Rifle through your Org-mode buffers and acquire your target</a>
@@ -645,7 +645,7 @@ I find org-rifle too slow at the moment. But its output is exacly what I want.
 </p>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 9: </span>Install org-rifle</label><pre class="src src-emacs-lisp" id="org78222e3">(<span style="color: #51afef;">use-package</span> <span style="color: #a9a1e1;">helm-org-rifle</span> <span style="color: #c678dd;">:ensure</span> t
+<label class="org-src-name"><span class="listing-number">Listing 9: </span>Install org-rifle</label><pre class="src src-emacs-lisp" id="orgd388ae5">(<span style="color: #51afef;">use-package</span> <span style="color: #a9a1e1;">helm-org-rifle</span> <span style="color: #c678dd;">:ensure</span> t
   <span style="color: #c678dd;">:init</span>
   (<span style="color: #51afef;">defun</span> <span style="color: #c678dd;">org-rifle-roam-directory</span> ()
     (<span style="color: #51afef;">interactive</span>)
@@ -656,7 +656,7 @@ I find org-rifle too slow at the moment. But its output is exacly what I want.
 </div>
 </li>
 
-<li><a id="orgf842523"></a>deft<br />
+<li><a id="org1974b18"></a>deft<br />
 <div class="outline-text-8" id="text-1-3-4-0-1-0-3">
 <p>
 <a href="https://github.com/dfeich/helm-deft">GitHub - dfeich/helm-deft: A helm based Emacs module to help search in a predetermined list of directories. Inspired by the deft module.</a>
@@ -674,7 +674,7 @@ information about the context.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp" id="orga047fb0">(<span style="color: #51afef;">use-package</span> <span style="color: #a9a1e1;">deft</span> <span style="color: #c678dd;">:ensure</span> t
+<pre class="src src-emacs-lisp" id="org4857f1f">(<span style="color: #51afef;">use-package</span> <span style="color: #a9a1e1;">deft</span> <span style="color: #c678dd;">:ensure</span> t
   <span style="color: #c678dd;">:init</span> (<span style="color: #51afef;">setq</span> deft-directory org-roam-directory
               deft-recursive t)
   <span style="color: #c678dd;">:bind</span> ((<span style="color: #98be65;">"C-c n d"</span> . deft))
@@ -694,7 +694,7 @@ information about the context.
 </div>
 </li>
 
-<li><a id="org1556edc"></a>org-ql<br />
+<li><a id="org8ef17d0"></a>org-ql<br />
 <div class="outline-text-8" id="text-1-3-4-0-1-0-4">
 <p>
 <a href="https://github.com/alphapapa/org-ql">GitHub - alphapapa/org-ql: An Org-mode query language, including search commands and saved views</a>
@@ -706,9 +706,12 @@ implementation is good for medium-sized collections.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp" id="orgc90f99f">(<span style="color: #51afef;">use-package</span> <span style="color: #a9a1e1;">org-ql</span> <span style="color: #c678dd;">:ensure</span> t
+<pre class="src src-emacs-lisp" id="orged9d3b3">(<span style="color: #51afef;">use-package</span> <span style="color: #a9a1e1;">org-ql</span> <span style="color: #c678dd;">:ensure</span> t
   <span style="color: #c678dd;">:init</span>
-  (<span style="color: #51afef;">setq</span> org-ql-search-directories-files-recursive t))
+
+  (<span style="color: #51afef;">setq</span> org-ql-search-directories-files-recursive t
+        org-ql-search-directories-files-regexp <span style="color: #98be65;">".org</span><span style="color: #51afef; font-weight: bold;">\\</span><span style="color: #51afef; font-weight: bold;">(</span><span style="color: #98be65;">_archive</span><span style="color: #51afef; font-weight: bold;">\\</span><span style="color: #51afef; font-weight: bold;">)</span><span style="color: #98be65;">?$"</span>
+        ))
 (<span style="color: #51afef;">use-package</span> <span style="color: #a9a1e1;">helm-org-ql</span> <span style="color: #c678dd;">:ensure</span> t
   <span style="color: #c678dd;">:init</span>
   (<span style="color: #51afef;">setq</span> helm-org-ql-recursive-paths t)
@@ -717,7 +720,7 @@ implementation is good for medium-sized collections.
 </div>
 </div>
 </li>
-<li><a id="orgf959a71"></a>recoll<br />
+<li><a id="org44c9de1"></a>recoll<br />
 <div class="outline-text-8" id="text-1-3-4-0-1-0-5">
 <p>
 <a href="https://github.com/emacs-helm/helm-recoll">GitHub - emacs-helm/helm-recoll: helm interface for the recoll desktop search tool.</a>
@@ -727,7 +730,7 @@ I wasn't able to get it working on MacOS.
 </div>
 </li>
 
-<li><a id="org757aca9"></a>org-fts<br />
+<li><a id="orgb2c0ebc"></a>org-fts<br />
 <div class="outline-text-8" id="text-1-3-4-0-1-0-6">
 <p>
 <a href="https://github.com/zot/microfts/tree/main/elisp">microfts/elisp at main · zot/microfts · GitHub</a>
@@ -742,7 +745,7 @@ either.</li>
 </div>
 </li>
 
-<li><a id="org09e5405"></a>org-agenda search<br />
+<li><a id="org253fa5e"></a>org-agenda search<br />
 <div class="outline-text-8" id="text-1-3-4-0-1-0-7">
 <ul class="org-ul">
 <li>Not trying this for now because agenda wants to open all its
@@ -756,12 +759,12 @@ files for search.</li>
 </div>
 </div>
 
-<div id="outline-container-orgb405116" class="outline-3">
-<h3 id="orgb405116"><span class="section-number-3">1.4</span> Organize</h3>
+<div id="outline-container-org01f431f" class="outline-3">
+<h3 id="org01f431f"><span class="section-number-3">1.4</span> Organize</h3>
 <div class="outline-text-3" id="text-1-4">
 </div>
-<div id="outline-container-org4b119dc" class="outline-4">
-<h4 id="org4b119dc"><span class="section-number-4">1.4.1</span> Org-mode tags</h4>
+<div id="outline-container-org4ff8e7b" class="outline-4">
+<h4 id="org4ff8e7b"><span class="section-number-4">1.4.1</span> Org-mode tags</h4>
 <div class="outline-text-4" id="text-1-4-1">
 <p>
 This is a default method. You just tag your projects with a
@@ -773,14 +776,14 @@ You can search projects with helm or with org-ql:
 </p>
 
 
-<div id="org5bc84dc" class="figure">
+<div id="orgbdd61da" class="figure">
 <p><img src="Emacs_CODE_implementation/2021-07-04_07-52-17_screenshot.png" alt="2021-07-04_07-52-17_screenshot.png" />
 </p>
 <p><span class="figure-number">Figure 1: </span>Finding projects with helm</p>
 </div>
 
 
-<div id="org9614b37" class="figure">
+<div id="orge598b4a" class="figure">
 <p><img src="Emacs_CODE_implementation/2021-07-04_07-57-55_screenshot.png" alt="2021-07-04_07-57-55_screenshot.png" />
 </p>
 <p><span class="figure-number">Figure 2: </span>Finding projects with org-ql</p>
@@ -788,8 +791,8 @@ You can search projects with helm or with org-ql:
 </div>
 </div>
 
-<div id="outline-container-orgaca061b" class="outline-4">
-<h4 id="orgaca061b"><span class="section-number-4">1.4.2</span> Org-roam links</h4>
+<div id="outline-container-org007a59c" class="outline-4">
+<h4 id="org007a59c"><span class="section-number-4">1.4.2</span> Org-roam links</h4>
 <div class="outline-text-4" id="text-1-4-2">
 <p>
 An alternative to use Org-roam references as tags.
@@ -798,7 +801,7 @@ a link to the target record according to where it belongs.
 </p>
 
 
-<div id="org2444e90" class="figure">
+<div id="org83ef989" class="figure">
 <p><img src="Emacs_CODE_implementation/2021-07-04_08-05-12_screenshot.png" alt="2021-07-04_08-05-12_screenshot.png" />
 </p>
 <p><span class="figure-number">Figure 3: </span>Links to an area within notes</p>
@@ -811,7 +814,7 @@ a backlink to you note in the side buffer.
 </p>
 
 
-<div id="orgb84ac03" class="figure">
+<div id="orgcaadb05" class="figure">
 <p><img src="Emacs_CODE_implementation/2021-07-04_08-07-11_screenshot.png" alt="2021-07-04_08-07-11_screenshot.png" />
 </p>
 <p><span class="figure-number">Figure 4: </span>Backlinks to all areas in the side buffer</p>
@@ -820,16 +823,16 @@ a backlink to you note in the side buffer.
 </div>
 </div>
 
-<div id="outline-container-orga696ed9" class="outline-3">
-<h3 id="orga696ed9"><span class="section-number-3">1.5</span> Distill</h3>
+<div id="outline-container-org9470c27" class="outline-3">
+<h3 id="org9470c27"><span class="section-number-3">1.5</span> Distill</h3>
 <div class="outline-text-3" id="text-1-5">
 </div>
-<div id="outline-container-org18b2e25" class="outline-4">
-<h4 id="org18b2e25"><span class="section-number-4">1.5.1</span> Progressive summarization</h4>
+<div id="outline-container-org0951fc8" class="outline-4">
+<h4 id="org0951fc8"><span class="section-number-4">1.5.1</span> Progressive summarization</h4>
 <div class="outline-text-4" id="text-1-5-1">
 </div>
 <ol class="org-ol">
-<li><a id="org112a2b9"></a>Make org-emphasize multi-linear<br />
+<li><a id="orgb0cb774"></a>Make org-emphasize multi-linear<br />
 <div class="outline-text-5" id="text-1-5-1-1">
 <p>
 To bypass the limit of two lines for org-emphasize marks enable
@@ -837,7 +840,7 @@ the code below.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp" id="orga6a5db3"><span style="color: #5B6268;">;; </span><span style="color: #5B6268;">Make org-emphasis to work on up to 10 lines selection.</span>
+<pre class="src src-emacs-lisp" id="org0fb386c"><span style="color: #5B6268;">;; </span><span style="color: #5B6268;">Make org-emphasis to work on up to 10 lines selection.</span>
 (setcar (nthcdr 4 org-emphasis-regexp-components) 10)
 (org-set-emph-re 'org-emphasis-regexp-components org-emphasis-regexp-components)
 </pre>
@@ -845,7 +848,7 @@ the code below.
 </div>
 </li>
 
-<li><a id="orge2c8d69"></a>Highlighting<br />
+<li><a id="org1c2c347"></a>Highlighting<br />
 <div class="outline-text-5" id="text-1-5-1-2">
 <p>
 Highlighting is a key part of progressive summarization.
@@ -856,7 +859,7 @@ use <code>org-emphasize</code> instead of functions provided here.
 </div>
 
 <ol class="org-ol">
-<li><a id="org6badb95"></a>highlight.el<br />
+<li><a id="orgf76c43a"></a>highlight.el<br />
 <div class="outline-text-6" id="text-1-5-1-2-1">
 <p>
 When working with plain text buffers, like org-mode or markdown,
@@ -865,7 +868,7 @@ mark the text.
 </p>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 10: </span>Set up highlight.el</label><pre class="src src-emacs-lisp" id="org1aa1d3c"><span style="color: #5B6268;">;; </span><span style="color: #5B6268;">If you get errors saying somethign about facemenu, try</span>
+<label class="org-src-name"><span class="listing-number">Listing 10: </span>Set up highlight.el</label><pre class="src src-emacs-lisp" id="orgc474da4"><span style="color: #5B6268;">;; </span><span style="color: #5B6268;">If you get errors saying somethign about facemenu, try</span>
 <span style="color: #5B6268;">;; </span><span style="color: #5B6268;">uncommenting this.</span>
 <span style="color: #5B6268;">;; </span><span style="color: #5B6268;">(setq facemenu-menu nil)</span>
 
@@ -884,14 +887,14 @@ mark the text.
 </div>
 </li>
 
-<li><a id="orgc067082"></a>org-capture a region&#xa0;&#xa0;&#xa0;<span class="tag"><span class="ATTACH">ATTACH</span></span><br />
+<li><a id="org8d821fb"></a>org-capture a region&#xa0;&#xa0;&#xa0;<span class="tag"><span class="ATTACH">ATTACH</span></span><br />
 <div class="outline-text-6" id="text-1-5-1-2-2">
 <p>
 To keep track of highlighted notes we will use <code>org-capture</code>.
 </p>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 11: </span>A capture template</label><pre class="src src-elisp" id="orgc63c60e"><span style="color: #5B6268;">;; </span><span style="color: #5B6268;">Use =org-capture f= to put a link to the text you selected.into an</span>
+<label class="org-src-name"><span class="listing-number">Listing 11: </span>A capture template</label><pre class="src src-elisp" id="orgad8ed68"><span style="color: #5B6268;">;; </span><span style="color: #5B6268;">Use =org-capture f= to put a link to the text you selected.into an</span>
 <span style="color: #5B6268;">;; </span><span style="color: #5B6268;">org entry with the current timer enabled.</span>
 
 (<span style="color: #51afef;">defun</span> <span style="color: #c678dd;">r/org-capture-get-selected-text</span> ()
@@ -933,7 +936,7 @@ on.
 </p>
 
 
-<div id="orga1143c2" class="figure">
+<div id="org47a210f" class="figure">
 <p><img src="attachments/highlighting-with-org-capture.gif" alt="highlighting-with-org-capture.gif" />
 </p>
 <p><span class="figure-number">Figure 5: </span>Highlighting on capture demo</p>
@@ -948,14 +951,19 @@ on.
 <h4 id="working-with-pdf-files"><span class="section-number-4">1.5.2</span> Working with PDF files&#xa0;&#xa0;&#xa0;<span class="tag"><span class="ATTACH">ATTACH</span></span></h4>
 <div class="outline-text-4" id="text-working-with-pdf-files">
 <div class="org-src-container">
-<pre class="src src-emacs-lisp" id="orga913fcf">(<span style="color: #51afef;">use-package</span> <span style="color: #a9a1e1;">pdf-tools</span>
+<pre class="src src-emacs-lisp" id="org28e8e17">(<span style="color: #51afef;">use-package</span> <span style="color: #a9a1e1;">pdf-tools</span>
   <span style="color: #c678dd;">:ensure</span> t
   <span style="color: #c678dd;">:straight</span> (<span style="color: #c678dd;">:host</span> github
                    <span style="color: #c678dd;">:repo</span> <span style="color: #98be65;">"matthew-piziak/pdf-tools"</span>
                    <span style="color: #c678dd;">:files</span> (<span style="color: #98be65;">"lisp/*.el"</span> <span style="color: #98be65;">"server"</span>))
   <span style="color: #c678dd;">:init</span>
   (add-to-list 'auto-mode-alist '(<span style="color: #98be65;">"\\.pdf\\'"</span> . pdf-view-mode))
+
+  (<span style="color: #51afef;">if</span> (not (locate-file <span style="color: #98be65;">"straight/repos/pdf-tools/server/epdfinfo"</span> `(,straight-base-dir)))
+      (pdf-tools-build-server
+       (concat straight-base-dir <span style="color: #98be65;">"straight/repos/pdf-tools/server"</span>) nil nil nil (concat straight-base-dir <span style="color: #98be65;">"straight/build/pdf-tools/server"</span>)))
   (<span style="color: #51afef;">setq</span> pdf-info-epdfinfo-program (locate-file <span style="color: #98be65;">"straight/repos/pdf-tools/server/epdfinfo"</span> `(,straight-base-dir))))
+
 (<span style="color: #51afef;">use-package</span> <span style="color: #a9a1e1;">org-pdftools</span> <span style="color: #c678dd;">:ensure</span> t
   <span style="color: #c678dd;">:init</span>
   (org-pdftools-setup-link))
@@ -969,7 +977,7 @@ working on.
 </p>
 
 
-<div id="orgfd419a2" class="figure">
+<div id="org6f0d8c1" class="figure">
 <p><img src="attachments/Highlighting PDF files with org capture.gif" alt="Highlighting PDF files with org capture.gif" />
 </p>
 <p><span class="figure-number">Figure 6: </span>Highlighting text in a PDF document</p>
@@ -978,8 +986,8 @@ working on.
 </div>
 </div>
 
-<div id="outline-container-org6020e8c" class="outline-3">
-<h3 id="org6020e8c"><span class="section-number-3">1.6</span> Express</h3>
+<div id="outline-container-org8621517" class="outline-3">
+<h3 id="org8621517"><span class="section-number-3">1.6</span> Express</h3>
 <div class="outline-text-3" id="text-1-6">
 <p>
 This area is too large to cover it in this guide.
@@ -993,8 +1001,8 @@ If you're new to org-mode consult
 </div>
 </div>
 
-<div id="outline-container-org56bff78" class="outline-2">
-<h2 id="org56bff78"><span class="section-number-2">2</span> Emacs config</h2>
+<div id="outline-container-org2c7df25" class="outline-2">
+<h2 id="org2c7df25"><span class="section-number-2">2</span> Emacs config</h2>
 <div class="outline-text-2" id="text-2">
 <div class="org-src-container">
 <label class="org-src-name"><span class="listing-number">Listing 12: </span>Config source block</label><pre class="src src-emacs-lisp"><span style="color: #5B6268;">;; </span><span style="color: #5B6268;">[[[[file:~/projects/org-basb-code/README.org::install-straight-el][install-straight-el]]][install-straight-el]]</span>
@@ -1071,7 +1079,10 @@ If you're new to org-mode consult
 <span style="color: #5B6268;">;; </span><span style="color: #5B6268;">[[[[file:~/projects/org-basb-code/README.org::install-org-ql][install-org-ql]]][install-org-ql]]</span>
 (<span style="color: #51afef;">use-package</span> <span style="color: #a9a1e1;">org-ql</span> <span style="color: #c678dd;">:ensure</span> t
   <span style="color: #c678dd;">:init</span>
-  (<span style="color: #51afef;">setq</span> org-ql-search-directories-files-recursive t))
+
+  (<span style="color: #51afef;">setq</span> org-ql-search-directories-files-recursive t
+        org-ql-search-directories-files-regexp <span style="color: #98be65;">".org</span><span style="color: #51afef; font-weight: bold;">\\</span><span style="color: #51afef; font-weight: bold;">(</span><span style="color: #98be65;">_archive</span><span style="color: #51afef; font-weight: bold;">\\</span><span style="color: #51afef; font-weight: bold;">)</span><span style="color: #98be65;">?$"</span>
+        ))
 (<span style="color: #51afef;">use-package</span> <span style="color: #a9a1e1;">helm-org-ql</span> <span style="color: #c678dd;">:ensure</span> t
   <span style="color: #c678dd;">:init</span>
   (<span style="color: #51afef;">setq</span> helm-org-ql-recursive-paths t)
@@ -1139,7 +1150,12 @@ If you're new to org-mode consult
                    <span style="color: #c678dd;">:files</span> (<span style="color: #98be65;">"lisp/*.el"</span> <span style="color: #98be65;">"server"</span>))
   <span style="color: #c678dd;">:init</span>
   (add-to-list 'auto-mode-alist '(<span style="color: #98be65;">"\\.pdf\\'"</span> . pdf-view-mode))
+
+  (<span style="color: #51afef;">if</span> (not (locate-file <span style="color: #98be65;">"straight/repos/pdf-tools/server/epdfinfo"</span> `(,straight-base-dir)))
+      (pdf-tools-build-server
+       (concat straight-base-dir <span style="color: #98be65;">"straight/repos/pdf-tools/server"</span>) nil nil nil (concat straight-base-dir <span style="color: #98be65;">"straight/build/pdf-tools/server"</span>)))
   (<span style="color: #51afef;">setq</span> pdf-info-epdfinfo-program (locate-file <span style="color: #98be65;">"straight/repos/pdf-tools/server/epdfinfo"</span> `(,straight-base-dir))))
+
 (<span style="color: #51afef;">use-package</span> <span style="color: #a9a1e1;">org-pdftools</span> <span style="color: #c678dd;">:ensure</span> t
   <span style="color: #c678dd;">:init</span>
   (org-pdftools-setup-link))
@@ -1149,8 +1165,8 @@ If you're new to org-mode consult
 </div>
 </div>
 
-<div id="outline-container-org88bf203" class="outline-2">
-<h2 id="org88bf203"><span class="section-number-2">3</span> Useful links</h2>
+<div id="outline-container-org2bb5bd0" class="outline-2">
+<h2 id="org2bb5bd0"><span class="section-number-2">3</span> Useful links</h2>
 <div class="outline-text-2" id="text-3">
 <ul class="org-ul">
 <li><a href="https://gist.github.com/mwfogleman/267b6bc7e512826a2c36cb57f0e3d854">GTD/BASB Templates for Emacs and Org-Mode · GitHub</a></li>
@@ -1162,7 +1178,7 @@ If you're new to org-mode consult
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Renat Galimov</p>
-<p class="date">Created: 2021-08-16 Mon 07:01</p>
+<p class="date">Created: 2021-09-14 Tue 03:39</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
