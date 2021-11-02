@@ -10,9 +10,11 @@
   https://renatgalimov.github.io/org-basb-code/
 
 ** How to work with this guide?
-   - Open this file in Emacs.
-   - [[https://orgmode.org/manual/Extracting-Source-Code.html][Extract]] the [[*Emacs config][config]] source block into your emacs directory.
-   - Add the resulting file to your load path.
+   - Copy-paste the [[*Emacs config][config]] source block into your =.emacs= file or
+     into a file in your emacs directory.
+   - In case of putting it into a separate file, add the following
+     code to your emacs config file =(load-file "~/path/to/basb.el")=
+
    - I will be using =C-c n= prefix for keybindings in this package.
 
 ** Prerequisites
@@ -458,20 +460,28 @@
     :ID:       B5A87A1B-E0FE-40D6-AC63-AD52DB283C31
     :CUSTOM_ID: working-with-pdf-files
     :END:
-   #+name: install-pdf-tools
-   #+begin_src emacs-lisp
-     (use-package pdf-tools
-       :ensure t
-       :straight (:host github
-                        :repo "matthew-piziak/pdf-tools"
-                        :files ("lisp/*.el" "server"))
-       :init
-       (add-to-list 'auto-mode-alist '("\\.pdf\\'" . pdf-view-mode))
-       (setq pdf-info-epdfinfo-program (locate-file "straight/repos/pdf-tools/server/epdfinfo" `(,straight-base-dir))))
-     (use-package org-pdftools :ensure t
-       :init
-       (org-pdftools-setup-link))
-       #+end_src
+
+    Don't forget to install pdf-tools dependencies.
+
+    #+name: install glib on MacOS
+    #+begin_src bash
+      brew install glib
+    #+end_src
+
+    #+name: install-pdf-tools
+    #+begin_src emacs-lisp
+      (use-package pdf-tools
+        :ensure t
+        :straight (:host github
+                         :repo "matthew-piziak/pdf-tools"
+                         :files ("lisp/*.el" "server"))
+        :init
+        (add-to-list 'auto-mode-alist '("\\.pdf\\'" . pdf-view-mode))
+        (setq pdf-info-epdfinfo-program (locate-file "straight/repos/pdf-tools/server/epdfinfo" `(,straight-base-dir))))
+      (use-package org-pdftools :ensure t
+        :init
+        (org-pdftools-setup-link))
+    #+end_src
 
        Now, capturing with =C-c c f= will create a highlight in the
        PDF file and add a link to an org-mode node you're currently
