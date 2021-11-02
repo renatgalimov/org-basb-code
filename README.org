@@ -322,7 +322,10 @@
         #+begin_src emacs-lisp
           (use-package org-ql :ensure t
             :init
-            (setq org-ql-search-directories-files-recursive t))
+
+            (setq org-ql-search-directories-files-recursive t
+                  org-ql-search-directories-files-regexp ".org\\(_archive\\)?$"
+                  ))
           (use-package helm-org-ql :ensure t
             :init
             (setq helm-org-ql-recursive-paths t)
@@ -514,15 +517,6 @@
             (let ((default-directory (file-name-directory pdf-info-epdfinfo-program)))
           (pdf-tools-install)))))
     #+end_src
-
-       Now, capturing with =C-c c f= will create a highlight in the
-       PDF file and add a link to an org-mode node you're currently
-       working on.
-
-       #+CAPTION: Highlighting text in a PDF document
-       #+attr_org: :width 400px
-       [[file:attachments/Highlighting PDF files with org capture.gif]]
-
 ** Express
    This area is too large to cover it in this guide.
    If you're new to org-mode consult
