@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-11-03 Wed 01:06 -->
+<!-- 2021-11-03 Wed 02:01 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Emacs CODE implementation</title>
@@ -235,8 +235,9 @@
 <li><a href="#orgcece2b0">1.2. Prerequisites</a>
 <ul>
 <li><a href="#org56c15d9">1.2.1. Pandoc</a></li>
-<li><a href="#orgcf55dbc">1.2.2. straight.el</a></li>
-<li><a href="#org80b245d">1.2.3. Org-roam</a></li>
+<li><a href="#org6e63291">1.2.2. melpa and melpa-stable</a></li>
+<li><a href="#orgcf55dbc">1.2.3. straight.el</a></li>
+<li><a href="#org80b245d">1.2.4. Org-roam</a></li>
 </ul>
 </li>
 <li><a href="#org0631135">1.3. Capture</a>
@@ -284,7 +285,24 @@
 into a file in your emacs directory.</li>
 <li>In case of putting it into a separate file, add the following
 code to your emacs config file <code>(load-file "~/path/to/basb.el")</code></li>
-
+<li>If you want to try this setup on a fresh Emacs do the following:
+<ul class="org-ul">
+<li>Create a new directory inside of your HOME: <code>mkdir ~/.emacs.code.d</code></li>
+<li><p>
+Put there a new <code>init.el</code>:
+</p>
+<div class="org-src-container">
+<pre class="src src-bash">echo '(setq user-init-file (or load-file-name (buffer-file-name)))' &gt; ~/.emacs.code.d/init.el
+echo '(setq user-emacs-directory (file-name-directory user-init-file))' &gt;&gt; ~/.emacs.code.d/init.el
+echo '(load-file "~/.emacs.code.d/CODE.el")' &gt;&gt; ~/.emacs.code.d/init.el
+</pre>
+</div></li>
+<li>Copy-paste the <a href="#org56bff78">config</a> into a new <code>"~/.emacs.code.d/CODE.el"</code></li>
+<li>Load a fresh Emacs with <code>emacs -q --load ~/.emacs.code.d/init.el</code></li>
+<li>Emacs will download and install all the packages defined in this guide.
+You might need depelopment tools installed to compile some packages.
+File a bug with errors you get and I will extend this guide.</li>
+</ul></li>
 <li>I will be using <code>C-c n</code> prefix for keybindings in this package.</li>
 </ul>
 </div>
@@ -327,15 +345,38 @@ warranty, not even for merchantability or fitness for a particular purpose.
 </pre>
 </div>
 </div>
-<div id="outline-container-orgcf55dbc" class="outline-4">
-<h4 id="orgcf55dbc"><span class="section-number-4">1.2.2</span> straight.el</h4>
+
+<div id="outline-container-org6e63291" class="outline-4">
+<h4 id="org6e63291"><span class="section-number-4">1.2.2</span> melpa and melpa-stable</h4>
 <div class="outline-text-4" id="text-1-2-2">
+<p>
+We will be downloading packages from these repos
+</p>
+
+<div class="org-src-container">
+<label class="org-src-name"><span class="listing-number">Listing 4: </span>Set up MELPA</label><pre class="src src-emacs-lisp" id="org91103f1">(package-initialize)
+
+(let* ((no-ssl (and (memq system-type '(windows-nt ms-dos))
+                    (not (gnutls-available-p))))
+       (proto (if no-ssl "http" "https")))
+  (add-to-list 'package-archives (cons "melpa" (concat proto "://melpa.org/packages/")) t)
+  (add-to-list 'package-archives (cons "melpa-stable" (concat proto "://stable.melpa.org/packages/")) t))
+
+(package-refresh-contents)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgcf55dbc" class="outline-4">
+<h4 id="orgcf55dbc"><span class="section-number-4">1.2.3</span> straight.el</h4>
+<div class="outline-text-4" id="text-1-2-3">
 <p>
 For this guide, we will be using <a href="https://github.com/raxod502/straight.el">straight.el</a> as your package manager.
 </p>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 4: </span>Install straight.el</label><pre class="src src-emacs-lisp" id="orgfd53805">(defvar bootstrap-version)
+<label class="org-src-name"><span class="listing-number">Listing 5: </span>Install straight.el</label><pre class="src src-emacs-lisp" id="orgfd53805">(defvar bootstrap-version)
 (let ((bootstrap-file
        (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
       (bootstrap-version 5))
@@ -347,19 +388,20 @@ For this guide, we will be using <a href="https://github.com/raxod502/straight.e
       (goto-char (point-max))
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
+(straight-use-package 'use-package)
 </pre>
 </div>
 </div>
 </div>
 
 <div id="outline-container-org80b245d" class="outline-4">
-<h4 id="org80b245d"><span class="section-number-4">1.2.3</span> Org-roam</h4>
-<div class="outline-text-4" id="text-1-2-3">
+<h4 id="org80b245d"><span class="section-number-4">1.2.4</span> Org-roam</h4>
+<div class="outline-text-4" id="text-1-2-4">
 <p>
 Obviously, we need <a href="https://github.com/org-roam/org-roam">org-roam</a> itself
 </p>
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 5: </span>Install org-roam</label><pre class="src src-emacs-lisp" id="orgda7d77d">(setq org-roam-v2-ack t)
+<label class="org-src-name"><span class="listing-number">Listing 6: </span>Install org-roam</label><pre class="src src-emacs-lisp" id="orgda7d77d">(setq org-roam-v2-ack t)
 (use-package org-roam
   :ensure t
   :pin "melpa-stable"
@@ -456,7 +498,7 @@ I use Firefoxes built-in one.</li>
 Convert the HTML with Pandoc
 </p>
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 6: </span>Convert HTML to Org with Pandoc</label><pre class="src src-bash">pandoc -f html -t org &lt;source-file&gt;.html -o &lt;target-file&gt;.org
+<label class="org-src-name"><span class="listing-number">Listing 7: </span>Convert HTML to Org with Pandoc</label><pre class="src src-bash">pandoc -f html -t org &lt;source-file&gt;.html -o &lt;target-file&gt;.org
 </pre>
 </div>
 
@@ -613,12 +655,12 @@ Now I use it as a default text search engine.
 </p>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 7: </span>Install ripgrep in MacOS</label><pre class="src src-bash">brew install ripgrep
+<label class="org-src-name"><span class="listing-number">Listing 8: </span>Install ripgrep in MacOS</label><pre class="src src-bash">brew install ripgrep
 </pre>
 </div>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 8: </span>Install helm-rg</label><pre class="src src-emacs-lisp" id="org30473b6">(use-package helm-rg :ensure t
+<label class="org-src-name"><span class="listing-number">Listing 9: </span>Install helm-rg</label><pre class="src src-emacs-lisp" id="org30473b6">(use-package helm-rg :ensure t
   :init
   (defun helm-rg-roam-directory (&amp;optional query)
     "Search with rg in your roam directory, QUERY."
@@ -647,7 +689,7 @@ I find org-rifle too slow at the moment. But its output is exacly what I want.
 </p>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 9: </span>Install org-rifle</label><pre class="src src-emacs-lisp" id="org78222e3">(use-package helm-org-rifle :ensure t
+<label class="org-src-name"><span class="listing-number">Listing 10: </span>Install org-rifle</label><pre class="src src-emacs-lisp" id="org78222e3">(use-package helm-org-rifle :ensure t
   :init
   (defun org-rifle-roam-directory ()
     (interactive)
@@ -775,14 +817,14 @@ You can search projects with helm or with org-ql:
 </p>
 
 
-<div id="org2299b6f" class="figure">
+<div id="org572f3c7" class="figure">
 <p><img src="Emacs_CODE_implementation/2021-07-04_07-52-17_screenshot.png" alt="2021-07-04_07-52-17_screenshot.png" />
 </p>
 <p><span class="figure-number">Figure 1: </span>Finding projects with helm</p>
 </div>
 
 
-<div id="org80fdcd3" class="figure">
+<div id="org5338c3e" class="figure">
 <p><img src="Emacs_CODE_implementation/2021-07-04_07-57-55_screenshot.png" alt="2021-07-04_07-57-55_screenshot.png" />
 </p>
 <p><span class="figure-number">Figure 2: </span>Finding projects with org-ql</p>
@@ -800,7 +842,7 @@ a link to the target record according to where it belongs.
 </p>
 
 
-<div id="orgec9c6db" class="figure">
+<div id="org91ed61c" class="figure">
 <p><img src="Emacs_CODE_implementation/2021-07-04_08-05-12_screenshot.png" alt="2021-07-04_08-05-12_screenshot.png" />
 </p>
 <p><span class="figure-number">Figure 3: </span>Links to an area within notes</p>
@@ -813,7 +855,7 @@ a backlink to you note in the side buffer.
 </p>
 
 
-<div id="org416b578" class="figure">
+<div id="org75bf7d0" class="figure">
 <p><img src="Emacs_CODE_implementation/2021-07-04_08-07-11_screenshot.png" alt="2021-07-04_08-07-11_screenshot.png" />
 </p>
 <p><span class="figure-number">Figure 4: </span>Backlinks to all areas in the side buffer</p>
@@ -867,7 +909,7 @@ mark the text.
 </p>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 10: </span>Set up highlight.el</label><pre class="src src-emacs-lisp" id="org1aa1d3c">;; If you get errors saying somethign about facemenu, try
+<label class="org-src-name"><span class="listing-number">Listing 11: </span>Set up highlight.el</label><pre class="src src-emacs-lisp" id="org1aa1d3c">;; If you get errors saying somethign about facemenu, try
 ;; uncommenting this.
 ;; (setq facemenu-menu nil)
 
@@ -893,7 +935,7 @@ To keep track of highlighted notes we will use <code>org-capture</code>.
 </p>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 11: </span>A capture template</label><pre class="src src-elisp" id="orgc63c60e">;; Use =org-capture f= to put a link to the text you selected.into an
+<label class="org-src-name"><span class="listing-number">Listing 12: </span>A capture template</label><pre class="src src-elisp" id="orgc63c60e">;; Use =org-capture f= to put a link to the text you selected.into an
 ;; org entry with the current timer enabled.
 
 (defun r/org-capture-get-selected-text ()
@@ -935,7 +977,7 @@ on.
 </p>
 
 
-<div id="orgdf96a0c" class="figure">
+<div id="org94c02fb" class="figure">
 <p><img src="attachments/highlighting-with-org-capture.gif" alt="highlighting-with-org-capture.gif" />
 </p>
 <p><span class="figure-number">Figure 5: </span>Highlighting on capture demo</p>
@@ -966,10 +1008,11 @@ Don't forget to install pdf-tools dependencies.
                    :files ("lisp/*.el" "server"))
   :init
   (add-to-list 'auto-mode-alist '("\\.pdf\\'" . pdf-view-mode))
-  (setq pdf-info-epdfinfo-program (locate-file "straight/repos/pdf-tools/server/epdfinfo" `(,straight-base-dir))))
-(use-package org-pdftools :ensure t
-  :init
-  (org-pdftools-setup-link))
+  (let ((pdf-tools-base-dir (expand-file-name  "straight/repos/pdf-tools/server" straight-base-dir)))
+    (setq pdf-info-epdfinfo-program (expand-file-name "straight/repos/pdf-tools/server/epdfinfo" straight-base-dir))
+    (unless (file-exists-p pdf-info-epdfinfo-program)
+      (let ((default-directory (file-name-directory pdf-info-epdfinfo-program)))
+    (pdf-tools-install)))))
 </pre>
 </div>
 
@@ -980,7 +1023,7 @@ working on.
 </p>
 
 
-<div id="orgbd85968" class="figure">
+<div id="org5fd132a" class="figure">
 <p><img src="attachments/Highlighting PDF files with org capture.gif" alt="Highlighting PDF files with org capture.gif" />
 </p>
 <p><span class="figure-number">Figure 6: </span>Highlighting text in a PDF document</p>
@@ -1008,7 +1051,18 @@ If you're new to org-mode consult
 <h2 id="org56bff78"><span class="section-number-2">2</span> Emacs config</h2>
 <div class="outline-text-2" id="text-2">
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 12: </span>Config source block</label><pre class="src src-emacs-lisp">;; [[[[file:~/projects/org-basb-code/README.org::install-straight-el][install-straight-el]]][install-straight-el]]
+<label class="org-src-name"><span class="listing-number">Listing 13: </span>Config source block</label><pre class="src src-emacs-lisp">;; [[[[file:~/projects/org-basb-code/README.org::set-up-melpa][set-up-melpa]]][set-up-melpa]]
+(package-initialize)
+
+(let* ((no-ssl (and (memq system-type '(windows-nt ms-dos))
+                    (not (gnutls-available-p))))
+       (proto (if no-ssl "http" "https")))
+  (add-to-list 'package-archives (cons "melpa" (concat proto "://melpa.org/packages/")) t)
+  (add-to-list 'package-archives (cons "melpa-stable" (concat proto "://stable.melpa.org/packages/")) t))
+
+(package-refresh-contents)
+;; set-up-melpa ends here
+;; [[[[file:~/projects/org-basb-code/README.org::install-straight-el][install-straight-el]]][install-straight-el]]
 (defvar bootstrap-version)
 (let ((bootstrap-file
        (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
@@ -1021,6 +1075,7 @@ If you're new to org-mode consult
       (goto-char (point-max))
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
+(straight-use-package 'use-package)
 ;; install-straight-el ends here
 ;; [[[[file:~/projects/org-basb-code/README.org::install-org-roam][install-org-roam]]][install-org-roam]]
 (setq org-roam-v2-ack t)
@@ -1150,10 +1205,11 @@ If you're new to org-mode consult
                    :files ("lisp/*.el" "server"))
   :init
   (add-to-list 'auto-mode-alist '("\\.pdf\\'" . pdf-view-mode))
-  (setq pdf-info-epdfinfo-program (locate-file "straight/repos/pdf-tools/server/epdfinfo" `(,straight-base-dir))))
-(use-package org-pdftools :ensure t
-  :init
-  (org-pdftools-setup-link))
+  (let ((pdf-tools-base-dir (expand-file-name  "straight/repos/pdf-tools/server" straight-base-dir)))
+    (setq pdf-info-epdfinfo-program (expand-file-name "straight/repos/pdf-tools/server/epdfinfo" straight-base-dir))
+    (unless (file-exists-p pdf-info-epdfinfo-program)
+      (let ((default-directory (file-name-directory pdf-info-epdfinfo-program)))
+    (pdf-tools-install)))))
 ;; install-pdf-tools ends here
 </pre>
 </div>
@@ -1173,7 +1229,7 @@ If you're new to org-mode consult
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Renat Galimov</p>
-<p class="date">Created: 2021-11-03 Wed 01:06</p>
+<p class="date">Created: 2021-11-03 Wed 02:01</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

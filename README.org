@@ -14,11 +14,22 @@
      into a file in your emacs directory.
    - In case of putting it into a separate file, add the following
      code to your emacs config file =(load-file "~/path/to/basb.el")=
-
+   - If you want to try this setup on a fresh Emacs do the following:
+     - Create a new directory inside of your HOME: =mkdir ~/.emacs.code.d=
+     - Put there a new =init.el=:
+       #+begin_src bash
+         echo '(setq user-init-file (or load-file-name (buffer-file-name)))' > ~/.emacs.code.d/init.el
+         echo '(setq user-emacs-directory (file-name-directory user-init-file))' >> ~/.emacs.code.d/init.el
+         echo '(load-file "~/.emacs.code.d/CODE.el")' >> ~/.emacs.code.d/init.el
+       #+end_src
+     - Copy-paste the [[*Emacs config][config]] into a new ="~/.emacs.code.d/CODE.el"=
+     - Load a fresh Emacs with =emacs -q --load ~/.emacs.code.d/init.el=
+     - Emacs will download and install all the packages defined in this guide.
+       You might need depelopment tools installed to compile some packages.
+       File a bug with errors you get and I will extend this guide.
    - I will be using =C-c n= prefix for keybindings in this package.
 
 ** Prerequisites
-
 *** Pandoc
     #+caption: Install Pandoc on Ubuntu
     #+begin_src bash :exports code :eval never-export
@@ -45,6 +56,25 @@
     : Copyright (C) 2006-2021 John MacFarlane. Web:  https://pandoc.org
     : This is free software; see the source for copying conditions. There is no
     : warranty, not even for merchantability or fitness for a particular purpose.
+
+*** melpa and melpa-stable
+
+    We will be downloading packages from these repos
+
+    #+caption: Set up MELPA
+    #+name: set-up-melpa
+    #+begin_src emacs-lisp :exports code :eval never-export :results none
+      (package-initialize)
+
+      (let* ((no-ssl (and (memq system-type '(windows-nt ms-dos))
+                          (not (gnutls-available-p))))
+             (proto (if no-ssl "http" "https")))
+        (add-to-list 'package-archives (cons "melpa" (concat proto "://melpa.org/packages/")) t)
+        (add-to-list 'package-archives (cons "melpa-stable" (concat proto "://stable.melpa.org/packages/")) t))
+
+      (package-refresh-contents)
+    #+end_src
+
 *** straight.el
 
     For this guide, we will be using [[https://github.com/raxod502/straight.el][straight.el]] as your package manager.
@@ -64,6 +94,7 @@
             (goto-char (point-max))
             (eval-print-last-sexp)))
         (load bootstrap-file nil 'nomessage))
+      (straight-use-package 'use-package)
     #+end_src
 
 *** Org-roam
@@ -477,10 +508,11 @@
                          :files ("lisp/*.el" "server"))
         :init
         (add-to-list 'auto-mode-alist '("\\.pdf\\'" . pdf-view-mode))
-        (setq pdf-info-epdfinfo-program (locate-file "straight/repos/pdf-tools/server/epdfinfo" `(,straight-base-dir))))
-      (use-package org-pdftools :ensure t
-        :init
-        (org-pdftools-setup-link))
+        (let ((pdf-tools-base-dir (expand-file-name  "straight/repos/pdf-tools/server" straight-base-dir)))
+          (setq pdf-info-epdfinfo-program (expand-file-name "straight/repos/pdf-tools/server/epdfinfo" straight-base-dir))
+          (unless (file-exists-p pdf-info-epdfinfo-program)
+            (let ((default-directory (file-name-directory pdf-info-epdfinfo-program)))
+          (pdf-tools-install)))))
     #+end_src
 
        Now, capturing with =C-c c f= will create a highlight in the
@@ -500,6 +532,7 @@
 * Emacs config
   #+caption: Config source block
   #+begin_src emacs-lisp :noweb yes :tangle ~/emacs/rc/CODE.el :comments noweb
+    <<set-up-melpa>>
     <<install-straight-el>>
     <<install-org-roam>>
     <<install-org-pandoc-import>>
