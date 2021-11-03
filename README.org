@@ -389,6 +389,32 @@
      #+caption: Backlinks to all areas in the side buffer
      [[file:Emacs_CODE_implementation/2021-07-04_08-07-11_screenshot.png]]
 
+*** Org-roam-ui
+
+    A nice second-brain visualizator: [[https://github.com/org-roam/org-roam-ui][org-roam-ui]].
+
+    #+caption: org-roam-ui design
+    #+attr_org: :width 400px
+    [[file:Emacs_CODE_implementation/2021-11-03_21-44-11_screenshot.png]]
+
+    #+caption: Install org-roam-ui
+    #+name: install-org-roam-ui
+    #+begin_src elisp :exports code :eval never-export :results none
+      (use-package org-roam-ui
+        :straight
+        (:host github :repo "org-roam/org-roam-ui" :branch "main" :files ("*.el" "out"))
+        :after org-roam
+        ;;         normally we'd recommend hooking orui after org-roam, but since org-roam does not have
+        ;;         a hookable mode anymore, you're advised to pick something yourself
+        ;;         if you don't care about startup time, use
+        :hook (after-init . org-roam-ui-mode)
+        :config
+        (setq org-roam-ui-sync-theme t
+              org-roam-ui-follow t
+              org-roam-ui-update-on-save t
+              org-roam-ui-open-on-start t))
+    #+end_src
+
 ** Distill
 *** Progressive summarization
 **** Make org-emphasize multi-linear
@@ -534,6 +560,7 @@
     <<set-up-melpa>>
     <<install-straight-el>>
     <<install-org-roam>>
+    <<install-org-roam-ui>>
     <<install-org-pandoc-import>>
     <<install-org-web-tools>>
     <<install-helm-rg>>
