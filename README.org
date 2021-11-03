@@ -18,10 +18,11 @@
    - If you want to try this setup on a fresh Emacs do the following:
      - Create a new directory inside of your HOME: =mkdir ~/.emacs.code.d=
      - Put there a new =init.el=:
-       #+begin_src bash
-         echo '(setq user-init-file (or load-file-name (buffer-file-name)))' > ~/.emacs.code.d/init.el
-         echo '(setq user-emacs-directory (file-name-directory user-init-file))' >> ~/.emacs.code.d/init.el
-         echo '(load-file "~/.emacs.code.d/CODE.el")' >> ~/.emacs.code.d/init.el
+       #+caption: Contents of ~/.emacs.code.d/CODE.el
+       #+begin_src emacs-lisp
+         (setq user-init-file (or load-file-name (buffer-file-name)))
+         (setq user-emacs-directory (file-name-directory user-init-file))
+         (load-file "~/.emacs.code.d/CODE.el")
        #+end_src
      - Copy-paste the [[*Emacs config][config]] into a new ="~/.emacs.code.d/CODE.el"=
      - Load a fresh Emacs with =emacs -q --load ~/.emacs.code.d/init.el=

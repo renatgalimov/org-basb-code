@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-11-03 Wed 08:14 -->
+<!-- 2021-11-03 Wed 08:19 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Emacs CODE implementation</title>
@@ -292,9 +292,9 @@ code to your emacs config file <code>(load-file "~/path/to/basb.el")</code></li>
 Put there a new <code>init.el</code>:
 </p>
 <div class="org-src-container">
-<pre class="src src-bash"><span style="color: #c678dd;">echo</span> <span style="color: #98be65;">'(setq user-init-file (or load-file-name (buffer-file-name)))'</span> &gt; ~/.emacs.code.d/init.el
-<span style="color: #c678dd;">echo</span> <span style="color: #98be65;">'(setq user-emacs-directory (file-name-directory user-init-file))'</span> &gt;&gt; ~/.emacs.code.d/init.el
-<span style="color: #c678dd;">echo</span> <span style="color: #98be65;">'(load-file "~/.emacs.code.d/CODE.el")'</span> &gt;&gt; ~/.emacs.code.d/init.el
+<label class="org-src-name"><span class="listing-number">Listing 1: </span>Contents of ~/.emacs.code.d/CODE.el</label><pre class="src src-emacs-lisp">(<span style="color: #51afef;">setq</span> user-init-file (<span style="color: #51afef;">or</span> load-file-name (buffer-file-name)))
+(<span style="color: #51afef;">setq</span> user-emacs-directory (file-name-directory user-init-file))
+(load-file <span style="color: #98be65;">"~/.emacs.code.d/CODE.el"</span>)
 </pre>
 </div></li>
 <li>Copy-paste the <a href="#emacs-config">config</a> into a new <code>"~/.emacs.code.d/CODE.el"</code></li>
@@ -316,12 +316,12 @@ File a bug with errors you get and I will extend this guide.</li>
 <h4 id="org56c15d9"><span class="section-number-4">1.2.1</span> Pandoc</h4>
 <div class="outline-text-4" id="text-1-2-1">
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 1: </span>Install Pandoc on Ubuntu</label><pre class="src src-bash">sudo apt install pandoc
+<label class="org-src-name"><span class="listing-number">Listing 2: </span>Install Pandoc on Ubuntu</label><pre class="src src-bash">sudo apt install pandoc
 </pre>
 </div>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 2: </span>Install Pandoc on Mac OS with homebrew</label><pre class="src src-bash">brew install pandoc
+<label class="org-src-name"><span class="listing-number">Listing 3: </span>Install Pandoc on Mac OS with homebrew</label><pre class="src src-bash">brew install pandoc
 </pre>
 </div>
 
@@ -330,7 +330,7 @@ Ensure that Pandoc is in your path.
 </p>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 3: </span>Pandoc version</label><pre class="src src-bash">pandoc --version
+<label class="org-src-name"><span class="listing-number">Listing 4: </span>Pandoc version</label><pre class="src src-bash">pandoc --version
 </pre>
 </div>
 
@@ -354,7 +354,7 @@ We will be downloading packages from these repos
 </p>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 4: </span>Set up MELPA</label><pre class="src src-emacs-lisp" id="org91103f1">(package-initialize)
+<label class="org-src-name"><span class="listing-number">Listing 5: </span>Set up MELPA</label><pre class="src src-emacs-lisp" id="org91103f1">(package-initialize)
 
 (<span style="color: #51afef;">let*</span> ((no-ssl (<span style="color: #51afef;">and</span> (memq system-type '(windows-nt ms-dos))
                     (not (gnutls-available-p))))
@@ -376,7 +376,7 @@ For this guide, we will be using <a href="https://github.com/raxod502/straight.e
 </p>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 5: </span>Install straight.el</label><pre class="src src-emacs-lisp" id="orgfd53805">(<span style="color: #51afef;">defvar</span> <span style="color: #dcaeea;">bootstrap-version</span>)
+<label class="org-src-name"><span class="listing-number">Listing 6: </span>Install straight.el</label><pre class="src src-emacs-lisp" id="orgfd53805">(<span style="color: #51afef;">defvar</span> <span style="color: #dcaeea;">bootstrap-version</span>)
 (<span style="color: #51afef;">let</span> ((bootstrap-file
        (expand-file-name <span style="color: #98be65;">"straight/repos/straight.el/bootstrap.el"</span> user-emacs-directory))
       (bootstrap-version 5))
@@ -401,7 +401,7 @@ For this guide, we will be using <a href="https://github.com/raxod502/straight.e
 Obviously, we need <a href="https://github.com/org-roam/org-roam">org-roam</a> itself
 </p>
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 6: </span>Install org-roam</label><pre class="src src-emacs-lisp" id="orgda7d77d">(<span style="color: #51afef;">setq</span> org-roam-v2-ack t)
+<label class="org-src-name"><span class="listing-number">Listing 7: </span>Install org-roam</label><pre class="src src-emacs-lisp" id="orgda7d77d">(<span style="color: #51afef;">setq</span> org-roam-v2-ack t)
 (<span style="color: #51afef;">use-package</span> <span style="color: #a9a1e1;">org-roam</span>
   <span style="color: #c678dd;">:ensure</span> t
   <span style="color: #c678dd;">:pin</span> <span style="color: #98be65;">"melpa-stable"</span>
@@ -498,7 +498,7 @@ I use Firefoxes built-in one.</li>
 Convert the HTML with Pandoc
 </p>
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 7: </span>Convert HTML to Org with Pandoc</label><pre class="src src-bash">pandoc -f html -t org &lt;source-file&gt;.html -o &lt;target-file&gt;.org
+<label class="org-src-name"><span class="listing-number">Listing 8: </span>Convert HTML to Org with Pandoc</label><pre class="src src-bash">pandoc -f html -t org &lt;source-file&gt;.html -o &lt;target-file&gt;.org
 </pre>
 </div>
 
@@ -655,12 +655,12 @@ Now I use it as a default text search engine.
 </p>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 8: </span>Install ripgrep in MacOS</label><pre class="src src-bash">brew install ripgrep
+<label class="org-src-name"><span class="listing-number">Listing 9: </span>Install ripgrep in MacOS</label><pre class="src src-bash">brew install ripgrep
 </pre>
 </div>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 9: </span>Install helm-rg</label><pre class="src src-emacs-lisp" id="org30473b6">(<span style="color: #51afef;">use-package</span> <span style="color: #a9a1e1;">helm-rg</span> <span style="color: #c678dd;">:ensure</span> t
+<label class="org-src-name"><span class="listing-number">Listing 10: </span>Install helm-rg</label><pre class="src src-emacs-lisp" id="org30473b6">(<span style="color: #51afef;">use-package</span> <span style="color: #a9a1e1;">helm-rg</span> <span style="color: #c678dd;">:ensure</span> t
   <span style="color: #c678dd;">:init</span>
   (<span style="color: #51afef;">defun</span> <span style="color: #c678dd;">helm-rg-roam-directory</span> (<span style="color: #ECBE7B;">&amp;optional</span> query)
     <span style="color: #83898d;">"Search with rg in your roam directory, QUERY."</span>
@@ -689,7 +689,7 @@ I find org-rifle too slow at the moment. But its output is exacly what I want.
 </p>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 10: </span>Install org-rifle</label><pre class="src src-emacs-lisp" id="org78222e3">(<span style="color: #51afef;">use-package</span> <span style="color: #a9a1e1;">helm-org-rifle</span> <span style="color: #c678dd;">:ensure</span> t
+<label class="org-src-name"><span class="listing-number">Listing 11: </span>Install org-rifle</label><pre class="src src-emacs-lisp" id="org78222e3">(<span style="color: #51afef;">use-package</span> <span style="color: #a9a1e1;">helm-org-rifle</span> <span style="color: #c678dd;">:ensure</span> t
   <span style="color: #c678dd;">:init</span>
   (<span style="color: #51afef;">defun</span> <span style="color: #c678dd;">org-rifle-roam-directory</span> ()
     (<span style="color: #51afef;">interactive</span>)
@@ -820,14 +820,14 @@ You can search projects with helm or with org-ql:
 </p>
 
 
-<div id="org53fc3a6" class="figure">
+<div id="org3322cd8" class="figure">
 <p><img src="Emacs_CODE_implementation/2021-07-04_07-52-17_screenshot.png" alt="2021-07-04_07-52-17_screenshot.png" />
 </p>
 <p><span class="figure-number">Figure 1: </span>Finding projects with helm</p>
 </div>
 
 
-<div id="org56f22ca" class="figure">
+<div id="org2e28b15" class="figure">
 <p><img src="Emacs_CODE_implementation/2021-07-04_07-57-55_screenshot.png" alt="2021-07-04_07-57-55_screenshot.png" />
 </p>
 <p><span class="figure-number">Figure 2: </span>Finding projects with org-ql</p>
@@ -845,7 +845,7 @@ a link to the target record according to where it belongs.
 </p>
 
 
-<div id="org08f3557" class="figure">
+<div id="org7499e62" class="figure">
 <p><img src="Emacs_CODE_implementation/2021-07-04_08-05-12_screenshot.png" alt="2021-07-04_08-05-12_screenshot.png" />
 </p>
 <p><span class="figure-number">Figure 3: </span>Links to an area within notes</p>
@@ -858,7 +858,7 @@ a backlink to you note in the side buffer.
 </p>
 
 
-<div id="org4c413f5" class="figure">
+<div id="org724b7ce" class="figure">
 <p><img src="Emacs_CODE_implementation/2021-07-04_08-07-11_screenshot.png" alt="2021-07-04_08-07-11_screenshot.png" />
 </p>
 <p><span class="figure-number">Figure 4: </span>Backlinks to all areas in the side buffer</p>
@@ -912,7 +912,7 @@ mark the text.
 </p>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 11: </span>Set up highlight.el</label><pre class="src src-emacs-lisp" id="org1aa1d3c"><span style="color: #5B6268;">;; </span><span style="color: #5B6268;">If you get errors saying somethign about facemenu, try</span>
+<label class="org-src-name"><span class="listing-number">Listing 12: </span>Set up highlight.el</label><pre class="src src-emacs-lisp" id="org1aa1d3c"><span style="color: #5B6268;">;; </span><span style="color: #5B6268;">If you get errors saying somethign about facemenu, try</span>
 <span style="color: #5B6268;">;; </span><span style="color: #5B6268;">uncommenting this.</span>
 <span style="color: #5B6268;">;; </span><span style="color: #5B6268;">(setq facemenu-menu nil)</span>
 
@@ -938,7 +938,7 @@ To keep track of highlighted notes we will use <code>org-capture</code>.
 </p>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 12: </span>A capture template</label><pre class="src src-elisp" id="orgc63c60e"><span style="color: #5B6268;">;; </span><span style="color: #5B6268;">Use =org-capture f= to put a link to the text you selected.into an</span>
+<label class="org-src-name"><span class="listing-number">Listing 13: </span>A capture template</label><pre class="src src-elisp" id="orgc63c60e"><span style="color: #5B6268;">;; </span><span style="color: #5B6268;">Use =org-capture f= to put a link to the text you selected.into an</span>
 <span style="color: #5B6268;">;; </span><span style="color: #5B6268;">org entry with the current timer enabled.</span>
 
 (<span style="color: #51afef;">defun</span> <span style="color: #c678dd;">r/org-capture-get-selected-text</span> ()
@@ -980,7 +980,7 @@ on.
 </p>
 
 
-<div id="orgbe4d7b6" class="figure">
+<div id="orgc9c7ed0" class="figure">
 <p><img src="attachments/highlighting-with-org-capture.gif" alt="highlighting-with-org-capture.gif" />
 </p>
 <p><span class="figure-number">Figure 5: </span>Highlighting on capture demo</p>
@@ -1040,7 +1040,7 @@ If you're new to org-mode consult
 <h2 id="emacs-config"><span class="section-number-2">2</span> Emacs config</h2>
 <div class="outline-text-2" id="text-emacs-config">
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 13: </span>Config source block</label><pre class="src src-emacs-lisp"><span style="color: #5B6268;">;; </span><span style="color: #5B6268;">[[[[file:~/projects/org-basb-code/README.org::set-up-melpa][set-up-melpa]]][set-up-melpa]]</span>
+<label class="org-src-name"><span class="listing-number">Listing 14: </span>Config source block</label><pre class="src src-emacs-lisp"><span style="color: #5B6268;">;; </span><span style="color: #5B6268;">[[[[file:~/projects/org-basb-code/README.org::set-up-melpa][set-up-melpa]]][set-up-melpa]]</span>
 (package-initialize)
 
 (<span style="color: #51afef;">let*</span> ((no-ssl (<span style="color: #51afef;">and</span> (memq system-type '(windows-nt ms-dos))
@@ -1221,7 +1221,7 @@ If you're new to org-mode consult
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Renat Galimov</p>
-<p class="date">Created: 2021-11-03 Wed 08:14</p>
+<p class="date">Created: 2021-11-03 Wed 08:19</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
