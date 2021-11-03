@@ -10,8 +10,9 @@
   https://renatgalimov.github.io/org-basb-code/
 
 ** How to work with this guide?
-   - Copy-paste the [[*Emacs config][config]] source block into your =.emacs= file or
-     into a file in your emacs directory.
+
+   - Copy-paste the [[#emacs-config][config]] source block at the end of this document
+     into your =.emacs= file or into a file in your emacs directory.
    - In case of putting it into a separate file, add the following
      code to your emacs config file =(load-file "~/path/to/basb.el")=
    - If you want to try this setup on a fresh Emacs do the following:
@@ -524,6 +525,9 @@
    [[https://orgmode.org/manual/Exporting.html][Exporting]] and [[https://orgmode.org/manual/Publishing.html][publishing]] sections of the org manual.
 
 * Emacs config
+  :PROPERTIES:
+  :CUSTOM_ID: emacs-config
+  :END:
   #+caption: Config source block
   #+begin_src emacs-lisp :noweb yes :tangle ~/emacs/rc/CODE.el :comments noweb
     <<set-up-melpa>>
