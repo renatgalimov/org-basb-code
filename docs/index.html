@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-09-14 Tue 03:39 -->
+<!-- 2021-12-18 Sat 00:55 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Emacs CODE implementation</title>
@@ -776,14 +776,14 @@ You can search projects with helm or with org-ql:
 </p>
 
 
-<div id="orgbdd61da" class="figure">
+<div id="org0f9ed94" class="figure">
 <p><img src="Emacs_CODE_implementation/2021-07-04_07-52-17_screenshot.png" alt="2021-07-04_07-52-17_screenshot.png" />
 </p>
 <p><span class="figure-number">Figure 1: </span>Finding projects with helm</p>
 </div>
 
 
-<div id="orge598b4a" class="figure">
+<div id="orgf77504d" class="figure">
 <p><img src="Emacs_CODE_implementation/2021-07-04_07-57-55_screenshot.png" alt="2021-07-04_07-57-55_screenshot.png" />
 </p>
 <p><span class="figure-number">Figure 2: </span>Finding projects with org-ql</p>
@@ -801,7 +801,7 @@ a link to the target record according to where it belongs.
 </p>
 
 
-<div id="org83ef989" class="figure">
+<div id="org9d59e3d" class="figure">
 <p><img src="Emacs_CODE_implementation/2021-07-04_08-05-12_screenshot.png" alt="2021-07-04_08-05-12_screenshot.png" />
 </p>
 <p><span class="figure-number">Figure 3: </span>Links to an area within notes</p>
@@ -814,7 +814,7 @@ a backlink to you note in the side buffer.
 </p>
 
 
-<div id="orgcaadb05" class="figure">
+<div id="org4c5263a" class="figure">
 <p><img src="Emacs_CODE_implementation/2021-07-04_08-07-11_screenshot.png" alt="2021-07-04_08-07-11_screenshot.png" />
 </p>
 <p><span class="figure-number">Figure 4: </span>Backlinks to all areas in the side buffer</p>
@@ -882,6 +882,38 @@ mark the text.
 
   <span style="color: #c678dd;">:bind</span> ((<span style="color: #98be65;">"C-c n h"</span> . hlt-general)
          (<span style="color: #98be65;">"C-c n H"</span> . hlt-unhighlight-region)))
+
+
+<span style="color: #5B6268;">;; </span><span style="color: #5B6268;">If you cannot save your enriched files because of the :inherit</span>
+<span style="color: #5B6268;">;; </span><span style="color: #5B6268;">error, try uncommenting this function.</span>
+
+<span style="color: #5B6268;">;; </span><span style="color: #5B6268;">(defun enriched-face-ans (face)</span>
+<span style="color: #5B6268;">;;   </span><span style="color: #5B6268;">"Return annotations specifying FACE.</span>
+<span style="color: #5B6268;">;; </span><span style="color: #5B6268;">FACE may be a list of faces instead of a single face;</span>
+<span style="color: #5B6268;">;; </span><span style="color: #5B6268;">it can also be anything allowed as an element of a list</span>
+<span style="color: #5B6268;">;; </span><span style="color: #5B6268;">which can be the value of the `</span><span style="color: #a9a1e1;">face</span><span style="color: #5B6268;">' text property."</span>
+<span style="color: #5B6268;">;;   </span><span style="color: #5B6268;">(cond ((and (consp face) (eq (car face) 'foreground-color))</span>
+<span style="color: #5B6268;">;;          </span><span style="color: #5B6268;">(list (list "x-color" (cdr face))))</span>
+<span style="color: #5B6268;">;;         </span><span style="color: #5B6268;">((and (consp face) (eq (car face) 'background-color))</span>
+<span style="color: #5B6268;">;;          </span><span style="color: #5B6268;">(list (list "x-bg-color" (cdr face))))</span>
+<span style="color: #5B6268;">;;         </span><span style="color: #5B6268;">((and (listp face) (eq (car face) :foreground))</span>
+<span style="color: #5B6268;">;;          </span><span style="color: #5B6268;">(list (list "x-color" (cadr face))))</span>
+<span style="color: #5B6268;">;;         </span><span style="color: #5B6268;">((and (listp face) (eq (car face) :background))</span>
+<span style="color: #5B6268;">;;          </span><span style="color: #5B6268;">(list (list "x-bg-color" (cadr face))))</span>
+<span style="color: #5B6268;">;;         </span><span style="color: #5B6268;">((and (listp face) (eq (car face) :inherit))</span>
+<span style="color: #5B6268;">;;          </span><span style="color: #5B6268;">(enriched-face-ans (cdr face)))</span>
+<span style="color: #5B6268;">;;         </span><span style="color: #5B6268;">((listp face)</span>
+<span style="color: #5B6268;">;;          </span><span style="color: #5B6268;">(apply 'append (mapcar 'enriched-face-ans face)))</span>
+<span style="color: #5B6268;">;;         </span><span style="color: #5B6268;">((let* ((fg (face-attribute face :foreground))</span>
+<span style="color: #5B6268;">;;                 </span><span style="color: #5B6268;">(bg (face-attribute face :background))</span>
+<span style="color: #5B6268;">;;                 </span><span style="color: #5B6268;">(props (face-font face t))</span>
+<span style="color: #5B6268;">;;                 </span><span style="color: #5B6268;">(ans (cdr (format-annotate-single-property-change</span>
+<span style="color: #5B6268;">;;                            </span><span style="color: #5B6268;">'face nil props enriched-translations))))</span>
+<span style="color: #5B6268;">;;            </span><span style="color: #5B6268;">(unless (eq fg 'unspecified)</span>
+<span style="color: #5B6268;">;;              </span><span style="color: #5B6268;">(setq ans (cons (list "x-color" fg) ans)))</span>
+<span style="color: #5B6268;">;;            </span><span style="color: #5B6268;">(unless (eq bg 'unspecified)</span>
+<span style="color: #5B6268;">;;              </span><span style="color: #5B6268;">(setq ans (cons (list "x-bg-color" bg) ans)))</span>
+<span style="color: #5B6268;">;;            </span><span style="color: #5B6268;">ans))))</span>
 </pre>
 </div>
 </div>
@@ -936,7 +968,7 @@ on.
 </p>
 
 
-<div id="org47a210f" class="figure">
+<div id="org074f617" class="figure">
 <p><img src="attachments/highlighting-with-org-capture.gif" alt="highlighting-with-org-capture.gif" />
 </p>
 <p><span class="figure-number">Figure 5: </span>Highlighting on capture demo</p>
@@ -977,7 +1009,7 @@ working on.
 </p>
 
 
-<div id="org6f0d8c1" class="figure">
+<div id="orgf0e95b7" class="figure">
 <p><img src="attachments/Highlighting PDF files with org capture.gif" alt="Highlighting PDF files with org capture.gif" />
 </p>
 <p><span class="figure-number">Figure 6: </span>Highlighting text in a PDF document</p>
@@ -1141,6 +1173,38 @@ If you're new to org-mode consult
 
   <span style="color: #c678dd;">:bind</span> ((<span style="color: #98be65;">"C-c n h"</span> . hlt-general)
          (<span style="color: #98be65;">"C-c n H"</span> . hlt-unhighlight-region)))
+
+
+<span style="color: #5B6268;">;; </span><span style="color: #5B6268;">If you cannot save your enriched files because of the :inherit</span>
+<span style="color: #5B6268;">;; </span><span style="color: #5B6268;">error, try uncommenting this function.</span>
+
+<span style="color: #5B6268;">;; </span><span style="color: #5B6268;">(defun enriched-face-ans (face)</span>
+<span style="color: #5B6268;">;;   </span><span style="color: #5B6268;">"Return annotations specifying FACE.</span>
+<span style="color: #5B6268;">;; </span><span style="color: #5B6268;">FACE may be a list of faces instead of a single face;</span>
+<span style="color: #5B6268;">;; </span><span style="color: #5B6268;">it can also be anything allowed as an element of a list</span>
+<span style="color: #5B6268;">;; </span><span style="color: #5B6268;">which can be the value of the `</span><span style="color: #a9a1e1;">face</span><span style="color: #5B6268;">' text property."</span>
+<span style="color: #5B6268;">;;   </span><span style="color: #5B6268;">(cond ((and (consp face) (eq (car face) 'foreground-color))</span>
+<span style="color: #5B6268;">;;          </span><span style="color: #5B6268;">(list (list "x-color" (cdr face))))</span>
+<span style="color: #5B6268;">;;         </span><span style="color: #5B6268;">((and (consp face) (eq (car face) 'background-color))</span>
+<span style="color: #5B6268;">;;          </span><span style="color: #5B6268;">(list (list "x-bg-color" (cdr face))))</span>
+<span style="color: #5B6268;">;;         </span><span style="color: #5B6268;">((and (listp face) (eq (car face) :foreground))</span>
+<span style="color: #5B6268;">;;          </span><span style="color: #5B6268;">(list (list "x-color" (cadr face))))</span>
+<span style="color: #5B6268;">;;         </span><span style="color: #5B6268;">((and (listp face) (eq (car face) :background))</span>
+<span style="color: #5B6268;">;;          </span><span style="color: #5B6268;">(list (list "x-bg-color" (cadr face))))</span>
+<span style="color: #5B6268;">;;         </span><span style="color: #5B6268;">((and (listp face) (eq (car face) :inherit))</span>
+<span style="color: #5B6268;">;;          </span><span style="color: #5B6268;">(enriched-face-ans (cdr face)))</span>
+<span style="color: #5B6268;">;;         </span><span style="color: #5B6268;">((listp face)</span>
+<span style="color: #5B6268;">;;          </span><span style="color: #5B6268;">(apply 'append (mapcar 'enriched-face-ans face)))</span>
+<span style="color: #5B6268;">;;         </span><span style="color: #5B6268;">((let* ((fg (face-attribute face :foreground))</span>
+<span style="color: #5B6268;">;;                 </span><span style="color: #5B6268;">(bg (face-attribute face :background))</span>
+<span style="color: #5B6268;">;;                 </span><span style="color: #5B6268;">(props (face-font face t))</span>
+<span style="color: #5B6268;">;;                 </span><span style="color: #5B6268;">(ans (cdr (format-annotate-single-property-change</span>
+<span style="color: #5B6268;">;;                            </span><span style="color: #5B6268;">'face nil props enriched-translations))))</span>
+<span style="color: #5B6268;">;;            </span><span style="color: #5B6268;">(unless (eq fg 'unspecified)</span>
+<span style="color: #5B6268;">;;              </span><span style="color: #5B6268;">(setq ans (cons (list "x-color" fg) ans)))</span>
+<span style="color: #5B6268;">;;            </span><span style="color: #5B6268;">(unless (eq bg 'unspecified)</span>
+<span style="color: #5B6268;">;;              </span><span style="color: #5B6268;">(setq ans (cons (list "x-bg-color" bg) ans)))</span>
+<span style="color: #5B6268;">;;            </span><span style="color: #5B6268;">ans))))</span>
 <span style="color: #5B6268;">;; </span><span style="color: #5B6268;">setup-highlight-el ends here</span>
 <span style="color: #5B6268;">;; </span><span style="color: #5B6268;">[[[[id:B5A87A1B-E0FE-40D6-AC63-AD52DB283C31][Working with PDF files]]][install-pdf-tools]]</span>
 (<span style="color: #51afef;">use-package</span> <span style="color: #a9a1e1;">pdf-tools</span>
@@ -1178,7 +1242,7 @@ If you're new to org-mode consult
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Renat Galimov</p>
-<p class="date">Created: 2021-09-14 Tue 03:39</p>
+<p class="date">Created: 2021-12-18 Sat 00:55</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

@@ -402,6 +402,38 @@
 
           :bind (("C-c n h" . hlt-general)
                  ("C-c n H" . hlt-unhighlight-region)))
+
+
+        ;; If you cannot save your enriched files because of the :inherit
+        ;; error, try uncommenting this function.
+
+        ;; (defun enriched-face-ans (face)
+        ;;   "Return annotations specifying FACE.
+        ;; FACE may be a list of faces instead of a single face;
+        ;; it can also be anything allowed as an element of a list
+        ;; which can be the value of the `face' text property."
+        ;;   (cond ((and (consp face) (eq (car face) 'foreground-color))
+        ;;          (list (list "x-color" (cdr face))))
+        ;;         ((and (consp face) (eq (car face) 'background-color))
+        ;;          (list (list "x-bg-color" (cdr face))))
+        ;;         ((and (listp face) (eq (car face) :foreground))
+        ;;          (list (list "x-color" (cadr face))))
+        ;;         ((and (listp face) (eq (car face) :background))
+        ;;          (list (list "x-bg-color" (cadr face))))
+        ;;         ((and (listp face) (eq (car face) :inherit))
+        ;;          (enriched-face-ans (cdr face)))
+        ;;         ((listp face)
+        ;;          (apply 'append (mapcar 'enriched-face-ans face)))
+        ;;         ((let* ((fg (face-attribute face :foreground))
+        ;;                 (bg (face-attribute face :background))
+        ;;                 (props (face-font face t))
+        ;;                 (ans (cdr (format-annotate-single-property-change
+        ;;                            'face nil props enriched-translations))))
+        ;;            (unless (eq fg 'unspecified)
+        ;;              (setq ans (cons (list "x-color" fg) ans)))
+        ;;            (unless (eq bg 'unspecified)
+        ;;              (setq ans (cons (list "x-bg-color" bg) ans)))
+        ;;            ans))))
       #+end_src
 
 ***** org-capture a region                                                             :ATTACH:
