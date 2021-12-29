@@ -188,6 +188,7 @@ A list of useful packages for implementing CODE with Emacs.
            :unnarrowed t))
        #+end_src
 
+**** Capturing videos
 *** Organize
 
     Tagging your notes as PARA objects.

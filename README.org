@@ -71,6 +71,7 @@
     #+begin_src emacs-lisp :exports code :eval never-export :results none
       (setq org-roam-v2-ack t)
       (use-package org-roam
+        :after org
         :ensure t
         :pin "melpa-stable"
         :bind (("C-c n l" . #'org-roam-buffer-toggle)
@@ -259,10 +260,10 @@
         #+name: install-deft
         #+begin_src emacs-lisp
           (use-package deft :ensure t
-            :init (setq deft-directory org-roam-directory
+            :after org-roam
+            :config (setq deft-directory org-roam-directory
                         deft-recursive t)
-            :bind (("C-c n d" . deft))
-            )
+            :bind (("C-c n d" . deft)))
           ;; (use-package helm-deft
           ;;   :ensure t
           ;;   :straight (:host github
