@@ -10,13 +10,28 @@
   https://renatgalimov.github.io/org-basb-code/
 
 ** How to work with this guide?
-   - Open this file in Emacs.
-   - [[https://orgmode.org/manual/Extracting-Source-Code.html][Extract]] the [[*Emacs config][config]] source block into your emacs directory.
-   - Add the resulting file to your load path.
+
+   - Copy-paste the [[#emacs-config][config]] source block at the end of this document
+     into your =.emacs= file or into a file in your emacs directory.
+   - In case of putting it into a separate file, add the following
+     code to your emacs config file =(load-file "~/path/to/basb.el")=
+   - If you want to try this setup on a fresh Emacs do the following:
+     - Create a new directory inside of your HOME: =mkdir ~/.emacs.code.d=
+     - Put there a new =init.el=:
+       #+caption: Contents of ~/.emacs.code.d/CODE.el
+       #+begin_src emacs-lisp
+         (setq user-init-file (or load-file-name (buffer-file-name)))
+         (setq user-emacs-directory (file-name-directory user-init-file))
+         (load-file "~/.emacs.code.d/CODE.el")
+       #+end_src
+     - Copy-paste the [[*Emacs config][config]] into a new ="~/.emacs.code.d/CODE.el"=
+     - Load a fresh Emacs with =emacs -q --load ~/.emacs.code.d/init.el=
+     - Emacs will download and install all the packages defined in this guide.
+       You might need depelopment tools installed to compile some packages.
+       File a bug with errors you get and I will extend this guide.
    - I will be using =C-c n= prefix for keybindings in this package.
 
 ** Prerequisites
-
 *** Pandoc
     #+caption: Install Pandoc on Ubuntu
     #+begin_src bash :exports code :eval never-export
@@ -43,6 +58,25 @@
     : Copyright (C) 2006-2021 John MacFarlane. Web:  https://pandoc.org
     : This is free software; see the source for copying conditions. There is no
     : warranty, not even for merchantability or fitness for a particular purpose.
+
+*** melpa and melpa-stable
+
+    We will be downloading packages from these repos
+
+    #+caption: Set up MELPA
+    #+name: set-up-melpa
+    #+begin_src emacs-lisp :exports code :eval never-export :results none
+      (package-initialize)
+
+      (let* ((no-ssl (and (memq system-type '(windows-nt ms-dos))
+                          (not (gnutls-available-p))))
+             (proto (if no-ssl "http" "https")))
+        (add-to-list 'package-archives (cons "melpa" (concat proto "://melpa.org/packages/")) t)
+        (add-to-list 'package-archives (cons "melpa-stable" (concat proto "://stable.melpa.org/packages/")) t))
+
+      (package-refresh-contents)
+    #+end_src
+
 *** straight.el
 
     For this guide, we will be using [[https://github.com/raxod502/straight.el][straight.el]] as your package manager.
@@ -62,6 +96,7 @@
             (goto-char (point-max))
             (eval-print-last-sexp)))
         (load bootstrap-file nil 'nomessage))
+      (straight-use-package 'use-package)
     #+end_src
 
 *** Org-roam
@@ -356,6 +391,32 @@
      #+caption: Backlinks to all areas in the side buffer
      [[file:Emacs_CODE_implementation/2021-07-04_08-07-11_screenshot.png]]
 
+*** Org-roam-ui
+
+    A nice second-brain visualizator: [[https://github.com/org-roam/org-roam-ui][org-roam-ui]].
+
+    #+caption: org-roam-ui design
+    #+attr_org: :width 400px
+    [[file:Emacs_CODE_implementation/2021-11-03_21-44-11_screenshot.png]]
+
+    #+caption: Install org-roam-ui
+    #+name: install-org-roam-ui
+    #+begin_src elisp :exports code :eval never-export :results none
+      (use-package org-roam-ui
+        :straight
+        (:host github :repo "org-roam/org-roam-ui" :branch "main" :files ("*.el" "out"))
+        :after org-roam
+        ;;         normally we'd recommend hooking orui after org-roam, but since org-roam does not have
+        ;;         a hookable mode anymore, you're advised to pick something yourself
+        ;;         if you don't care about startup time, use
+        :hook (after-init . org-roam-ui-mode)
+        :config
+        (setq org-roam-ui-sync-theme t
+              org-roam-ui-follow t
+              org-roam-ui-update-on-save t
+              org-roam-ui-open-on-start t))
+    #+end_src
+
 ** Distill
 *** Progressive summarization
 **** Make org-emphasize multi-linear
@@ -495,34 +556,29 @@
     :ID:       B5A87A1B-E0FE-40D6-AC63-AD52DB283C31
     :CUSTOM_ID: working-with-pdf-files
     :END:
-   #+name: install-pdf-tools
-   #+begin_src emacs-lisp
-     (use-package pdf-tools
-       :ensure t
-       :straight (:host github
-                        :repo "matthew-piziak/pdf-tools"
-                        :files ("lisp/*.el" "server"))
-       :init
-       (add-to-list 'auto-mode-alist '("\\.pdf\\'" . pdf-view-mode))
 
-       (if (not (locate-file "straight/repos/pdf-tools/server/epdfinfo" `(,straight-base-dir)))
-           (pdf-tools-build-server
-            (concat straight-base-dir "straight/repos/pdf-tools/server") nil nil nil (concat straight-base-dir "straight/build/pdf-tools/server")))
-       (setq pdf-info-epdfinfo-program (locate-file "straight/repos/pdf-tools/server/epdfinfo" `(,straight-base-dir))))
+    Don't forget to install pdf-tools dependencies.
 
-     (use-package org-pdftools :ensure t
-       :init
-       (org-pdftools-setup-link))
-       #+end_src
+    #+name: install glib on MacOS
+    #+begin_src bash
+      brew install glib
+    #+end_src
 
-       Now, capturing with =C-c c f= will create a highlight in the
-       PDF file and add a link to an org-mode node you're currently
-       working on.
-
-       #+CAPTION: Highlighting text in a PDF document
-       #+attr_org: :width 400px
-       [[file:attachments/Highlighting PDF files with org capture.gif]]
-
+    #+name: install-pdf-tools
+    #+begin_src emacs-lisp
+      (use-package pdf-tools
+        :ensure t
+        :straight (:host github
+                         :repo "matthew-piziak/pdf-tools"
+                         :files ("lisp/*.el" "server"))
+        :init
+        (add-to-list 'auto-mode-alist '("\\.pdf\\'" . pdf-view-mode))
+        (let ((pdf-tools-base-dir (expand-file-name  "straight/repos/pdf-tools/server" straight-base-dir)))
+          (setq pdf-info-epdfinfo-program (expand-file-name "straight/repos/pdf-tools/server/epdfinfo" straight-base-dir))
+          (unless (file-exists-p pdf-info-epdfinfo-program)
+            (let ((default-directory (file-name-directory pdf-info-epdfinfo-program)))
+          (pdf-tools-install)))))
+    #+end_src
 ** Express
    This area is too large to cover it in this guide.
    If you're new to org-mode consult
@@ -530,10 +586,15 @@
    [[https://orgmode.org/manual/Exporting.html][Exporting]] and [[https://orgmode.org/manual/Publishing.html][publishing]] sections of the org manual.
 
 * Emacs config
+  :PROPERTIES:
+  :CUSTOM_ID: emacs-config
+  :END:
   #+caption: Config source block
   #+begin_src emacs-lisp :noweb yes :tangle ~/emacs/rc/CODE.el :comments noweb
+    <<set-up-melpa>>
     <<install-straight-el>>
     <<install-org-roam>>
+    <<install-org-roam-ui>>
     <<install-org-pandoc-import>>
     <<install-org-web-tools>>
     <<install-helm-rg>>
