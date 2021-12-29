@@ -66,8 +66,6 @@
     #+caption: Set up MELPA
     #+name: set-up-melpa
     #+begin_src emacs-lisp :exports code :eval never-export :results none
-      (package-initialize)
-
       (let* ((no-ssl (and (memq system-type '(windows-nt ms-dos))
                           (not (gnutls-available-p))))
              (proto (if no-ssl "http" "https")))
@@ -85,18 +83,19 @@
     #+name: install-straight-el
     #+begin_src emacs-lisp :exports code :eval never-export :results none
       (defvar bootstrap-version)
-      (let ((bootstrap-file
-             (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
-            (bootstrap-version 5))
-        (unless (file-exists-p bootstrap-file)
-          (with-current-buffer
-              (url-retrieve-synchronously
-               "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
-               'silent 'inhibit-cookies)
-            (goto-char (point-max))
-            (eval-print-last-sexp)))
-        (load bootstrap-file nil 'nomessage))
-      (straight-use-package 'use-package)
+      (unless (boundp 'straight-use-package)
+        (let ((bootstrap-file
+               (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+              (bootstrap-version 5))
+          (unless (file-exists-p bootstrap-file)
+            (with-current-buffer
+                (url-retrieve-synchronously
+                 "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+                 'silent 'inhibit-cookies)
+              (goto-char (point-max))
+              (eval-print-last-sexp)))
+          (load bootstrap-file nil 'nomessage))
+        (straight-use-package 'use-package))
     #+end_src
 
 *** Org-roam
@@ -106,12 +105,17 @@
     #+begin_src emacs-lisp :exports code :eval never-export :results none
       (setq org-roam-v2-ack t)
       (use-package org-roam
+
         :ensure t
-        :pin "melpa-stable"
+        :pin "melpa"
         :bind (("C-c n l" . #'org-roam-buffer-toggle)
                ("C-c n f" . #'org-roam-node-find)
                ("C-c n v" . #'org-roam-node-visit)
-               ("C-c n i" . #'org-roam-node-insert)))
+               ("C-c n i" . #'org-roam-node-insert))
+        :config
+        ;; We want org-id to work with our roam directory
+        (setq org-id-extra-files (org-roam-list-files))
+        )
     #+end_src
 
 ** Capture
@@ -242,6 +246,7 @@
         #+name: install-helm-rg
         #+begin_src emacs-lisp
           (use-package helm-rg :ensure t
+            :after org-roam
             :init
             (defun helm-rg-roam-directory (&optional query)
               "Search with rg in your roam directory, QUERY."
@@ -269,6 +274,7 @@
         #+name: install-org-rifle
         #+begin_src emacs-lisp :comments both
           (use-package helm-org-rifle :ensure t
+            :after org-roam
             :init
             (defun org-rifle-roam-directory ()
               (interactive)
@@ -294,6 +300,7 @@
         #+name: install-deft
         #+begin_src emacs-lisp
           (use-package deft :ensure t
+            :after org-roam
             :init (setq deft-directory org-roam-directory
                         deft-recursive t)
             :bind (("C-c n d" . deft))
@@ -401,8 +408,6 @@
     #+name: install-org-roam-ui
     #+begin_src elisp :exports code :eval never-export :results none
       (use-package org-roam-ui
-        :straight
-        (:host github :repo "org-roam/org-roam-ui" :branch "main" :files ("*.el" "out"))
         :after org-roam
         ;;         normally we'd recommend hooking orui after org-roam, but since org-roam does not have
         ;;         a hookable mode anymore, you're advised to pick something yourself
@@ -537,13 +542,19 @@
         :straight (:host github
                          :repo "matthew-piziak/pdf-tools"
                          :files ("lisp/*.el" "server"))
-        :init
+        :config
         (add-to-list 'auto-mode-alist '("\\.pdf\\'" . pdf-view-mode))
         (let ((pdf-tools-base-dir (expand-file-name  "straight/repos/pdf-tools/server" straight-base-dir)))
           (setq pdf-info-epdfinfo-program (expand-file-name "straight/repos/pdf-tools/server/epdfinfo" straight-base-dir))
-          (unless (file-exists-p pdf-info-epdfinfo-program)
-            (let ((default-directory (file-name-directory pdf-info-epdfinfo-program)))
-          (pdf-tools-install)))))
+          (condition-case nil
+              (pdf-info-check-epdfinfo)
+            (error (let ((default-directory (file-name-directory pdf-info-epdfinfo-program)))
+          (pdf-tools-install))))))
+
+
+      (use-package org-pdftools
+        :ensure t
+        :hook (org-mode . org-pdftools-setup-link))
     #+end_src
 ** Express
    This area is too large to cover it in this guide.
@@ -577,3 +588,26 @@
   - [[https://gist.github.com/mwfogleman/267b6bc7e512826a2c36cb57f0e3d854][GTD/BASB Templates for Emacs and Org-Mode · GitHub]]
   - [[yt:AyhPmypHDEw]]
   - [[https://github.com/weirdNox/org-noter][GitHub - weirdNox/org-noter: Emacs document annotator, using Org-mode]]
+
+* Improving this guide
+  - [ ] per-org-document style
+  - [ ] org-pdf-import videos for
+    - [ ] epub
+    - [ ] doc files
+  - [ ] org web read url
+  - [ ] fix invalid face error.
+  - [ ] Faces not saving in enriched mode in vanilla emacs setup.
+  - [ ] Links made by capture are broken.
+  - [X] Use normal emacs
+  - [ ] Org pdftools link
+  - [ ] Capturing emails
+  - [ ] Multi-line emphasis are not working on MacOS Emacs
+  - [ ] Org pdftools: fix links for Linux and MacOS
+  - [ ] Videos:
+
+    Be slow when doing videos. Give more details?
+
+    - [ ] Capturing different formats:
+      - [ ] HTML
+      - [ ] PDF
+    - [ ] Organize:
