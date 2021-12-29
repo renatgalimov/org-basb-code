@@ -289,12 +289,13 @@
         #+name: install-org-ql
         #+begin_src emacs-lisp
           (use-package org-ql :ensure t
+            :after org
             :init
-
             (setq org-ql-search-directories-files-recursive t
-                  org-ql-search-directories-files-regexp ".org\\(_archive\\)?$"
-                  ))
+                  org-ql-search-directories-files-regexp ".org\\(_archive\\)?$"))
+
           (use-package helm-org-ql :ensure t
+            :after org-ql
             :init
             (setq helm-org-ql-recursive-paths t)
             :bind (("C-c n q" . helm-org-ql-org-directory)))
