@@ -247,7 +247,7 @@
         #+begin_src emacs-lisp
           (use-package helm-rg :ensure t
             :after org-roam
-            :init
+            :config
             (defun helm-rg-roam-directory (&optional query)
               "Search with rg in your roam directory, QUERY."
               (interactive)
@@ -275,7 +275,7 @@
         #+begin_src emacs-lisp :comments both
           (use-package helm-org-rifle :ensure t
             :after org-roam
-            :init
+            :config
             (defun org-rifle-roam-directory ()
               (interactive)
               (helm-org-rifle-directories org-roam-directory))
@@ -309,7 +309,7 @@
           ;;   :straight (:host github
           ;;                    :repo "dfeich/helm-deft"
           ;;                    :files ("*.el"))
-          ;;   :init
+          ;;   :config
           ;;   (setq helm-deft-dir-list `(,org-roam-directory)
           ;;         helm-deft-extension '("org"))
           ;;   :bind (("C-c n d" . helm-deft)))
@@ -330,13 +330,13 @@
         #+begin_src emacs-lisp
           (use-package org-ql :ensure t
             :after org
-            :init
+            :config
             (setq org-ql-search-directories-files-recursive t
                   org-ql-search-directories-files-regexp ".org\\(_archive\\)?$"))
 
           (use-package helm-org-ql :ensure t
             :after org-ql
-            :init
+            :config
             (setq helm-org-ql-recursive-paths t)
             :bind (("C-c n q" . helm-org-ql-org-directory)))
         #+end_src
@@ -459,7 +459,7 @@
         ;; (setq facemenu-menu nil)
 
         (use-package highlight :ensure t
-          :init
+          :config
           (defun hlt-general()
             (interactive)
             (unless (bound-and-true-p enriched-mode)
