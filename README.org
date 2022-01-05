@@ -107,7 +107,7 @@
       (use-package org-roam
         :after org
         :ensure t
-        :pin "melpa"
+        :pin "melpa-stable"
         :bind (("C-c n l" . #'org-roam-buffer-toggle)
                ("C-c n f" . #'org-roam-node-find)
                ("C-c n v" . #'org-roam-node-visit)
@@ -156,7 +156,9 @@
 
      #+name: install-org-web-tools
      #+begin_src emacs-lisp
-       (use-package org-web-tools :ensure t
+       (use-package org-web-tools
+         :ensure t
+         :pin "melpa-stable"
          :bind (("C-c n u" . org-web-tools-read-url-as-org)))
      #+end_src
 
@@ -247,6 +249,7 @@
         #+begin_src emacs-lisp
           (use-package helm-rg :ensure t
             :after org-roam
+            :pin "melpa-stable"
             :config
             (defun helm-rg-roam-directory (&optional query)
               "Search with rg in your roam directory, QUERY."
@@ -275,6 +278,7 @@
         #+begin_src emacs-lisp :comments both
           (use-package helm-org-rifle :ensure t
             :after org-roam
+            :pin "melpa-stable"
             :config
             (defun org-rifle-roam-directory ()
               (interactive)
@@ -413,6 +417,7 @@
         ;;         a hookable mode anymore, you're advised to pick something yourself
         ;;         if you don't care about startup time, use
         :hook (after-init . org-roam-ui-mode)
+        :pin "melpa-stable"
         :config
         (setq org-roam-ui-sync-theme t
               org-roam-ui-follow t
@@ -571,6 +576,7 @@
     #+begin_src emacs-lisp
       (use-package pdf-tools
         :ensure t
+
         :straight (:host github
                          :repo "matthew-piziak/pdf-tools"
                          :files ("lisp/*.el" "server"))
