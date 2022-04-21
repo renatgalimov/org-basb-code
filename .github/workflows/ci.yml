@@ -1,0 +1,29 @@
+
+name: "Emacs 27 build check"
+on:
+  push:
+    branches:
+      - main
+      - workflow-test
+
+jobs:
+  test:
+    container: silex/emacs:27.2-ci
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Install dependencies
+        run: >
+          sudo apt update &&
+          sudo apt install -q -yy \
+              git \
+              autoconf \
+              automake \
+              libpng-dev \
+              zlib1g-dev \
+              libpoppler-glib-dev \
+              libpoppler-private-dev
+
+      - name: Emacs test
+        run: emacs --batch -l ./bin/run-test.el

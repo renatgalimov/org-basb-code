@@ -5,67 +5,70 @@
 * CODE implementation
   :PROPERTIES:
   :DIR:      ~/projects/org-basb-code/attachments/
+  :header-args: :tangle no
   :END:
 
   https://renatgalimov.github.io/org-basb-code/
 
 ** How to work with this guide?
-
-   - Copy-paste the [[#emacs-config][config]] source block at the end of this document
-     into your =.emacs= file or into a file in your emacs directory.
-   - In case of putting it into a separate file, add the following
-     code to your emacs config file =(load-file "~/path/to/basb.el")=
-   - If you want to try this setup on a fresh Emacs do the following:
-     - Create a new directory inside of your HOME: =mkdir ~/.emacs.code.d=
-     - Put there a new =init.el=:
-       #+caption: Contents of ~/.emacs.code.d/CODE.el
-       #+begin_src emacs-lisp
-         (setq user-init-file (or load-file-name (buffer-file-name)))
-         (setq user-emacs-directory (file-name-directory user-init-file))
-         (load-file "~/.emacs.code.d/CODE.el")
-       #+end_src
-     - Copy-paste the [[*Emacs config][config]] into a new ="~/.emacs.code.d/CODE.el"=
-     - Load a fresh Emacs with =emacs -q --load ~/.emacs.code.d/init.el=
-     - Emacs will download and install all the packages defined in this guide.
-       You might need depelopment tools installed to compile some packages.
-       File a bug with errors you get and I will extend this guide.
-   - I will be using =C-c n= prefix for keybindings in this package.
+  - Copy-paste the [[#emacs-config][config]] source block at the end of this document
+    into your =.emacs= file or into a file in your emacs directory.
+  - In case of putting it into a separate file, add the following
+    code to your emacs config file =(load-file "~/path/to/basb.el")=
+  - If you want to try this setup on a fresh Emacs do the following:
+    - Create a new directory inside of your HOME: =mkdir ~/.emacs.code.d=
+    - Put there a new =init.el=:
+      #+caption: Contents of ~/.emacs.code.d/CODE.el
+      #+begin_src emacs-lisp
+        (setq user-init-file (or load-file-name (buffer-file-name)))
+        (setq user-emacs-directory (file-name-directory user-init-file))
+        (load-file "~/.emacs.code.d/CODE.el")
+      #+end_src
+    - Copy-paste the [[*Emacs config][config]] into a new ="~/.emacs.code.d/CODE.el"=
+    - Load a fresh Emacs with =emacs -q --load ~/.emacs.code.d/init.el=
+    - Emacs will download and install all the packages defined in this guide.
+      You might need depelopment tools installed to compile some packages.
+      File a bug with errors you get and I will extend this guide.
+  - I will be using =C-c n= prefix for keybindings in this package.
 
 ** Prerequisites
 *** Pandoc
-    #+caption: Install Pandoc on Ubuntu
-    #+begin_src bash :exports code :eval never-export
-      sudo apt install pandoc
-    #+end_src
 
-    #+caption: Install Pandoc on Mac OS with homebrew
-    #+begin_src bash :exports code :eval never-export
-      brew install pandoc
-    #+end_src
+   #+caption: Install Pandoc on Ubuntu
+   #+begin_src bash :exports code :eval never-export
+     sudo apt install pandoc
+   #+end_src
 
-    Ensure that Pandoc is in your path.
+   #+caption: Install Pandoc on Mac OS with homebrew
+   #+begin_src bash :exports code :eval never-export
+     brew install pandoc
+   #+end_src
 
-    #+caption: Pandoc version
-    #+begin_src bash :exports both :eval never-export :results verbatim
-      pandoc --version
-    #+end_src
+   Ensure that Pandoc is in your path.
 
-    #+RESULTS:
-    : pandoc 2.14.0.2
-    : Compiled with pandoc-types 1.22, texmath 0.12.3, skylighting 0.10.5.1,
-    : citeproc 0.4.0.1, ipynb 0.1.0.1
-    : User data directory: /Users/renat.galimov/.local/share/pandoc
-    : Copyright (C) 2006-2021 John MacFarlane. Web:  https://pandoc.org
-    : This is free software; see the source for copying conditions. There is no
-    : warranty, not even for merchantability or fitness for a particular purpose.
+   #+caption: Pandoc version
+   #+begin_src bash :exports both :eval never-export :results verbatim
+     pandoc --version
+   #+end_src
+
+   #+RESULTS:
+   : pandoc 2.14.0.2
+   : Compiled with pandoc-types 1.22, texmath 0.12.3, skylighting 0.10.5.1,
+   : citeproc 0.4.0.1, ipynb 0.1.0.1
+   : User data directory: /Users/renat.galimov/.local/share/pandoc
+   : Copyright (C) 2006-2021 John MacFarlane. Web:  https://pandoc.org
+   : This is free software; see the source for copying conditions. There is no
+   : warranty, not even for merchantability or fitness for a particular purpose.
 
 *** melpa and melpa-stable
-
     We will be downloading packages from these repos
 
     #+caption: Set up MELPA
     #+name: set-up-melpa
     #+begin_src emacs-lisp :exports code :eval never-export :results none
+      (unless (boundp 'package-archives)
+        (setq package-archives '()))
+
       (let* ((no-ssl (and (memq system-type '(windows-nt ms-dos))
                           (not (gnutls-available-p))))
              (proto (if no-ssl "http" "https")))
@@ -197,22 +200,22 @@
     packages that give results fast but in a random order.
 
 ***** Org full-text search                                                              :table:
-          :PROPERTIES:
-          :ID:       47985238-3e66-4201-969c-16d1858b797e
-          :COLUMNS:  %25ITEM %FRONTEND %SPEED %SORT
-          :END:
+      :PROPERTIES:
+      :ID:       47985238-3e66-4201-969c-16d1858b797e
+      :COLUMNS:  %25ITEM %FRONTEND %SPEED %SORT
+      :END:
 
-          - Requested features:
-            - helm or counsel integration.
-            - live search.
-            - result previewing support.
-            - a key-binding to capture results into currently clocked
-              org file.
-            - results ordering support
-              - Headlines
-              - Summary
-              - Hightlight
-            - large file-sets support
+      - Requested features:
+        - helm or counsel integration.
+        - live search.
+        - result previewing support.
+        - a key-binding to capture results into currently clocked
+          org file.
+        - results ordering support
+          - Headlines
+          - Summary
+          - Hightlight
+        - large file-sets support
 
           #+CAPTION: Full text search engines features
           #+BEGIN: columnview :hlines 1 :id local :maxlevel 2 :indent t
@@ -306,7 +309,7 @@
           (use-package deft :ensure t
             :after org-roam
             :config (setq deft-directory org-roam-directory
-                        deft-recursive t)
+                          deft-recursive t)
             :bind (("C-c n d" . deft)))
           ;; (use-package helm-deft
           ;;   :ensure t
@@ -412,12 +415,12 @@
     #+name: install-org-roam-ui
     #+begin_src elisp :exports code :eval never-export :results none
       (use-package org-roam-ui
+        :ensure t
         :after org-roam
         ;;         normally we'd recommend hooking orui after org-roam, but since org-roam does not have
         ;;         a hookable mode anymore, you're advised to pick something yourself
         ;;         if you don't care about startup time, use
         :hook (after-init . org-roam-ui-mode)
-        :pin "melpa-stable"
         :config
         (setq org-roam-ui-sync-theme t
               org-roam-ui-follow t
@@ -587,7 +590,7 @@
           (condition-case nil
               (pdf-info-check-epdfinfo)
             (error (let ((default-directory (file-name-directory pdf-info-epdfinfo-program)))
-          (pdf-tools-install))))))
+                     (pdf-tools-install t t))))))
 
 
       (use-package org-pdftools
@@ -605,7 +608,8 @@
   :CUSTOM_ID: emacs-config
   :END:
   #+caption: Config source block
-  #+begin_src emacs-lisp :noweb yes :tangle ~/emacs/rc/CODE.el :comments noweb
+  #+header-args: :tangle (or (and (boundp 'org-basb-code-file) org-basb-code-file) "~/emacs/rc/CODE.el")
+  #+begin_src emacs-lisp :noweb yes :comments noweb
     <<set-up-melpa>>
     <<install-straight-el>>
     <<install-org-roam>>
