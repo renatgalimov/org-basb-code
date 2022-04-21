@@ -9,7 +9,7 @@
 ;; Package-Requires: ()
 ;; Last-Updated:
 ;;           By:
-;;     Update #: 6
+;;     Update #: 7
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -47,20 +47,11 @@
 
 
 (require 'org)
-
 (mkdir "~/emacs/")
-(org-babel-tangle-file "./README.org" "~/emacs/CODE.el")
-(unless
-    (condition-case err
-        (load-file "~/emacs/CODE.el")
-      (file-error (message "File error: %s" err) nil)
-      (error (message "The error: %s" err) nil))
-  (progn
-    (with-current-buffer "*straight-process*"
-      (print (buffer-substring-no-properties (point-min) (point-max))))
-    (kill-emacs 2)))
-
-
+(org-babel-tangle-file "/work/README.org" "~/emacs/CODE.el")
+(load-file "~/emacs/CODE.el")
+(with-current-buffer "*straight-process*"
+  (print (buffer-substring-no-properties (point-min) (point-max))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; run-test.el ends here
