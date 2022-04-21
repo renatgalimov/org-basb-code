@@ -2,6 +2,8 @@
 #+AUTHOR: Renat Galimov
 #+EXPORT_FILE_NAME: index
 
+[[https://github.com/renatgalimov/org-basb-code/actions/workflows/ci.yml/badge.svg]]
+
 * CODE implementation
   :PROPERTIES:
   :DIR:      ~/projects/org-basb-code/attachments/
