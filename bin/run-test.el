@@ -9,7 +9,7 @@
 ;; Package-Requires: ()
 ;; Last-Updated:
 ;;           By:
-;;     Update #: 7
+;;     Update #: 8
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -48,7 +48,7 @@
 
 (require 'org)
 (mkdir "~/emacs/")
-(org-babel-tangle-file "/work/README.org" "~/emacs/CODE.el")
+(org-babel-tangle-file "./README.org" "~/emacs/CODE.el")
 (load-file "~/emacs/CODE.el")
 (with-current-buffer "*straight-process*"
   (print (buffer-substring-no-properties (point-min) (point-max))))
