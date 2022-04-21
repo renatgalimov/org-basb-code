@@ -8,6 +8,7 @@ on:
 
 jobs:
   test:
+    runs-on: ubuntu-20.04
     container: silex/emacs:27.2-ci
     steps:
       - name: Checkout
