@@ -252,14 +252,16 @@
         #+caption: Install helm-rg
         #+name: install-helm-rg
         #+begin_src emacs-lisp
-          (use-package helm-rg :ensure t
+          (use-package helm-rg
+            :ensure t
             :after org-roam
             :pin "melpa-stable"
             :config
             (defun helm-rg-roam-directory (&optional query)
               "Search with rg in your roam directory, QUERY."
               (interactive)
-              (let ((helm-rg-default-directory org-roam-directory))
+              (let ((helm-rg-default-directory org-roam-directory)
+                    (helm-rg--current-dir org-roam-directory))
                 (helm-rg query nil)))
             :bind (("C-c n R" . helm-rg-roam-directory)))
         #+end_src
