@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2022-06-07 Tue 01:13 -->
+<!-- 2022-06-07 Tue 01:57 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Emacs CODE implementation</title>
@@ -271,7 +271,7 @@
 </div>
 </div>
 
-<div id="orgbc1e7a2" class="figure">
+<div id="orgf13b47e" class="figure">
 <p><object type="image/svg+xml" data="https://github.com/renatgalimov/org-basb-code/actions/workflows/ci.yml/badge.svg" class="org-svg">
 Sorry, your browser does not support SVG.</object>
 </p>
@@ -846,14 +846,14 @@ You can search projects with helm or with org-ql:
 </p>
 
 
-<div id="org144e6dd" class="figure">
+<div id="org9bb7645" class="figure">
 <p><img src="Emacs_CODE_implementation/2021-07-04_07-52-17_screenshot.png" alt="2021-07-04_07-52-17_screenshot.png" />
 </p>
 <p><span class="figure-number">Figure 2: </span>Finding projects with helm</p>
 </div>
 
 
-<div id="org1992d8d" class="figure">
+<div id="org253a326" class="figure">
 <p><img src="Emacs_CODE_implementation/2021-07-04_07-57-55_screenshot.png" alt="2021-07-04_07-57-55_screenshot.png" />
 </p>
 <p><span class="figure-number">Figure 3: </span>Finding projects with org-ql</p>
@@ -871,7 +871,7 @@ a link to the target record according to where it belongs.
 </p>
 
 
-<div id="orgc04b0fc" class="figure">
+<div id="orgfaf377e" class="figure">
 <p><img src="Emacs_CODE_implementation/2021-07-04_08-05-12_screenshot.png" alt="2021-07-04_08-05-12_screenshot.png" />
 </p>
 <p><span class="figure-number">Figure 4: </span>Links to an area within notes</p>
@@ -884,7 +884,7 @@ a backlink to you note in the side buffer.
 </p>
 
 
-<div id="org4ec39ba" class="figure">
+<div id="org79c300d" class="figure">
 <p><img src="Emacs_CODE_implementation/2021-07-04_08-07-11_screenshot.png" alt="2021-07-04_08-07-11_screenshot.png" />
 </p>
 <p><span class="figure-number">Figure 5: </span>Backlinks to all areas in the side buffer</p>
@@ -900,7 +900,7 @@ A nice second-brain visualizator: <a href="https://github.com/org-roam/org-roam-
 </p>
 
 
-<div id="orgab86895" class="figure">
+<div id="org53cca68" class="figure">
 <p><img src="Emacs_CODE_implementation/2021-11-03_21-44-11_screenshot.png" alt="2021-11-03_21-44-11_screenshot.png" />
 </p>
 <p><span class="figure-number">Figure 6: </span>org-roam-ui design</p>
@@ -1043,10 +1043,13 @@ To keep track of highlighted notes we will use <code>org-capture</code>.
   (<span style="color: #e45649;">with-current-buffer</span> (org-capture-get <span style="color: #a626a4;">:original-buffer</span>)
     (<span style="color: #e45649;">cond</span> ((eq major-mode 'pdf-view-mode) (switch-to-buffer (org-capture-get <span style="color: #a626a4;">:original-buffer</span>)) (org-pdftools-get-link))
           (t (concat path <span style="color: #50a14f;">"::"</span> (r/org-capture-get-selected-text))))))
-(add-to-list
- 'org-capture-templates
- '(<span style="color: #50a14f;">"f"</span> <span style="color: #50a14f;">"Curently watched"</span> item (clock)
-   <span style="color: #50a14f;">"%(r/org-capture-get-selected-text) [[%(r/org-capture-get-link \"%F\")][&#8599;]]%?"</span> <span style="color: #a626a4;">:unnarrowed</span> t))
+
+(<span style="color: #e45649;">with-eval-after-load</span> <span style="color: #50a14f;">"org-capture"</span>
+  (add-to-list
+   'org-capture-templates
+   '(<span style="color: #50a14f;">"f"</span> <span style="color: #50a14f;">"Curently watched"</span> item (clock)
+     <span style="color: #50a14f;">"%(r/org-capture-get-selected-text) [[%(r/org-capture-get-link \"%F\")][&#8599;]]%?"</span> <span style="color: #a626a4;">:unnarrowed</span> t)))
+
 <span style="color: #9ca0a4;">;; </span><span style="color: #9ca0a4;">The code below automatically highlights the region we captured</span>
 (<span style="color: #e45649;">defun</span> <span style="color: #a626a4;">do-highlight-on-capture</span> ()
   <span style="color: #84888b; font-style: italic;">"Highlight selected region of the buffer you were in at capture."</span>
@@ -1070,7 +1073,7 @@ on.
 </p>
 
 
-<div id="org5e92ff0" class="figure">
+<div id="org082795e" class="figure">
 <p><img src="attachments/highlighting-with-org-capture.gif" alt="highlighting-with-org-capture.gif" />
 </p>
 <p><span class="figure-number">Figure 7: </span>Highlighting on capture demo</p>
@@ -1283,10 +1286,13 @@ If you're new to org-mode consult
   (<span style="color: #e45649;">with-current-buffer</span> (org-capture-get <span style="color: #a626a4;">:original-buffer</span>)
     (<span style="color: #e45649;">cond</span> ((eq major-mode 'pdf-view-mode) (switch-to-buffer (org-capture-get <span style="color: #a626a4;">:original-buffer</span>)) (org-pdftools-get-link))
           (t (concat path <span style="color: #50a14f;">"::"</span> (r/org-capture-get-selected-text))))))
-(add-to-list
- 'org-capture-templates
- '(<span style="color: #50a14f;">"f"</span> <span style="color: #50a14f;">"Curently watched"</span> item (clock)
-   <span style="color: #50a14f;">"%(r/org-capture-get-selected-text) [[%(r/org-capture-get-link \"%F\")][&#8599;]]%?"</span> <span style="color: #a626a4;">:unnarrowed</span> t))
+
+(<span style="color: #e45649;">with-eval-after-load</span> <span style="color: #50a14f;">"org-capture"</span>
+  (add-to-list
+   'org-capture-templates
+   '(<span style="color: #50a14f;">"f"</span> <span style="color: #50a14f;">"Curently watched"</span> item (clock)
+     <span style="color: #50a14f;">"%(r/org-capture-get-selected-text) [[%(r/org-capture-get-link \"%F\")][&#8599;]]%?"</span> <span style="color: #a626a4;">:unnarrowed</span> t)))
+
 <span style="color: #9ca0a4;">;; </span><span style="color: #9ca0a4;">The code below automatically highlights the region we captured</span>
 (<span style="color: #e45649;">defun</span> <span style="color: #a626a4;">do-highlight-on-capture</span> ()
   <span style="color: #84888b; font-style: italic;">"Highlight selected region of the buffer you were in at capture."</span>
@@ -1426,7 +1432,7 @@ Be slow when doing videos. Give more details?
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Renat Galimov</p>
-<p class="date">Created: 2022-06-07 Tue 01:13</p>
+<p class="date">Created: 2022-06-07 Tue 01:57</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

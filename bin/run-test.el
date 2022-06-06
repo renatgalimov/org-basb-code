@@ -9,7 +9,7 @@
 ;; Package-Requires: ()
 ;; Last-Updated:
 ;;           By:
-;;     Update #: 10
+;;     Update #: 12
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -53,6 +53,7 @@
 (load-file "~/emacs/CODE.el")
 (with-current-buffer "*straight-process*"
   (print (buffer-substring-no-properties (point-min) (point-max))))
-
+(unless (boundp 'org-ql)
+  (error "org-ql is not installed properly"))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; run-test.el ends here

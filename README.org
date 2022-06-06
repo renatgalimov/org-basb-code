@@ -541,10 +541,13 @@
           (with-current-buffer (org-capture-get :original-buffer)
             (cond ((eq major-mode 'pdf-view-mode) (switch-to-buffer (org-capture-get :original-buffer)) (org-pdftools-get-link))
                   (t (concat path "::" (r/org-capture-get-selected-text))))))
-        (add-to-list
-         'org-capture-templates
-         '("f" "Curently watched" item (clock)
-           "%(r/org-capture-get-selected-text) [[%(r/org-capture-get-link \"%F\")][↗]]%?" :unnarrowed t))
+
+        (with-eval-after-load "org-capture"
+          (add-to-list
+           'org-capture-templates
+           '("f" "Curently watched" item (clock)
+             "%(r/org-capture-get-selected-text) [[%(r/org-capture-get-link \"%F\")][↗]]%?" :unnarrowed t)))
+
         ;; The code below automatically highlights the region we captured
         (defun do-highlight-on-capture ()
           "Highlight selected region of the buffer you were in at capture."
