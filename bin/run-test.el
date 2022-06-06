@@ -9,7 +9,7 @@
 ;; Package-Requires: ()
 ;; Last-Updated:
 ;;           By:
-;;     Update #: 8
+;;     Update #: 10
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -48,6 +48,7 @@
 
 (require 'org)
 (mkdir "~/emacs/")
+(setq org-basb-code-file "~/emacs/CODE.el")
 (org-babel-tangle-file "./README.org" "~/emacs/CODE.el")
 (load-file "~/emacs/CODE.el")
 (with-current-buffer "*straight-process*"

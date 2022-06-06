@@ -613,7 +613,7 @@
   :CUSTOM_ID: emacs-config
   :END:
   #+caption: Config source block
-  #+begin_src emacs-lisp :noweb yes :comments noweb :tangle (or (and (boundp 'org-basb-code-file) org-basb-code-file) "~/emacs/rc/CODE.el")
+  #+begin_src emacs-lisp :noweb yes :comments noweb :tangle (if (boundp 'org-basb-code-file) org-basb-code-file "~/emacs/CODE.el")
     <<set-up-melpa>>
     <<install-straight-el>>
     <<install-org-roam>>
