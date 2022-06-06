@@ -6,7 +6,7 @@ function collapse_toc_elements_on_click (nav_li_a){
       states.  The active attribute is documented in bootstrap.
       https://getbootstrap.com/docs/4.0/components/navbar/#nav
     */
-    $(nav_li_el).parent().toggleClass("active");
+    $(nav_li_a).parent().toggleClass("active");
 }
 
 $( document ).ready(function() {
@@ -19,16 +19,22 @@ $( document ).ready(function() {
 });
 
 $(function() {
-    $('.note').before("<p class='admonition-title note'>Note</p>");
-    $('.seealso').before("<p class='admonition-title seealso'>See also</p>");
-    $('.warning').before("<p class='admonition-title warning'>Warning</p>");
-    $('.caution').before("<p class='admonition-title caution'>Caution</p>");
-    $('.attention').before("<p class='admonition-title attention'>Attention</p>");
-    $('.tip').before("<p class='admonition-title tip'>Tip</p>");
-    $('.important').before("<p class='admonition-title important'>Important</p>");
-    $('.hint').before("<p class='admonition-title hint'>Hint</p>");
-    $('.error').before("<p class='admonition-title error'>Error</p>");
-    $('.danger').before("<p class='admonition-title danger'>Danger</p>");
+    function replace_admonition (tag, readable) {
+        $(`.${tag}:not(#table-of-contents *)`)
+            .parent().parent().replaceWith(function() {
+                return `<p id='${this.id}' class='admonition-title ${tag}'>${readable}</p>`
+            });
+    }
+    replace_admonition('note', 'Note');
+    replace_admonition('seealso', 'See also');
+    replace_admonition('warning', 'Warning');
+    replace_admonition('caution', 'Caution');
+    replace_admonition('attention', 'Attention');
+    replace_admonition('tip', 'Tip');
+    replace_admonition('important', 'Important');
+    replace_admonition('hint', 'Hint');
+    replace_admonition('error', 'Error');
+    replace_admonition('danger', 'Danger');
 });
 
 $( document ).ready(function() {
