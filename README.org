@@ -478,6 +478,9 @@ mark the text.
         (enriched-mode t))
       (hlt-highlight-region (region-beginning) (region-end) 'highlight))
 
+    ;; Without this setq highlights won't be saved even in enriched mode
+    (setq hlt-use-overlays-flag nil)
+
     :bind (("C-c n h" . hlt-general)
            ("C-c n H" . hlt-unhighlight-region)))
 
