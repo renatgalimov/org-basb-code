@@ -74,6 +74,8 @@ We will be downloading packages from these repos
   (let* ((no-ssl (and (memq system-type '(windows-nt ms-dos))
                       (not (gnutls-available-p))))
          (proto (if no-ssl "http" "https")))
+    (add-to-list 'package-archives (cons "gnu" (concat proto "://elpa.gnu.org/packages/")) t)
+    ;; (add-to-list 'package-archives (cons "nongnu" (concat proto "://elpa.nongnu.org/packages/")) t)
     (add-to-list 'package-archives (cons "melpa" (concat proto "://melpa.org/packages/")) t)
     (add-to-list 'package-archives (cons "melpa-stable" (concat proto "://stable.melpa.org/packages/")) t))
 
@@ -88,7 +90,9 @@ For this guide, we will be using [[https://github.com/raxod502/straight.el][stra
 #+name: install-straight-el
 #+begin_src emacs-lisp :exports code :eval never-export :results none
   (defvar bootstrap-version)
+  (unless (boundp 'use-package) (package-install 'use-package))
   (unless (boundp 'straight-use-package)
+    (message "Bootstrapping straight.el")
     (let ((bootstrap-file
            (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
           (bootstrap-version 5))
@@ -100,7 +104,8 @@ For this guide, we will be using [[https://github.com/raxod502/straight.el][stra
           (goto-char (point-max))
           (eval-print-last-sexp)))
       (load bootstrap-file nil 'nomessage))
-    (straight-use-package 'use-package))
+    (message "Bootstrapping straight.el done"))
+
 #+end_src
 
 *** Org-roam
@@ -116,7 +121,9 @@ Obviously, we need [[https://github.com/org-roam/org-roam][org-roam]] itself
     :bind (("C-c n l" . #'org-roam-buffer-toggle)
            ("C-c n f" . #'org-roam-node-find)
            ("C-c n v" . #'org-roam-node-visit)
-           ("C-c n i" . #'org-roam-node-insert))
+           ("C-c n i" . #'org-roam-node-insert)
+           (("C-c q" . #'org-roam-tag-add)))
+
     :config
     ;; We want org-id to work with our roam directory
     (setq org-roam-file-extensions '("org" "org_archive")
@@ -142,12 +149,13 @@ Emacs is a text editor.
 
     #+name: install-org-pandoc-import
     #+begin_src emacs-lisp
-      (use-package org-pandoc-import
-        :straight (:host github
-                         :repo "tecosaur/org-pandoc-import"
-                         :files ("*.el" "filters" "preprocessors"))
+      (straight-use-package
+       '(org-pandoc-import
+         :host github
+         :repo "tecosaur/org-pandoc-import"
+         :files ("*.el" "filters" "preprocessors")
 
-        :bind (("C-c n o" . org-pandoc-import-as-org)))
+         :bind (("C-c n o" . org-pandoc-import-as-org))))
     #+end_src
 
     Pandoc can convert almost any text format to org-mode
@@ -425,6 +433,7 @@ A nice second-brain visualizator: [[https://github.com/org-roam/org-roam-ui][org
     ;;         a hookable mode anymore, you're advised to pick something yourself
     ;;         if you don't care about startup time, use
     :hook (after-init . org-roam-ui-mode)
+
     :config
     (setq org-roam-ui-sync-theme t
           org-roam-ui-follow t
@@ -587,21 +596,21 @@ Don't forget to install pdf-tools dependencies.
 
 #+name: install-pdf-tools
 #+begin_src emacs-lisp
-  (use-package pdf-tools
-    :ensure t
-
-    :straight (:host github
-                     :repo "matthew-piziak/pdf-tools"
-                     :files ("lisp/*.el" "server"))
-    :config
-    (add-to-list 'auto-mode-alist '("\\.pdf\\'" . pdf-view-mode))
-    (let ((pdf-tools-base-dir (expand-file-name  "straight/repos/pdf-tools/server" straight-base-dir)))
-      (setq pdf-info-epdfinfo-program (expand-file-name "straight/repos/pdf-tools/server/epdfinfo" straight-base-dir))
-      (condition-case nil
-          (pdf-info-check-epdfinfo)
-        (error (let ((default-directory (file-name-directory pdf-info-epdfinfo-program)))
-                 (pdf-tools-install t t))))))
-
+  (straight-use-package
+   '(pdf-tools
+     :type git
+     :host github
+     :repo "matthew-piziak/pdf-tools"
+     :files ("lisp/*.el" "server")
+     :config
+     (progn
+       (add-to-list 'auto-mode-alist '("\\.pdf\\'" . pdf-view-mode))
+       (let ((pdf-tools-base-dir (expand-file-name  "straight/repos/pdf-tools/server" straight-base-dir)))
+         (setq pdf-info-epdfinfo-program (expand-file-name "straight/repos/pdf-tools/server/epdfinfo" straight-base-dir))
+         (condition-case nil
+             (pdf-info-check-epdfinfo)
+           (error (let ((default-directory (file-name-directory pdf-info-epdfinfo-program)))
+                    (pdf-tools-install t t))))))))
 
   (use-package org-pdftools
     :ensure t
