@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2023-04-02 Sun 14:59 -->
+<!-- 2023-04-02 Sun 15:51 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Emacs CODE implementation</title>
@@ -249,7 +249,7 @@
 </div>
 </div>
 
-<div id="org865f680" class="figure">
+<div id="org0ddff41" class="figure">
 <p><img src="https://github.com/renatgalimov/org-basb-code/actions/workflows/ci.yml/badge.svg" alt="badge.svg" class="org-svg" />
 </p>
 </div>
@@ -454,9 +454,9 @@ To capture we use Pandoc and <a href="https://github.com/tecosaur/org-pandoc-imp
  '(org-pandoc-import
    <span style="color: #483d8b;">:host</span> github
    <span style="color: #483d8b;">:repo</span> <span style="color: #8b2252;">"tecosaur/org-pandoc-import"</span>
-   <span style="color: #483d8b;">:files</span> (<span style="color: #8b2252;">"*.el"</span> <span style="color: #8b2252;">"filters"</span> <span style="color: #8b2252;">"preprocessors"</span>)
+   <span style="color: #483d8b;">:files</span> (<span style="color: #8b2252;">"*.el"</span> <span style="color: #8b2252;">"filters"</span> <span style="color: #8b2252;">"preprocessors"</span>)))
 
-   <span style="color: #483d8b;">:bind</span> ((<span style="color: #8b2252;">"C-c n o"</span> . org-pandoc-import-as-org))))
+(global-set-key (kbd <span style="color: #8b2252;">"C-c n o"</span>) #'org-pandoc-import-as-org)
 </pre>
 </div>
 
@@ -843,14 +843,14 @@ You can search projects with helm or with org-ql:
 </p>
 
 
-<div id="orgc84e076" class="figure">
+<div id="org014b3c9" class="figure">
 <p><img src="Emacs_CODE_implementation/2021-07-04_07-52-17_screenshot.png" alt="2021-07-04_07-52-17_screenshot.png" />
 </p>
 <p><span class="figure-number">Figure 1: </span>Finding projects with helm</p>
 </div>
 
 
-<div id="orgec5b9d9" class="figure">
+<div id="orga9ee961" class="figure">
 <p><img src="Emacs_CODE_implementation/2021-07-04_07-57-55_screenshot.png" alt="2021-07-04_07-57-55_screenshot.png" />
 </p>
 <p><span class="figure-number">Figure 2: </span>Finding projects with org-ql</p>
@@ -868,7 +868,7 @@ a link to the target record according to where it belongs.
 </p>
 
 
-<div id="org12b4451" class="figure">
+<div id="orgc2bccee" class="figure">
 <p><img src="Emacs_CODE_implementation/2021-07-04_08-05-12_screenshot.png" alt="2021-07-04_08-05-12_screenshot.png" />
 </p>
 <p><span class="figure-number">Figure 3: </span>Links to an area within notes</p>
@@ -881,7 +881,7 @@ a backlink to you note in the side buffer.
 </p>
 
 
-<div id="org33f9552" class="figure">
+<div id="org6e6a835" class="figure">
 <p><img src="Emacs_CODE_implementation/2021-07-04_08-07-11_screenshot.png" alt="2021-07-04_08-07-11_screenshot.png" />
 </p>
 <p><span class="figure-number">Figure 4: </span>Backlinks to all areas in the side buffer</p>
@@ -897,7 +897,7 @@ A nice second-brain visualizator: <a href="https://github.com/org-roam/org-roam-
 </p>
 
 
-<div id="org4e4af43" class="figure">
+<div id="org8588768" class="figure">
 <p><img src="Emacs_CODE_implementation/2021-11-03_21-44-11_screenshot.png" alt="2021-11-03_21-44-11_screenshot.png" />
 </p>
 <p><span class="figure-number">Figure 5: </span>org-roam-ui design</p>
@@ -1074,7 +1074,7 @@ on.
 </p>
 
 
-<div id="org786d923" class="figure">
+<div id="orgadd0d28" class="figure">
 <p><img src="attachments/highlighting-with-org-capture.gif" alt="highlighting-with-org-capture.gif" />
 </p>
 <p><span class="figure-number">Figure 6: </span>Highlighting on capture demo</p>
@@ -1098,21 +1098,15 @@ Don't forget to install pdf-tools dependencies.
 </div>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp" id="orgd2b1010">(straight-use-package
- '(pdf-tools
-   <span style="color: #483d8b;">:type</span> git
-   <span style="color: #483d8b;">:host</span> github
-   <span style="color: #483d8b;">:repo</span> <span style="color: #8b2252;">"matthew-piziak/pdf-tools"</span>
-   <span style="color: #483d8b;">:files</span> (<span style="color: #8b2252;">"lisp/*.el"</span> <span style="color: #8b2252;">"server"</span>)
-   <span style="color: #483d8b;">:config</span>
-   (<span style="color: #a020f0;">progn</span>
-     (add-to-list 'auto-mode-alist '(<span style="color: #8b2252;">"\\.pdf\\'"</span> . pdf-view-mode))
-     (<span style="color: #a020f0;">let</span> ((pdf-tools-base-dir (expand-file-name  <span style="color: #8b2252;">"straight/repos/pdf-tools/server"</span> straight-base-dir)))
-       (<span style="color: #a020f0;">setq</span> pdf-info-epdfinfo-program (expand-file-name <span style="color: #8b2252;">"straight/repos/pdf-tools/server/epdfinfo"</span> straight-base-dir))
-       (<span style="color: #a020f0;">condition-case</span> nil
-           (pdf-info-check-epdfinfo)
-         (<span style="color: #ff0000; font-weight: bold;">error</span> (<span style="color: #a020f0;">let</span> ((default-directory (file-name-directory pdf-info-epdfinfo-program)))
-                  (pdf-tools-install t t))))))))
+<pre class="src src-emacs-lisp" id="orgd2b1010">(<span style="color: #a020f0;">use-package</span> <span style="color: #008b8b;">pdf-tools</span>
+  <span style="color: #483d8b;">:ensure</span> t
+  <span style="color: #483d8b;">:mode</span> (<span style="color: #8b2252;">"\\.pdf\\'"</span> . pdf-view-mode)
+  <span style="color: #483d8b;">:init</span>
+  (<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">pdf-info</span>)
+  (<span style="color: #a020f0;">condition-case</span> nil
+      (pdf-info-check-epdfinfo)
+    (<span style="color: #ff0000; font-weight: bold;">error</span> (<span style="color: #a020f0;">let</span> ((default-directory (file-name-directory pdf-info-epdfinfo-program)))
+               (pdf-tools-install t t)))))
 
 (<span style="color: #a020f0;">use-package</span> <span style="color: #008b8b;">org-pdftools</span>
   <span style="color: #483d8b;">:ensure</span> t
@@ -1218,9 +1212,9 @@ If you're new to org-mode consult
  '(org-pandoc-import
    <span style="color: #483d8b;">:host</span> github
    <span style="color: #483d8b;">:repo</span> <span style="color: #8b2252;">"tecosaur/org-pandoc-import"</span>
-   <span style="color: #483d8b;">:files</span> (<span style="color: #8b2252;">"*.el"</span> <span style="color: #8b2252;">"filters"</span> <span style="color: #8b2252;">"preprocessors"</span>)
+   <span style="color: #483d8b;">:files</span> (<span style="color: #8b2252;">"*.el"</span> <span style="color: #8b2252;">"filters"</span> <span style="color: #8b2252;">"preprocessors"</span>)))
 
-   <span style="color: #483d8b;">:bind</span> ((<span style="color: #8b2252;">"C-c n o"</span> . org-pandoc-import-as-org))))
+(global-set-key (kbd <span style="color: #8b2252;">"C-c n o"</span>) #'org-pandoc-import-as-org)
 <span style="color: #b22222;">;; </span><span style="color: #b22222;">install-org-pandoc-import ends here</span>
 <span style="color: #b22222;">;; </span><span style="color: #b22222;">[[[[file:~/projects/org-basb-code/README.org::install-org-web-tools][install-org-web-tools]]][install-org-web-tools]]</span>
 (<span style="color: #a020f0;">use-package</span> <span style="color: #008b8b;">org-web-tools</span>
@@ -1378,21 +1372,15 @@ If you're new to org-mode consult
 <span style="color: #b22222;">;;            </span><span style="color: #b22222;">ans))))</span>
 <span style="color: #b22222;">;; </span><span style="color: #b22222;">setup-highlight-el ends here</span>
 <span style="color: #b22222;">;; </span><span style="color: #b22222;">[[[[file:~/projects/org-basb-code/README.org::#working-with-pdf-files][file:~/projects/org-basb-code/README.org::#working-with-pdf-files]]][install-pdf-tools]]</span>
-(straight-use-package
- '(pdf-tools
-   <span style="color: #483d8b;">:type</span> git
-   <span style="color: #483d8b;">:host</span> github
-   <span style="color: #483d8b;">:repo</span> <span style="color: #8b2252;">"matthew-piziak/pdf-tools"</span>
-   <span style="color: #483d8b;">:files</span> (<span style="color: #8b2252;">"lisp/*.el"</span> <span style="color: #8b2252;">"server"</span>)
-   <span style="color: #483d8b;">:config</span>
-   (<span style="color: #a020f0;">progn</span>
-     (add-to-list 'auto-mode-alist '(<span style="color: #8b2252;">"\\.pdf\\'"</span> . pdf-view-mode))
-     (<span style="color: #a020f0;">let</span> ((pdf-tools-base-dir (expand-file-name  <span style="color: #8b2252;">"straight/repos/pdf-tools/server"</span> straight-base-dir)))
-       (<span style="color: #a020f0;">setq</span> pdf-info-epdfinfo-program (expand-file-name <span style="color: #8b2252;">"straight/repos/pdf-tools/server/epdfinfo"</span> straight-base-dir))
-       (<span style="color: #a020f0;">condition-case</span> nil
-           (pdf-info-check-epdfinfo)
-         (<span style="color: #ff0000; font-weight: bold;">error</span> (<span style="color: #a020f0;">let</span> ((default-directory (file-name-directory pdf-info-epdfinfo-program)))
-                  (pdf-tools-install t t))))))))
+(<span style="color: #a020f0;">use-package</span> <span style="color: #008b8b;">pdf-tools</span>
+  <span style="color: #483d8b;">:ensure</span> t
+  <span style="color: #483d8b;">:mode</span> (<span style="color: #8b2252;">"\\.pdf\\'"</span> . pdf-view-mode)
+  <span style="color: #483d8b;">:init</span>
+  (<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">pdf-info</span>)
+  (<span style="color: #a020f0;">condition-case</span> nil
+      (pdf-info-check-epdfinfo)
+    (<span style="color: #ff0000; font-weight: bold;">error</span> (<span style="color: #a020f0;">let</span> ((default-directory (file-name-directory pdf-info-epdfinfo-program)))
+               (pdf-tools-install t t)))))
 
 (<span style="color: #a020f0;">use-package</span> <span style="color: #008b8b;">org-pdftools</span>
   <span style="color: #483d8b;">:ensure</span> t
@@ -1455,7 +1443,7 @@ Be slow when doing videos. Give more details?
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Renat Galimov</p>
-<p class="date">Created: 2023-04-02 Sun 14:59</p>
+<p class="date">Created: 2023-04-02 Sun 15:51</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

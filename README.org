@@ -160,9 +160,9 @@ Emacs is a text editor.
        '(org-pandoc-import
          :host github
          :repo "tecosaur/org-pandoc-import"
-         :files ("*.el" "filters" "preprocessors")
+         :files ("*.el" "filters" "preprocessors")))
 
-         :bind (("C-c n o" . org-pandoc-import-as-org))))
+      (global-set-key (kbd "C-c n o") #'org-pandoc-import-as-org)
     #+end_src
 
     Pandoc can convert almost any text format to org-mode
@@ -606,21 +606,15 @@ Don't forget to install pdf-tools dependencies.
 
 #+name: install-pdf-tools
 #+begin_src emacs-lisp
-  (straight-use-package
-   '(pdf-tools
-     :type git
-     :host github
-     :repo "matthew-piziak/pdf-tools"
-     :files ("lisp/*.el" "server")
-     :config
-     (progn
-       (add-to-list 'auto-mode-alist '("\\.pdf\\'" . pdf-view-mode))
-       (let ((pdf-tools-base-dir (expand-file-name  "straight/repos/pdf-tools/server" straight-base-dir)))
-         (setq pdf-info-epdfinfo-program (expand-file-name "straight/repos/pdf-tools/server/epdfinfo" straight-base-dir))
-         (condition-case nil
-             (pdf-info-check-epdfinfo)
-           (error (let ((default-directory (file-name-directory pdf-info-epdfinfo-program)))
-                    (pdf-tools-install t t))))))))
+  (use-package pdf-tools
+    :ensure t
+    :mode ("\\.pdf\\'" . pdf-view-mode)
+    :init
+    (require 'pdf-info)
+    (condition-case nil
+        (pdf-info-check-epdfinfo)
+      (error (let ((default-directory (file-name-directory pdf-info-epdfinfo-program)))
+                 (pdf-tools-install t t)))))
 
   (use-package org-pdftools
     :ensure t
