@@ -20,5 +20,8 @@ jobs:
         run: >
           apk add ca-certificates emacs imagemagick git autoconf automake libpng-dev zlib-dev poppler-dev
 
+      - name: LS
+        run: ls && ls bin
+
       - name: Emacs test
         run: ./bin/test-emacs-28.1.sh
