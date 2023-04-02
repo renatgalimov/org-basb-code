@@ -90,15 +90,10 @@ For this guide, we will be using [[https://github.com/raxod502/straight.el][stra
 #+name: install-straight-el
 #+begin_src emacs-lisp :exports code :eval never-export :results none
   (defvar bootstrap-version)
-  (when (locate-library "package")
-      (progn
-        (require 'package)
-        (package-initialize)'
-        (unless (package-installed-p 'use-package)
-          (package-refresh-contents)
-          (package-install 'use-package))
-        (require 'use-package))
-    )
+  (if (package-installed-p 'use-package)
+      (require 'use-package)
+    (package-refresh-contents)
+    (package-install 'use-package))
 
   (unless (boundp 'straight-use-package)
     (message "Bootstrapping straight.el")
