@@ -9,7 +9,7 @@
 ;; Package-Requires: ()
 ;; Last-Updated:
 ;;           By:
-;;     Update #: 29
+;;     Update #: 30
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -64,5 +64,7 @@
 
 (unless (and (featurep 'org-ql) (fboundp 'org-ql-view))
   (error "org-ql is not installed properly"))
+
+(pdf-info-check-epdfinfo)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; run-test.el ends here

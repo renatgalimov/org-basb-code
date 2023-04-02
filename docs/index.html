@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2023-04-02 Sun 14:34 -->
+<!-- 2023-04-02 Sun 14:59 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Emacs CODE implementation</title>
@@ -249,7 +249,7 @@
 </div>
 </div>
 
-<div id="orgcf67018" class="figure">
+<div id="org865f680" class="figure">
 <p><img src="https://github.com/renatgalimov/org-basb-code/actions/workflows/ci.yml/badge.svg" alt="badge.svg" class="org-svg" />
 </p>
 </div>
@@ -351,6 +351,9 @@ We will be downloading packages from these repos
   (add-to-list 'package-archives (cons <span style="color: #8b2252;">"melpa-stable"</span> (concat proto <span style="color: #8b2252;">"://stable.melpa.org/packages/"</span>)) t))
 
 (package-refresh-contents)
+
+(<span style="color: #a020f0;">unless</span> (<span style="color: #a020f0;">bound-and-true-p</span> package--initialized)
+  (package-initialize))
 </pre>
 </div>
 </div>
@@ -366,7 +369,8 @@ For this guide, we will be using <a href="https://github.com/raxod502/straight.e
 <div class="org-src-container">
 <label class="org-src-name"><span class="listing-number">Listing 6: </span>Install straight.el</label><pre class="src src-emacs-lisp" id="org60689be">(<span style="color: #a020f0;">defvar</span> <span style="color: #a0522d;">bootstrap-version</span>)
 (<span style="color: #a020f0;">if</span> (package-installed-p 'use-package)
-    (<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">use-package</span>)
+    (<span style="color: #a020f0;">eval-when-compile</span>
+      (<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">use-package</span>))
   (package-refresh-contents)
   (package-install 'use-package))
 
@@ -839,14 +843,14 @@ You can search projects with helm or with org-ql:
 </p>
 
 
-<div id="org91ca09e" class="figure">
+<div id="orgc84e076" class="figure">
 <p><img src="Emacs_CODE_implementation/2021-07-04_07-52-17_screenshot.png" alt="2021-07-04_07-52-17_screenshot.png" />
 </p>
 <p><span class="figure-number">Figure 1: </span>Finding projects with helm</p>
 </div>
 
 
-<div id="orgde96e49" class="figure">
+<div id="orgec5b9d9" class="figure">
 <p><img src="Emacs_CODE_implementation/2021-07-04_07-57-55_screenshot.png" alt="2021-07-04_07-57-55_screenshot.png" />
 </p>
 <p><span class="figure-number">Figure 2: </span>Finding projects with org-ql</p>
@@ -864,7 +868,7 @@ a link to the target record according to where it belongs.
 </p>
 
 
-<div id="org22224b8" class="figure">
+<div id="org12b4451" class="figure">
 <p><img src="Emacs_CODE_implementation/2021-07-04_08-05-12_screenshot.png" alt="2021-07-04_08-05-12_screenshot.png" />
 </p>
 <p><span class="figure-number">Figure 3: </span>Links to an area within notes</p>
@@ -877,7 +881,7 @@ a backlink to you note in the side buffer.
 </p>
 
 
-<div id="org4f52295" class="figure">
+<div id="org33f9552" class="figure">
 <p><img src="Emacs_CODE_implementation/2021-07-04_08-07-11_screenshot.png" alt="2021-07-04_08-07-11_screenshot.png" />
 </p>
 <p><span class="figure-number">Figure 4: </span>Backlinks to all areas in the side buffer</p>
@@ -893,7 +897,7 @@ A nice second-brain visualizator: <a href="https://github.com/org-roam/org-roam-
 </p>
 
 
-<div id="org0e515be" class="figure">
+<div id="org4e4af43" class="figure">
 <p><img src="Emacs_CODE_implementation/2021-11-03_21-44-11_screenshot.png" alt="2021-11-03_21-44-11_screenshot.png" />
 </p>
 <p><span class="figure-number">Figure 5: </span>org-roam-ui design</p>
@@ -1070,7 +1074,7 @@ on.
 </p>
 
 
-<div id="orgc17c8a5" class="figure">
+<div id="org786d923" class="figure">
 <p><img src="attachments/highlighting-with-org-capture.gif" alt="highlighting-with-org-capture.gif" />
 </p>
 <p><span class="figure-number">Figure 6: </span>Highlighting on capture demo</p>
@@ -1150,11 +1154,15 @@ If you're new to org-mode consult
   (add-to-list 'package-archives (cons <span style="color: #8b2252;">"melpa-stable"</span> (concat proto <span style="color: #8b2252;">"://stable.melpa.org/packages/"</span>)) t))
 
 (package-refresh-contents)
+
+(<span style="color: #a020f0;">unless</span> (<span style="color: #a020f0;">bound-and-true-p</span> package--initialized)
+  (package-initialize))
 <span style="color: #b22222;">;; </span><span style="color: #b22222;">set-up-melpa ends here</span>
 <span style="color: #b22222;">;; </span><span style="color: #b22222;">[[[[file:~/projects/org-basb-code/README.org::install-straight-el][install-straight-el]]][install-straight-el]]</span>
 (<span style="color: #a020f0;">defvar</span> <span style="color: #a0522d;">bootstrap-version</span>)
 (<span style="color: #a020f0;">if</span> (package-installed-p 'use-package)
-    (<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">use-package</span>)
+    (<span style="color: #a020f0;">eval-when-compile</span>
+      (<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">use-package</span>))
   (package-refresh-contents)
   (package-install 'use-package))
 
@@ -1447,7 +1455,7 @@ Be slow when doing videos. Give more details?
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Renat Galimov</p>
-<p class="date">Created: 2023-04-02 Sun 14:34</p>
+<p class="date">Created: 2023-04-02 Sun 14:59</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
