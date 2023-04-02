@@ -80,6 +80,10 @@ We will be downloading packages from these repos
     (add-to-list 'package-archives (cons "melpa-stable" (concat proto "://stable.melpa.org/packages/")) t))
 
   (package-refresh-contents)
+
+  (unless (bound-and-true-p package--initialized)
+    (package-initialize)
+    (require 'use-package))
 #+end_src
 
 *** straight.el
@@ -89,26 +93,27 @@ For this guide, we will be using [[https://github.com/raxod502/straight.el][stra
 #+caption: Install straight.el
 #+name: install-straight-el
 #+begin_src emacs-lisp :exports code :eval never-export :results none
-  (defvar bootstrap-version)
-  (if (package-installed-p 'use-package)
-      (require 'use-package)
-    (package-refresh-contents)
-    (package-install 'use-package))
+    (defvar bootstrap-version)
+    (if (package-installed-p 'use-package)
+        (eval-when-compile
+          (require 'use-package))
+      (package-refresh-contents)
+      (package-install 'use-package))
 
-  (unless (boundp 'straight-use-package)
-    (message "Bootstrapping straight.el")
-    (let ((bootstrap-file
-           (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
-          (bootstrap-version 5))
-      (unless (file-exists-p bootstrap-file)
-        (with-current-buffer
-            (url-retrieve-synchronously
-             "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
-             'silent 'inhibit-cookies)
-          (goto-char (point-max))
-          (eval-print-last-sexp)))
-      (load bootstrap-file nil 'nomessage))
-    (message "Bootstrapping straight.el done"))
+    (unless (boundp 'straight-use-package)
+      (message "Bootstrapping straight.el")
+      (let ((bootstrap-file
+             (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+            (bootstrap-version 5))
+        (unless (file-exists-p bootstrap-file)
+          (with-current-buffer
+              (url-retrieve-synchronously
+               "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+               'silent 'inhibit-cookies)
+            (goto-char (point-max))
+            (eval-print-last-sexp)))
+        (load bootstrap-file nil 'nomessage))
+      (message "Bootstrapping straight.el done"))
 #+end_src
 
 *** Org-roam
