@@ -8,21 +8,17 @@ on:
 jobs:
   test:
     runs-on: ubuntu-20.04
-    container: silex/emacs:28.1-ci
+    container: alpine:3
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+      - name: Update apk
+        run: >
+          apk update
+
       - name: Install dependencies
         run: >
-          apt update &&
-          apt install -q -yy \
-              git \
-              autoconf \
-              automake \
-              libpng-dev \
-              zlib1g-dev \
-              libpoppler-glib-dev \
-              libpoppler-private-dev
+          apk add ca-certificates emacs imagemagick git autoconf automake libpng-dev zlib-dev poppler-dev
 
       - name: Emacs test
-        run: emacs --batch -l ./bin/run-test.el
+        run: ./bin/test-emacs-28.1.sh

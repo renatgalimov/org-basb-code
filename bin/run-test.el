@@ -9,7 +9,7 @@
 ;; Package-Requires: ()
 ;; Last-Updated:
 ;;           By:
-;;     Update #: 14
+;;     Update #: 29
 ;; URL:
 ;; Doc URL:
 ;; Keywords:
@@ -45,9 +45,13 @@
 ;;
 ;;; Code:
 
+(set-binary-mode 'stdout nil)
+(set-binary-mode 'stderr nil)
 
 (require 'org)
-(mkdir "~/emacs/")
+;; Check that directory exists
+(unless (file-exists-p "~/emacs/")
+  (mkdir "~/emacs/"))
 (setq straight-enable-use-package-integration nil)
 (setq straight-use-package-by-default nil)
 (setq straight-vc-git-default-clone-depth 1)
@@ -57,7 +61,8 @@
 (load-file "~/emacs/CODE.el")
 (with-current-buffer "*straight-process*"
   (print (buffer-substring-no-properties (point-min) (point-max))))
-(unless (boundp 'org-ql)
+
+(unless (and (featurep 'org-ql) (fboundp 'org-ql-view))
   (error "org-ql is not installed properly"))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; run-test.el ends here
