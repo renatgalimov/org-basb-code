@@ -82,8 +82,7 @@ We will be downloading packages from these repos
   (package-refresh-contents)
 
   (unless (bound-and-true-p package--initialized)
-    (package-initialize)
-    (require 'use-package))
+    (package-initialize))
 #+end_src
 
 *** straight.el
